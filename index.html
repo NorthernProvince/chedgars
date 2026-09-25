@@ -4,267 +4,730 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChiEdgars Lodge · Kasama</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f4f6fb;
-            color: #1e293b;
-            padding: 24px;
-            min-height: 100vh;
+        :root {
+            --bg: #f5f6fa;
+            --card: #ffffff;
+            --text: #1a1f36;
+            --text-soft: #697386;
+            --text-muted: #8792a2;
+            --border: #eef0f5;
+            --border-strong: #e3e6ee;
+
+            --blue-1: #4f46e5;
+            --blue-2: #6366f1;
+            --green-1: #059669;
+            --green-2: #10b981;
+            --orange-1: #ea580c;
+            --orange-2: #f59e0b;
+            --purple-1: #7c3aed;
+            --purple-2: #a78bfa;
+            --pink-1: #db2777;
+            --pink-2: #f472b6;
+
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 4px 14px -4px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.03);
+            --shadow-lg: 0 20px 40px -20px rgba(15, 23, 42, 0.12), 0 8px 20px -12px rgba(15, 23, 42, 0.06);
+            --shadow-glow: 0 12px 28px -10px rgba(79, 70, 229, 0.35);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(1200px 600px at 10% -10%, rgba(99, 102, 241, 0.06), transparent 60%),
+                radial-gradient(900px 500px at 100% 0%, rgba(16, 185, 129, 0.05), transparent 55%);
+            color: var(--text);
+            padding: 24px 20px 60px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            font-feature-settings: 'cv11', 'ss01';
+        }
+
         .dashboard { max-width: 1440px; margin: 0 auto; }
 
-        /* HEADER */
-        .header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        /* ---------- HEADER ---------- */
+        .topbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 55%, #312e81 100%);
+            border-radius: 26px;
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.5);
         }
-        .header-left h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600; font-size: 28px; letter-spacing: -0.3px;
-            color: #0f172a; display: flex; align-items: center; gap: 10px;
-        }
-        .header-left h1 i {
-            color: #3b82f6; background: #e6edfc;
-            padding: 8px 10px; border-radius: 14px; font-size: 22px;
-        }
-        .badge-lodge {
-            background: #dbeafe; color: #1d4ed8;
-            font-size: 14px; font-weight: 600;
-            padding: 4px 12px; border-radius: 30px;
-            margin-left: 12px;
-        }
-        .header-right { display: flex; gap: 12px; }
-        .btn {
-            border: none; background: white; padding: 10px 18px;
-            border-radius: 40px; font-weight: 600; font-size: 14px;
-            display: inline-flex; align-items: center; gap: 8px;
-            cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            transition: 0.2s ease; border: 1px solid #e2e8f0; color: #1e293b;
-        }
-        .btn-primary {
-            background: #1e293b; color: white;
-            border: 1px solid #1e293b;
-            box-shadow: 0 8px 16px -6px rgba(15,23,42,0.2);
-        }
-        .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(0,0,0,0.15); }
-        .btn-primary:hover { background: #0f172a; }
 
-        /* STATS */
+        .topbar::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -10%;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .topbar::after {
+            content: '';
+            position: absolute;
+            bottom: -70%;
+            left: -5%;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.22), transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .brand { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+
+        .brand-logo {
+            width: 52px; height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: white;
+            box-shadow: 0 10px 24px -8px rgba(139, 92, 246, 0.6);
+        }
+
+        .brand-text h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px; font-weight: 700;
+            color: white; letter-spacing: -0.4px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .brand-text h1 .pin {
+            font-size: 11px; font-weight: 600;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #c7d2fe;
+            padding: 3px 10px; border-radius: 20px;
+            letter-spacing: 0.2px;
+            display: inline-flex; align-items: center; gap: 5px;
+        }
+
+        .brand-text .tagline {
+            color: #a5b4fc;
+            font-size: 12.5px;
+            margin-top: 3px;
+            display: flex; align-items: center; gap: 6px;
+            font-weight: 500;
+        }
+
+        .top-actions { display: flex; gap: 10px; position: relative; z-index: 1; }
+
+        .btn {
+            border: none; background: white; padding: 10px 16px;
+            border-radius: 12px; font-weight: 600; font-size: 13.5px;
+            font-family: inherit;
+            display: inline-flex; align-items: center; gap: 8px;
+            cursor: pointer; transition: 0.18s ease;
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+        }
+        .btn-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 22px -10px rgba(99, 102, 241, 0.8);
+        }
+        .btn-primary:hover { box-shadow: 0 14px 28px -12px rgba(99, 102, 241, 0.9); }
+
+        /* ---------- STATS ---------- */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px; margin-bottom: 28px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
+
         .stat-card {
-            background: white; border-radius: 26px; padding: 20px 22px;
-            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.04);
-            border: 1px solid #eef2f6;
-            display: flex; align-items: center; justify-content: space-between;
+            background: var(--card);
+            border-radius: 22px;
+            padding: 20px 20px 18px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: 0.2s ease;
         }
-        .stat-info h3 { font-size: 15px; font-weight: 500; color: #64748b; margin-bottom: 6px; }
+
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        .stat-top {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .stat-icon {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: white;
+            position: relative;
+        }
+
+        .stat-icon::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: 14px;
+            background: inherit;
+            filter: blur(16px);
+            opacity: 0.35;
+            z-index: -1;
+            transform: scale(1.05);
+        }
+
+        .ic-blue   { background: linear-gradient(135deg, var(--blue-1), var(--blue-2)); }
+        .ic-green  { background: linear-gradient(135deg, var(--green-1), var(--green-2)); }
+        .ic-orange { background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); }
+        .ic-purple { background: linear-gradient(135deg, var(--purple-1), var(--purple-2)); }
+
+        .stat-trend {
+            font-size: 11px; font-weight: 700;
+            padding: 4px 9px; border-radius: 20px;
+            background: #ecfdf5; color: #047857;
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .stat-trend.neutral { background: #eef2ff; color: #4338ca; }
+
+        .stat-info h3 {
+            font-size: 12.5px; font-weight: 600;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
         .stat-value {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 34px; font-weight: 600; color: #0f172a; line-height: 1.1;
-        }
-        .stat-icon {
-            width: 52px; height: 52px; background: #f1f5f9;
-            border-radius: 18px; display: flex; align-items: center;
-            justify-content: center; font-size: 24px; color: #3b82f6;
+            font-size: 30px; font-weight: 700;
+            color: var(--text);
+            line-height: 1.05;
+            letter-spacing: -0.7px;
         }
 
-        /* LAYOUT */
-        .main-panel { display: flex; gap: 24px; flex-wrap: wrap; }
+        .stat-value small {
+            font-size: 15px; font-weight: 600;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+
+        /* ---------- LAYOUT ---------- */
+        .main-panel { display: flex; gap: 20px; flex-wrap: wrap; }
         .left-section { flex: 2.2; min-width: 320px; }
-        .right-section { flex: 1.2; min-width: 280px; }
+        .right-section { flex: 1.15; min-width: 300px; }
 
         .card {
-            background: white; border-radius: 28px; padding: 22px 20px;
-            box-shadow: 0 8px 24px -10px rgba(0,0,0,0.04);
-            border: 1px solid #edf2f7; margin-bottom: 24px;
+            background: var(--card);
+            border-radius: 24px;
+            padding: 22px 22px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+            transition: 0.2s;
         }
+
         .card-header {
             display: flex; justify-content: space-between;
             align-items: center; margin-bottom: 18px;
-        }
-        .card-header h2 {
-            font-size: 18px; font-weight: 600;
-            display: flex; align-items: center; gap: 8px; color: #0f172a;
-        }
-        .card-header h2 i { color: #3b82f6; font-size: 18px; }
-        .small-badge {
-            background: #eef2f6; font-size: 12px; font-weight: 600;
-            padding: 4px 10px; border-radius: 40px; color: #475569;
+            gap: 12px;
         }
 
-        /* TABLE */
-        .guest-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .guest-table th {
-            text-align: left; padding: 10px 6px 10px 0;
-            font-weight: 600; color: #64748b; font-size: 12px;
-            text-transform: uppercase; letter-spacing: 0.4px;
-            border-bottom: 1px solid #e9eef3;
+        .card-title {
+            display: flex; align-items: center; gap: 12px;
         }
-        .guest-table td {
-            padding: 14px 6px 14px 0;
-            border-bottom: 1px solid #f1f6fa;
-            color: #1e293b; font-weight: 500;
+
+        .card-title-icon {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            background: #eef2ff; color: #4f46e5;
         }
-        .guest-table tr:last-child td { border-bottom: none; }
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 5px;
+
+        .card-title-text h2 {
+            font-size: 16px; font-weight: 700;
+            color: var(--text); letter-spacing: -0.2px;
+        }
+
+        .card-title-text p {
+            font-size: 12px; color: var(--text-muted);
+            font-weight: 500; margin-top: 1px;
+        }
+
+        .chip {
+            background: #f1f5f9; color: #475569;
+            font-size: 12px; font-weight: 700;
+            padding: 5px 12px; border-radius: 30px;
+            letter-spacing: 0.2px;
+        }
+        .chip.live {
             background: #dcfce7; color: #15803d;
-            font-size: 12px; font-weight: 600;
-            padding: 4px 10px; border-radius: 30px;
+            display: inline-flex; align-items: center; gap: 6px;
         }
-        .status-badge.checked-out { background: #f1f5f9; color: #475569; }
-        .amount { font-weight: 700; color: #0f172a; }
-        .btn-icon {
-            background: transparent; border: none; color: #94a3b8;
-            font-size: 16px; cursor: pointer; padding: 6px 8px;
-            border-radius: 12px; transition: 0.15s;
+        .chip.live::before {
+            content: ''; width: 6px; height: 6px;
+            background: #22c55e; border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+            animation: pulse 1.8s infinite;
         }
-        .btn-icon:hover { background: #f1f5f9; color: #1e293b; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
-        /* ROOMS — grid auto-fits 30 rooms nicely */
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            max-height: 520px;
-            overflow-y: auto;
-            padding-right: 4px;
+        /* ---------- TABLE ---------- */
+        .table-wrap { overflow-x: auto; margin: 0 -6px; padding: 0 6px; }
+
+        .guest-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+        .guest-table th {
+            text-align: left; padding: 10px 12px;
+            font-weight: 600; color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase; letter-spacing: 0.6px;
+            border-bottom: 1px solid var(--border);
+            background: #fafbfd;
+            white-space: nowrap;
         }
-        .room-item {
-            background: #f9fbfd; border-radius: 16px;
-            padding: 10px 12px;
-            display: flex; flex-direction: column;
-            gap: 6px;
-            border: 1px solid #e9f0f5;
+        .guest-table th:first-child { border-top-left-radius: 12px; }
+        .guest-table th:last-child { border-top-right-radius: 12px; }
+
+        .guest-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 500;
+            vertical-align: middle;
+        }
+
+        .guest-table tbody tr { transition: 0.15s; }
+        .guest-table tbody tr:hover { background: #fafbff; }
+        .guest-table tbody tr:last-child td { border-bottom: none; }
+
+        .guest-cell { display: flex; align-items: center; gap: 12px; }
+
+        .avatar {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; color: white;
+            flex-shrink: 0;
+            letter-spacing: -0.3px;
+        }
+
+        .avatar.a0 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .avatar.a1 { background: linear-gradient(135deg, #10b981, #059669); }
+        .avatar.a2 { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .avatar.a3 { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .avatar.a4 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .avatar.a5 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+
+        .guest-name { font-weight: 700; color: var(--text); font-size: 13.5px; }
+        .guest-room { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #dcfce7; color: #15803d;
+            font-size: 11.5px; font-weight: 700;
+            padding: 5px 11px; border-radius: 30px;
+            white-space: nowrap;
+        }
+        .status-badge::before {
+            content: ''; width: 6px; height: 6px;
+            background: currentColor; border-radius: 50%;
+        }
+        .status-badge.checked-out {
+            background: #f1f5f9; color: #64748b;
+        }
+
+        .amount {
+            font-weight: 700; color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+        }
+
+        .btn-icon {
+            width: 32px; height: 32px;
+            background: #f4f6fb; border: none;
+            color: #64748b; font-size: 13px;
+            cursor: pointer; border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
             transition: 0.15s;
         }
-        .room-item:hover { transform: translateY(-2px); box-shadow: 0 6px 14px -6px rgba(0,0,0,0.08); }
-        .room-item.vacant { border-left: 5px solid #22c55e; background: #f0fdf4; }
-        .room-item.occupied { border-left: 5px solid #f97316; background: #fff7ed; }
-        .room-number {
-            font-weight: 700; font-size: 14px; color: #0f172a;
+        .btn-icon:hover { background: #fee2e2; color: #dc2626; transform: scale(1.05); }
+
+        /* ---------- ROOMS ---------- */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+            gap: 10px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 6px;
+            margin-right: -6px;
+        }
+
+        .rooms-grid::-webkit-scrollbar { width: 6px; }
+        .rooms-grid::-webkit-scrollbar-thumb {
+            background: #e2e8f0; border-radius: 4px;
+        }
+        .rooms-grid::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+
+        .room-item {
+            border-radius: 14px;
+            padding: 12px 11px;
+            display: flex; flex-direction: column;
+            gap: 8px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: 0.18s ease;
+            cursor: default;
+        }
+
+        .room-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .room-item.vacant {
+            background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+            border-color: #d1fae5;
+        }
+        .room-item.occupied {
+            background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+            border-color: #fed7aa;
+        }
+
+        .room-top {
             display: flex; align-items: center; justify-content: space-between;
         }
-        .room-number i { font-size: 11px; color: #94a3b8; }
+
+        .room-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 15px;
+            color: var(--text);
+            letter-spacing: -0.3px;
+        }
+
+        .room-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+        .vacant .room-dot {
+            background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+        }
+        .occupied .room-dot {
+            background: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.18);
+        }
+
         .room-guest {
-            font-size: 11px; color: #64748b;
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600;
+            color: var(--text-soft);
+            min-height: 16px;
             white-space: nowrap; overflow: hidden;
             text-overflow: ellipsis;
-            min-height: 14px;
         }
-        .room-status {
-            font-size: 11px; font-weight: 600;
+
+        .room-mini-avatar {
+            width: 18px; height: 18px;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; color: white;
+            flex-shrink: 0;
+        }
+
+        .room-status-label {
+            font-size: 10.5px; font-weight: 700;
             padding: 3px 8px; border-radius: 20px;
             background: white;
             text-align: center;
+            letter-spacing: 0.2px;
         }
-        .vacant .room-status { color: #15803d; }
-        .occupied .room-status { color: #b45309; }
+        .vacant .room-status-label {
+            color: #15803d;
+            background: #dcfce7;
+        }
+        .occupied .room-status-label {
+            color: #b45309;
+            background: #ffedd5;
+        }
+
         .room-legend {
-            display: flex; gap: 18px; margin-top: 16px;
-            font-size: 13px; color: #475569; align-items: center;
+            display: flex; gap: 16px; margin-top: 16px;
+            font-size: 12px; color: var(--text-soft);
+            align-items: center; font-weight: 500;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
         }
-        .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 4px; margin-right: 6px; }
-        .legend-dot.green { background: #22c55e; }
-        .legend-dot.orange { background: #f97316; }
 
-        /* FORM */
-        .add-guest-form { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
-        .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
-        .form-group { flex: 1; min-width: 120px; }
+        .legend-item { display: flex; align-items: center; gap: 7px; }
+        .legend-dot {
+            width: 9px; height: 9px; border-radius: 50%;
+        }
+        .legend-dot.green {
+            background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+        }
+        .legend-dot.orange {
+            background: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.18);
+        }
+
+        /* ---------- FORM ---------- */
+        .add-guest-form { display: flex; flex-direction: column; gap: 14px; }
+        .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+        .form-group { flex: 1; min-width: 130px; }
+
         .form-group label {
-            font-size: 12px; font-weight: 600; color: #64748b;
-            margin-bottom: 4px; display: block;
+            font-size: 11.5px; font-weight: 700;
+            color: var(--text-soft);
+            margin-bottom: 6px; display: flex;
+            align-items: center; gap: 5px;
+            text-transform: uppercase; letter-spacing: 0.4px;
         }
+        .form-group label i { color: #a5b4fc; font-size: 11px; }
+
+        .input-wrap { position: relative; }
+
         .form-group input, .form-group select {
-            width: 100%; padding: 12px 14px; border-radius: 16px;
-            border: 1px solid #e2e8f0; background: #fbfdff;
-            font-size: 14px; font-family: 'Inter', sans-serif;
-            font-weight: 500; color: #0f172a; outline: none;
+            width: 100%;
+            padding: 13px 14px 13px 40px;
+            border-radius: 13px;
+            border: 1.5px solid var(--border-strong);
+            background: #fafbff;
+            font-size: 13.5px;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--text);
+            outline: none;
+            transition: 0.15s;
         }
+
+        .form-group input::placeholder {
+            color: #a8b1c1; font-weight: 500;
+        }
+
+        .input-wrap > i {
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: #a5b4fc;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
         .form-group input:focus, .form-group select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+            border-color: #6366f1;
             background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a5b4fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
         .btn-add {
-            background: #1e293b; color: white; border: none;
-            padding: 14px 18px; border-radius: 40px;
-            font-weight: 600; font-size: 14px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white; border: none;
+            padding: 15px 20px; border-radius: 14px;
+            font-weight: 700; font-size: 14px;
+            font-family: inherit;
             display: flex; align-items: center; justify-content: center;
-            gap: 10px; cursor: pointer; margin-top: 6px; width: 100%;
+            gap: 10px; cursor: pointer;
+            margin-top: 4px; width: 100%;
+            box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.7);
+            transition: 0.18s;
+            letter-spacing: 0.2px;
         }
-        .btn-add:hover { background: #0f172a; }
-        .btn-add:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-add:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.85);
+        }
+        .btn-add:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .text-muted { color: #64748b; font-size: 13px; }
-        .mt-2 { margin-top: 10px; }
+        /* ---------- QUICK ACTIONS ---------- */
+        .quick-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
 
-        /* TOAST */
+        .action-btn {
+            display: flex; align-items: center; gap: 12px;
+            background: #fafbff;
+            border: 1px solid var(--border);
+            padding: 13px 14px;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 13.5px; font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.15s;
+            text-align: left;
+            width: 100%;
+        }
+        .action-btn:hover {
+            background: white;
+            border-color: #c7d2fe;
+            transform: translateX(3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-icon {
+            width: 36px; height: 36px;
+            border-radius: 11px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: white;
+            flex-shrink: 0;
+        }
+        .ai-red    { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .ai-blue   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .ai-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+
+        .action-text small {
+            display: block; font-size: 11px;
+            color: var(--text-muted); font-weight: 500;
+            margin-top: 1px;
+        }
+
+        .db-note {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11.5px; font-weight: 600;
+            color: #047857;
+            background: #ecfdf5;
+            padding: 9px 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+            border: 1px solid #d1fae5;
+        }
+
+        /* ---------- TOAST ---------- */
         #toast {
             position: fixed; bottom: 30px; right: 30px;
-            background: #1e293b; color: white;
-            padding: 14px 22px; border-radius: 14px;
-            font-size: 14px; font-weight: 500;
-            box-shadow: 0 10px 30px -8px rgba(0,0,0,0.3);
-            transform: translateY(200%); transition: transform 0.3s;
+            background: #0f172a; color: white;
+            padding: 15px 22px; border-radius: 14px;
+            font-size: 14px; font-weight: 600;
+            font-family: inherit;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
+            transform: translateY(200%); transition: transform 0.35s cubic-bezier(.2,.9,.3,1.3);
             z-index: 999; max-width: 340px;
+            display: flex; align-items: center; gap: 10px;
         }
         #toast.show { transform: translateY(0); }
         #toast.error { background: #dc2626; }
-        #toast.success { background: #15803d; }
+        #toast.success { background: #059669; }
 
-        /* LOADING */
+        /* ---------- LOADING ---------- */
         .loading-overlay {
-            position: fixed; inset: 0; background: rgba(244,246,251,0.8);
+            position: fixed; inset: 0;
+            background: rgba(245, 246, 250, 0.85);
+            backdrop-filter: blur(4px);
             display: flex; align-items: center; justify-content: center;
-            z-index: 998; font-size: 40px; color: #3b82f6;
+            z-index: 998; font-size: 32px; color: #6366f1;
         }
         .hidden { display: none !important; }
 
-        @media (max-width: 700px) {
-            body { padding: 16px; }
-            .header-left h1 { font-size: 22px; }
-            .stat-value { font-size: 28px; }
-            .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+        .text-muted { color: var(--text-muted); font-size: 13px; }
+
+        .empty-msg {
+            display: flex; align-items: center; gap: 10px;
+            padding: 16px 18px;
+            background: #f0fdf4; color: #15803d;
+            border-radius: 14px; font-size: 13.5px;
+            font-weight: 600;
+            margin-top: 12px;
+            border: 1px solid #d1fae5;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 760px) {
+            body { padding: 16px 14px 50px; }
+            .topbar { padding: 18px 20px; border-radius: 22px; }
+            .brand-text h1 { font-size: 19px; }
+            .stat-value { font-size: 26px; }
+            .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+            .top-actions .btn span { display: none; }
+            .top-actions .btn { padding: 10px 12px; }
         }
     </style>
 </head>
 <body>
 <div class="dashboard">
-    <div class="header">
-        <div class="header-left">
-            <h1>
-                <i class="fas fa-hotel"></i> ChiEdgars
-                <span class="badge-lodge"><i class="fas fa-map-pin"></i> Kasama</span>
-            </h1>
-            <div class="text-muted" style="margin-top: 6px; margin-left: 6px;">
-                <i class="far fa-calendar-alt"></i> Today · <span id="currentDate"></span>
+
+    <!-- ============ TOPBAR ============ -->
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fas fa-hotel"></i>
+            </div>
+            <div class="brand-text">
+                <h1>
+                    ChiEdgars Lodge
+                    <span class="pin"><i class="fas fa-map-pin"></i> Kasama</span>
+                </h1>
+                <div class="tagline">
+                    <i class="far fa-calendar-alt"></i>
+                    <span id="currentDate"></span>
+                    <span style="opacity:.5">·</span>
+                    <span><i class="fas fa-circle" style="font-size:7px;color:#4ade80;"></i> System online</span>
+                </div>
             </div>
         </div>
-        <div class="header-right">
-            <button class="btn" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Refresh</button>
-            <button class="btn btn-primary" onclick="showConfigHelp()"><i class="fas fa-gear"></i> Config</button>
+        <div class="top-actions">
+            <button class="btn btn-ghost" onclick="loadAll()">
+                <i class="fas fa-rotate"></i> <span>Refresh</span>
+            </button>
+            <button class="btn btn-primary" onclick="showConfigHelp()">
+                <i class="fas fa-gear"></i> <span>Setup</span>
+            </button>
         </div>
     </div>
 
+    <!-- ============ STATS ============ -->
     <div class="stats-grid" id="statsGrid"></div>
 
+    <!-- ============ MAIN ============ -->
     <div class="main-panel">
+        <!-- LEFT -->
         <div class="left-section">
             <div class="card">
                 <div class="card-header">
-                    <h2><i class="fas fa-users"></i> Guests & Stays</h2>
-                    <span class="small-badge" id="guestCountBadge">0 active</span>
+                    <div class="card-title">
+                        <div class="card-title-icon"><i class="fas fa-users"></i></div>
+                        <div class="card-title-text">
+                            <h2>Guests & Stays</h2>
+                            <p>Live guest register</p>
+                        </div>
+                    </div>
+                    <span class="chip live" id="guestCountBadge">0 active</span>
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-wrap">
                     <table class="guest-table">
                         <thead>
                             <tr>
@@ -272,74 +735,128 @@
                                 <th>Lodge In</th>
                                 <th>Lodge Out</th>
                                 <th>Status</th>
-                                <th>Amount (ZMW)</th>
+                                <th>Amount</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="guestTableBody"></tbody>
                     </table>
                 </div>
-                <div class="text-muted mt-2" id="emptyGuestMsg" style="display:none;">
-                    <i class="fas fa-circle-check" style="color:#22c55e;"></i> No guests yet. Add one below.
+                <div class="empty-msg" id="emptyGuestMsg" style="display:none;">
+                    <i class="fas fa-circle-check"></i> No guests yet — add one below.
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <h2><i class="fas fa-user-plus"></i> New guest</h2>
-                    <span class="small-badge">quick check‑in</span>
+                    <div class="card-title">
+                        <div class="card-title-icon" style="background:#fef3c7;color:#d97706;">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="card-title-text">
+                            <h2>New Guest</h2>
+                            <p>Quick check‑in</p>
+                        </div>
+                    </div>
+                    <span class="chip">Fast entry</span>
                 </div>
                 <div class="add-guest-form">
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Guest name</label>
-                            <input type="text" id="guestNameInput" placeholder="e.g. Chanda M.">
+                            <label><i class="fas fa-user"></i> Guest name</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="guestNameInput" placeholder="e.g. Chanda M.">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Room number</label>
-                            <select id="roomSelect"></select>
+                            <label><i class="fas fa-door-closed"></i> Room number</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-door-closed"></i>
+                                <select id="roomSelect"></select>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Check‑in date</label>
-                            <input type="date" id="checkInDate">
+                            <label><i class="fas fa-calendar"></i> Check‑in date</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="checkInDate">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Amount paid (ZMW)</label>
-                            <input type="number" id="amountPaidInput" placeholder="0" min="0" step="10" value="500">
+                            <label><i class="fas fa-coins"></i> Amount paid (ZMW)</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-coins"></i>
+                                <input type="number" id="amountPaidInput" placeholder="0" min="0" step="10" value="500">
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-add" id="addGuestBtn"><i class="fas fa-check-circle"></i> Check‑in guest</button>
+                    <button class="btn-add" id="addGuestBtn">
+                        <i class="fas fa-circle-check"></i> Check‑in Guest
+                    </button>
                 </div>
             </div>
         </div>
 
+        <!-- RIGHT -->
         <div class="right-section">
             <div class="card">
                 <div class="card-header">
-                    <h2><i class="fas fa-door-open"></i> Rooms (1–30)</h2>
-                    <span class="small-badge" id="roomSummaryBadge">0 vacant</span>
+                    <div class="card-title">
+                        <div class="card-title-icon" style="background:#ecfdf5;color:#059669;">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="card-title-text">
+                            <h2>Rooms 1–30</h2>
+                            <p>Occupancy overview</p>
+                        </div>
+                    </div>
+                    <span class="chip" id="roomSummaryBadge">0 vacant</span>
                 </div>
                 <div class="rooms-grid" id="roomsGrid"></div>
                 <div class="room-legend">
-                    <span><span class="legend-dot green"></span> Vacant</span>
-                    <span><span class="legend-dot orange"></span> Occupied</span>
+                    <span class="legend-item">
+                        <span class="legend-dot green"></span> Vacant
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-dot orange"></span> Occupied
+                    </span>
                 </div>
             </div>
 
-            <div class="card" style="background:#eef6ff; border:1px solid #d9e9ff;">
-                <h2 style="font-size:16px;"><i class="fas fa-lightbulb"></i> Quick actions</h2>
-                <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px;">
-                    <button class="btn" style="justify-content:flex-start;" onclick="markAllCheckedOut()">
-                        <i class="fas fa-right-from-bracket"></i> Check‑out all guests
-                    </button>
-                    <button class="btn" style="justify-content:flex-start;" onclick="loadAll()">
-                        <i class="fas fa-rotate"></i> Reload from database
-                    </button>
-                    <div class="text-muted" style="font-size:12px; margin-top:8px;">
-                        <i class="fas fa-database"></i> Data stored in Supabase
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-title-icon" style="background:#fce7f3;color:#db2777;">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="card-title-text">
+                            <h2>Quick Actions</h2>
+                            <p>One‑tap operations</p>
+                        </div>
                     </div>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="markAllCheckedOut()">
+                        <span class="action-icon ai-red"><i class="fas fa-right-from-bracket"></i></span>
+                        <span>
+                            Check‑out all guests
+                            <small>Free every occupied room</small>
+                        </span>
+                    </button>
+                    <button class="action-btn" onclick="loadAll()">
+                        <span class="action-icon ai-blue"><i class="fas fa-rotate"></i></span>
+                        <span>
+                            Reload from database
+                            <small>Sync latest records</small>
+                        </span>
+                    </button>
+                </div>
+                <div class="db-note">
+                    <i class="fas fa-database"></i>
+                    Data stored securely in Supabase
                 </div>
             </div>
         </div>
@@ -351,22 +868,18 @@
 
 <!-- ============================================================= -->
 <!-- STEP 1: REPLACE THESE WITH YOUR SUPABASE CREDENTIALS          -->
-<!-- Get them from: Supabase Dashboard → Project Settings → API    -->
 <!-- ============================================================= -->
 <script>
-    // 🔴 REPLACE THESE TWO LINES WITH YOUR ACTUAL SUPABASE VALUES
     const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
 </script>
 
-<!-- Supabase client from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 (function() {
     'use strict';
 
-    // ---------- INIT ----------
     let supabase = null;
     let rooms = [];
     let guests = [];
@@ -381,7 +894,6 @@
         return true;
     }
 
-    // ---------- UI HELPERS ----------
     function showToast(msg, type = 'success', duration = 3000) {
         const el = document.getElementById('toast');
         el.textContent = msg;
@@ -401,14 +913,22 @@
         const day = String(d.getDate()).padStart(2, '0');
         return `${y}-${m}-${day}`;
     }
-
     function today() { return formatDate(new Date()); }
-
     function escapeHtml(text) {
         if (!text) return '';
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+    function initials(name) {
+        if (!name) return '?';
+        const parts = name.trim().split(/\s+/);
+        return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+    function colorFor(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 6;
+        return 'a' + h;
     }
 
     // ---------- LOAD ----------
@@ -420,10 +940,8 @@
                 supabase.from('rooms').select('*').order('id'),
                 supabase.from('guests').select('*').order('created_at', { ascending: false })
             ]);
-
             if (roomsRes.error) throw roomsRes.error;
             if (guestsRes.error) throw guestsRes.error;
-
             rooms = roomsRes.data || [];
             guests = guestsRes.data || [];
             renderAll();
@@ -449,35 +967,51 @@
         const totalPaid = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
         const vacant = rooms.filter(r => !r.is_occupied).length;
         const occupied = rooms.length - vacant;
+        const occupancyRate = rooms.length ? Math.round((occupied / rooms.length) * 100) : 0;
 
         document.getElementById('statsGrid').innerHTML = `
             <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-blue"><i class="fas fa-user-check"></i></div>
+                    <span class="stat-trend"><i class="fas fa-arrow-up"></i> Live</span>
+                </div>
                 <div class="stat-info">
                     <h3>Guests in house</h3>
                     <div class="stat-value">${active}</div>
                 </div>
-                <div class="stat-icon"><i class="fas fa-user-check"></i></div>
             </div>
+
             <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-green"><i class="fas fa-coins"></i></div>
+                    <span class="stat-trend"><i class="fas fa-check"></i> All time</span>
+                </div>
                 <div class="stat-info">
                     <h3>Total revenue</h3>
                     <div class="stat-value">ZMW ${totalPaid.toLocaleString()}</div>
                 </div>
-                <div class="stat-icon"><i class="fas fa-coins"></i></div>
             </div>
+
             <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-orange"><i class="fas fa-door-closed"></i></div>
+                    <span class="stat-trend neutral">${rooms.length} total</span>
+                </div>
                 <div class="stat-info">
                     <h3>Vacant rooms</h3>
-                    <div class="stat-value">${vacant}</div>
+                    <div class="stat-value">${vacant}<small> / ${rooms.length}</small></div>
                 </div>
-                <div class="stat-icon"><i class="fas fa-door-closed"></i></div>
             </div>
+
             <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-purple"><i class="fas fa-door-open"></i></div>
+                    <span class="stat-trend neutral">${occupancyRate}% full</span>
+                </div>
                 <div class="stat-info">
                     <h3>Occupied</h3>
-                    <div class="stat-value">${occupied}</div>
+                    <div class="stat-value">${occupied}<small> / ${rooms.length}</small></div>
                 </div>
-                <div class="stat-icon"><i class="fas fa-door-open"></i></div>
             </div>
         `;
     }
@@ -488,7 +1022,7 @@
 
         if (!guests.length) {
             tbody.innerHTML = '';
-            emptyMsg.style.display = 'block';
+            emptyMsg.style.display = 'flex';
             return;
         }
         emptyMsg.style.display = 'none';
@@ -502,12 +1036,18 @@
             const room = rooms.find(r => r.id === g.room_id);
             const roomName = room ? room.name : '—';
             const statusClass = g.still_lodging ? 'status-badge' : 'status-badge checked-out';
-            const statusText = g.still_lodging
-                ? '<i class="fas fa-circle"></i> Lodging'
-                : '<i class="fas fa-check-circle"></i> Checked out';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked out';
+            const av = colorFor(g.name || 'x');
             return `<tr>
-                <td><strong>${escapeHtml(g.name)}</strong><br>
-                    <span class="text-muted" style="font-size:12px;">${roomName}</span></td>
+                <td>
+                    <div class="guest-cell">
+                        <div class="avatar ${av}">${initials(g.name)}</div>
+                        <div>
+                            <div class="guest-name">${escapeHtml(g.name)}</div>
+                            <div class="guest-room"><i class="fas fa-door-closed" style="opacity:.5;margin-right:3px;"></i>${roomName}</div>
+                        </div>
+                    </div>
+                </td>
                 <td>${g.check_in || '—'}</td>
                 <td>${g.check_out || '—'}</td>
                 <td><span class="${statusClass}">${statusText}</span></td>
@@ -528,14 +1068,17 @@
         grid.innerHTML = rooms.map(room => {
             const occ = room.is_occupied;
             const occupant = occ ? guests.find(g => g.room_id === room.id && g.still_lodging) : null;
-            const guestName = occupant ? escapeHtml(occupant.name.split(' ')[0]) : '—';
+            const av = occupant ? colorFor(occupant.name || 'x') : null;
+            const guestLine = occupant
+                ? `<div class="room-mini-avatar ${av}">${initials(occupant.name)}</div><span>${escapeHtml(occupant.name.split(' ')[0])}</span>`
+                : `<span style="opacity:.5;">Available</span>`;
             return `<div class="room-item ${occ ? 'occupied' : 'vacant'}">
-                <div class="room-number">
-                    <span>${escapeHtml(room.name)}</span>
-                    <i class="fas fa-door-${occ ? 'open' : 'closed'}"></i>
+                <div class="room-top">
+                    <span class="room-num">${escapeHtml(room.name.replace('Room ',''))}</span>
+                    <span class="room-dot"></span>
                 </div>
-                <div class="room-guest">${guestName}</div>
-                <div class="room-status">${occ ? 'Occupied' : 'Vacant'}</div>
+                <div class="room-guest">${guestLine}</div>
+                <div class="room-status-label">${occ ? 'Occupied' : 'Vacant'}</div>
             </div>`;
         }).join('');
 
@@ -546,15 +1089,12 @@
     function renderRoomSelect() {
         const select = document.getElementById('roomSelect');
         const vacant = rooms.filter(r => !r.is_occupied);
-
         if (!vacant.length) {
             select.innerHTML = '<option value="">-- No vacant rooms --</option>';
             select.disabled = true;
             return;
         }
         select.disabled = false;
-
-        // Group by numeric order (Room 1 → Room 30)
         select.innerHTML = vacant
             .sort((a, b) => a.id - b.id)
             .map(r => `<option value="${r.id}">${escapeHtml(r.name)}</option>`)
@@ -584,17 +1124,13 @@
         setLoading(true);
         try {
             const { error: guestErr } = await supabase.from('guests').insert({
-                name,
-                room_id: Number(roomId),
-                check_in: checkIn,
-                amount_paid: amount,
-                still_lodging: true
+                name, room_id: Number(roomId), check_in: checkIn,
+                amount_paid: amount, still_lodging: true
             });
             if (guestErr) throw guestErr;
 
             const { error: roomErr } = await supabase
-                .from('rooms')
-                .update({ is_occupied: true })
+                .from('rooms').update({ is_occupied: true })
                 .eq('id', Number(roomId));
             if (roomErr) throw roomErr;
 
@@ -614,7 +1150,6 @@
     window.checkoutGuest = async function(guestId) {
         if (!supabase) return;
         if (!confirm('Check out this guest?')) return;
-
         const guest = guests.find(g => g.id === guestId);
         if (!guest) return;
 
@@ -628,12 +1163,10 @@
 
             if (guest.room_id) {
                 const { error: rErr } = await supabase
-                    .from('rooms')
-                    .update({ is_occupied: false })
+                    .from('rooms').update({ is_occupied: false })
                     .eq('id', guest.room_id);
                 if (rErr) throw rErr;
             }
-
             showToast('✅ Guest checked out');
             await loadAll();
         } catch (err) {
@@ -659,8 +1192,7 @@
             if (gErr) throw gErr;
 
             const { error: rErr } = await supabase
-                .from('rooms')
-                .update({ is_occupied: false })
+                .from('rooms').update({ is_occupied: false })
                 .eq('is_occupied', true);
             if (rErr) throw rErr;
 
@@ -680,9 +1212,7 @@
             '1. Create a project at supabase.com\n' +
             '2. Run the SQL schema below in SQL Editor\n' +
             '3. Copy your Project URL and anon key\n' +
-            '4. In index.html, find the script block with\n' +
-            '   SUPABASE_URL and SUPABASE_ANON_KEY and paste them.\n\n' +
-            '5. Push to GitHub → deploy on Vercel.\n\n' +
+            '4. Paste them at the top of the <script> tag\n\n' +
             '=== SQL SCHEMA ===\n\n' +
             "create table rooms (\n" +
             "  id bigint generated always as identity primary key,\n" +
@@ -713,18 +1243,12 @@
         );
     };
 
-    // ---------- BOOT ----------
     document.addEventListener('DOMContentLoaded', () => {
         const opts = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
         document.getElementById('currentDate').textContent =
             new Date().toLocaleDateString('en-GB', opts);
-
         document.getElementById('checkInDate').value = today();
-
-        if (initSupabase()) {
-            loadAll();
-        }
-
+        if (initSupabase()) loadAll();
         document.getElementById('addGuestBtn').addEventListener('click', addGuest);
     });
 })();
