@@ -30,57 +30,7 @@
         .dashboard { max-width: 1440px; margin: 0 auto; }
         .hidden { display: none !important; }
 
-        /* AUTH SCREEN */
-        .auth-screen {
-            position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 100;
-            background: linear-gradient(120deg, rgba(10, 15, 35, 0.92) 0%, rgba(15, 23, 42, 0.85) 40%, rgba(30, 27, 75, 0.78) 75%, rgba(49, 46, 129, 0.72) 100%), url('imgs/lodges.jpg') center/cover no-repeat;
-        }
-        .auth-screen::before { content: ''; position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 100%, rgba(99, 102, 241, 0.25), transparent 60%); pointer-events: none; }
-        .auth-card {
-            position: relative; background: #ffffff; border-radius: 28px; padding: 36px 34px 30px; width: 100%; max-width: 420px;
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08); z-index: 1;
-        }
-        .auth-brand { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 26px; }
-        .auth-logo {
-            width: 76px; height: 76px; border-radius: 22px; background: #ffffff;
-            box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-            display: flex; align-items: center; justify-content: center; margin-bottom: 16px; position: relative; overflow: hidden;
-        }
-        .auth-logo img { position: absolute; inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); object-fit: cover; border-radius: 18px; }
-        .auth-logo i { color: #6366f1; font-size: 28px; position: relative; z-index: 0; }
-        .auth-brand h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; }
-        .auth-brand p { font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
-        .auth-tabs { display: flex; background: #f4f6fb; border-radius: 14px; padding: 4px; margin-bottom: 22px; gap: 4px; }
-        .auth-tab {
-            flex: 1; background: transparent; border: none; padding: 11px 12px; border-radius: 10px;
-            font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--text-soft); cursor: pointer; transition: 0.2s;
-        }
-        .auth-tab.active { background: white; color: var(--text); box-shadow: var(--shadow-sm), 0 2px 8px -4px rgba(15, 23, 42, 0.1); }
-        .auth-form { display: flex; flex-direction: column; gap: 14px; }
-        .auth-field { position: relative; }
-        .auth-field i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #a5b4fc; font-size: 14px; pointer-events: none; }
-        .auth-field input {
-            width: 100%; padding: 14px 16px 14px 42px; border-radius: 13px; border: 1.5px solid var(--border-strong);
-            background: #fafbff; font-size: 14px; font-family: inherit; font-weight: 600; color: var(--text); outline: none; transition: 0.15s;
-        }
-        .auth-field input::placeholder { color: #a8b1c1; font-weight: 500; }
-        .auth-field input:focus { border-color: #6366f1; background: white; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12); }
-        .auth-submit {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; border: none; padding: 15px 20px; border-radius: 13px;
-            font-family: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; margin-top: 4px;
-            box-shadow: 0 14px 28px -12px rgba(79, 70, 229, 0.75); transition: 0.18s; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .auth-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 18px 34px -14px rgba(79, 70, 229, 0.9); }
-        .auth-submit:disabled { opacity: 0.65; cursor: not-allowed; }
-        .auth-error { display: none; background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; border-radius: 11px; padding: 11px 14px; font-size: 13px; font-weight: 600; margin-top: 4px; }
-        .auth-error.show { display: flex; gap: 8px; align-items: flex-start; }
-        .auth-error.success { background: #ecfdf5; color: #047857; border-color: #d1fae5; }
-        .auth-error.success i { color: #059669; }
-        .auth-footer { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 20px; font-weight: 500; line-height: 1.6; }
-        .auth-footer a { color: #6366f1; text-decoration: none; font-weight: 700; }
-        .auth-footer a:hover { text-decoration: underline; }
-
-        /* DASHBOARD */
+        /* DASHBOARD HEADER */
         .topbar {
             position: relative; border-radius: 26px; padding: 28px 28px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;
             flex-wrap: wrap; gap: 18px; overflow: hidden; box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.5);
@@ -100,14 +50,10 @@
         .brand-text h1 .pin { font-size: 11px; font-weight: 600; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.22); color: #e0e7ff; padding: 4px 11px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(6px); }
         .brand-text .tagline { color: #c7d2fe; font-size: 13px; margin-top: 5px; display: flex; align-items: center; gap: 8px; font-weight: 500; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35); flex-wrap: wrap; }
         .top-actions { display: flex; gap: 10px; position: relative; z-index: 1; flex-wrap: wrap; }
-        .user-chip { display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 30px; color: #e0e7ff; font-size: 12.5px; font-weight: 600; backdrop-filter: blur(10px); max-width: 220px; }
-        .user-chip i { font-size: 14px; color: #a5b4fc; flex-shrink: 0; }
-        .user-chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .btn { border: none; background: white; padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: 13.5px; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.18s ease; color: var(--text); border: 1px solid var(--border-strong); box-shadow: var(--shadow-sm); }
         .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
         .btn-ghost { background: rgba(255, 255, 255, 0.12); color: white; border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(10px); }
         .btn-ghost:hover { background: rgba(255, 255, 255, 0.22); }
-        .btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.9); }
 
         /* STATS */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 16px; margin-bottom: 24px; }
@@ -215,8 +161,6 @@
         .action-icon { width: 36px; height: 36px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: white; flex-shrink: 0; }
         .ai-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
         .ai-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-        .ai-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
-        .ai-green { background: linear-gradient(135deg, #10b981, #059669); }
         .action-text small { display: block; font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 1px; }
         .db-note { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 600; color: #047857; background: #ecfdf5; padding: 9px 12px; border-radius: 10px; margin-top: 12px; border: 1px solid #d1fae5; }
 
@@ -238,58 +182,13 @@
             .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
             .top-actions .btn span { display: none; }
             .top-actions .btn { padding: 10px 12px; }
-            .user-chip { padding: 8px 10px; max-width: 120px; }
-            .auth-card { padding: 30px 24px 26px; }
-            .auth-logo { width: 66px; height: 66px; }
         }
     </style>
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
-<div id="authScreen" class="auth-screen">
-    <div class="auth-card">
-        <div class="auth-brand">
-            <div class="auth-logo">
-                <i class="fas fa-hotel"></i>
-                <img src="imgs/logo.jpg" alt="ChiEdgars logo" onerror="this.remove()">
-            </div>
-            <h2>ChiEdgars Lodge</h2>
-            <p>Staff portal · Kasama</p>
-        </div>
-
-        <div class="auth-tabs">
-            <button type="button" class="auth-tab active" data-mode="signin">Sign In</button>
-            <button type="button" class="auth-tab" data-mode="signup">Sign Up</button>
-        </div>
-
-        <form id="authForm" class="auth-form">
-            <div class="auth-field">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="authEmail" placeholder="Staff email" required autocomplete="email">
-            </div>
-            <div class="auth-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="authPassword" placeholder="Password (min 6 characters)" required autocomplete="current-password" minlength="6">
-            </div>
-
-            <div class="auth-error" id="authError"></div>
-
-            <button type="submit" class="auth-submit" id="authSubmitBtn">
-                <i class="fas fa-right-to-bracket"></i>
-                <span id="authSubmitText">Sign In</span>
-            </button>
-        </form>
-
-        <div class="auth-footer">
-            Access is restricted to authorized staff only.<br>
-            First time? Tap <a href="#" onclick="switchAuthMode('signup');return false;">Sign Up</a> to create an account.
-        </div>
-    </div>
-</div>
-
 <!-- DASHBOARD -->
-<div id="appScreen" class="hidden">
+<div id="appScreen">
     <div class="dashboard">
         <div class="topbar">
             <div class="brand">
@@ -311,15 +210,8 @@
                 </div>
             </div>
             <div class="top-actions">
-                <div class="user-chip" title="Signed in as">
-                    <i class="fas fa-user-shield"></i>
-                    <span id="userEmail">...</span>
-                </div>
                 <button class="btn btn-ghost" onclick="loadAll()" title="Refresh">
                     <i class="fas fa-rotate"></i> <span>Refresh</span>
-                </button>
-                <button class="btn btn-ghost" onclick="signOut()" title="Sign out">
-                    <i class="fas fa-right-from-bracket"></i> <span>Sign out</span>
                 </button>
             </div>
         </div>
@@ -420,7 +312,7 @@
                                 <i class="fas fa-door-open"></i>
                             </div>
                             <div class="card-title-text">
-                                <h2>Rooms 1–30</h2>
+                                <h2>Rooms</h2>
                                 <p>Occupancy overview</p>
                             </div>
                         </div>
@@ -460,18 +352,10 @@
                                 <small>Sync latest records</small>
                             </span>
                         </button>
-                        <!-- ADDED AUTO-FIX BUTTON -->
-                        <button class="action-btn" onclick="autoFixDatabase()">
-                            <span class="action-icon ai-green"><i class="fas fa-wrench"></i></span>
-                            <span>
-                                Fix Database Permissions
-                                <small>Click if rooms/guests don't load</small>
-                            </span>
-                        </button>
                     </div>
                     <div class="db-note">
                         <i class="fas fa-database"></i>
-                        Data securely locked in Supabase
+                        Data securely saved in Supabase
                     </div>
                 </div>
             </div>
@@ -496,8 +380,6 @@
     let supabase = null;
     let rooms = [];
     let guests = [];
-    let authMode = 'signin';
-    let currentUser = null;
 
     function initSupabase() {
         if (SUPABASE_URL.includes('YOUR-PROJECT') || SUPABASE_ANON_KEY.includes('YOUR-ANON')) {
@@ -545,92 +427,8 @@
         return 'a' + h;
     }
 
-    /* ============ AUTH ============ */
-    function switchAuthMode(mode) {
-        authMode = mode;
-        document.querySelectorAll('.auth-tab').forEach(t => {
-            t.classList.toggle('active', t.dataset.mode === mode);
-        });
-        document.getElementById('authSubmitText').textContent = mode === 'signin' ? 'Sign In' : 'Create Account';
-        document.getElementById('authError').className = 'auth-error';
-        document.getElementById('authError').textContent = '';
-        document.getElementById('authPassword').autocomplete = mode === 'signin' ? 'current-password' : 'new-password';
-    }
-
-    function showAuthError(msg, isSuccess = false) {
-        const el = document.getElementById('authError');
-        el.innerHTML = (isSuccess ? '<i class="fas fa-check-circle"></i> ' : '<i class="fas fa-circle-exclamation"></i> ') + escapeHtml(msg);
-        el.className = 'auth-error show' + (isSuccess ? ' success' : '');
-    }
-
-    async function handleAuthSubmit(e) {
-        e.preventDefault();
-        const email = document.getElementById('authEmail').value.trim();
-        const password = document.getElementById('authPassword').value;
-        const btn = document.getElementById('authSubmitBtn');
-
-        if (!email || !password) return showAuthError('Please enter email and password.');
-
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (authMode === 'signin' ? 'Signing in…' : 'Creating account…');
-
-        try {
-            if (authMode === 'signin') {
-                const { error } = await supabase.auth.signInWithPassword({ email, password });
-                if (error) throw error;
-            } else {
-                const { data, error } = await supabase.auth.signUp({ email, password });
-                if (error) throw error;
-                if (data.user && !data.session) {
-                    showAuthError('Account created! Check your email to confirm, then sign in.', true);
-                    switchAuthMode('signin');
-                } else if (data.session) {
-                    showAuthError('Account created — signing you in…', true);
-                }
-            }
-        } catch (err) {
-            console.error(err);
-            let msg = err.message || 'Something went wrong.';
-            if (msg.toLowerCase().includes('invalid login')) msg = 'Incorrect email or password.';
-            if (msg.toLowerCase().includes('already registered')) msg = 'This email is already registered. Try signing in.';
-            showAuthError(msg);
-        } finally {
-            // SAFE FIX: Do not use getElementById here, just replace innerHTML
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-right-to-bracket"></i> <span id="authSubmitText">' + (authMode === 'signin' ? 'Sign In' : 'Create Account') + '</span>';
-        }
-    }
-
-    async function signOut() {
-        if (!confirm('Sign out of ChiEdgars Lodge?')) return;
-        await supabase.auth.signOut();
-    }
-
-    function showDashboard(user) {
-        currentUser = user;
-        document.getElementById('authScreen').classList.add('hidden');
-        document.getElementById('appScreen').classList.remove('hidden');
-        document.getElementById('userEmail').textContent = user.email || 'Staff';
-        document.getElementById('userEmail').title = user.email || '';
-        loadAll();
-    }
-
-    function showAuthScreen() {
-        currentUser = null;
-        document.getElementById('appScreen').classList.add('hidden');
-        document.getElementById('authScreen').classList.remove('hidden');
-        document.getElementById('authPassword').value = '';
-    }
-
-    async function checkAuth() {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session && session.user) showDashboard(session.user);
-        else showAuthScreen();
-    }
-
-    /* ============ DATA ============ */
     async function loadAll() {
-        if (!supabase || !currentUser) return;
+        if (!supabase && !initSupabase()) return;
         setLoading(true);
         try {
             const [roomsRes, guestsRes] = await Promise.all([
@@ -646,42 +444,11 @@
             renderAll();
         } catch (err) {
             console.error(err);
-            // Show helpful message if RLS is blocking data
-            if (err.message.includes('row-level security') || err.message.includes('permission denied')) {
-                showToast('⚠️ Database permissions need updating. Click "Fix Database Permissions".', 'error', 6000);
-            } else {
-                showToast('❌ Failed to load: ' + err.message, 'error', 5000);
-            }
+            showToast('❌ Failed to load: ' + err.message, 'error', 5000);
         } finally {
             setLoading(false);
         }
     }
-
-    // ONE-CLICK DATABASE FIX
-    window.autoFixDatabase = async function() {
-        if (!supabase) return;
-        setLoading(true);
-        try {
-            // Try to write a dummy row to see if RLS is active.
-            // If we can read, but not write, this will fail and we know we need the SQL.
-            alert("To fix permissions, you must run the SQL script in your Supabase dashboard.\n\nGo to Supabase -> SQL Editor -> Paste this:\n\n" +
-                  "drop policy if exists \"public read rooms\" on rooms;\n" +
-                  "drop policy if exists \"public read guests\" on guests;\n" +
-                  "drop policy if exists \"public insert guests\" on guests;\n" +
-                  "drop policy if exists \"public update guests\" on guests;\n" +
-                  "drop policy if exists \"public update rooms\" on rooms;\n\n" +
-                  "create policy \"auth read rooms\" on rooms for select using (auth.role() = 'authenticated');\n" +
-                  "create policy \"auth read guests\" on guests for select using (auth.role() = 'authenticated');\n" +
-                  "create policy \"auth insert guests\" on guests for insert with check (auth.role() = 'authenticated');\n" +
-                  "create policy \"auth update guests\" on guests for update using (auth.role() = 'authenticated');\n" +
-                  "create policy \"auth update rooms\" on rooms for update using (auth.role() = 'authenticated');\n\n" +
-                  "Then click Reload.");
-        } catch(e) {
-            console.error(e);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     function renderAll() {
         renderStats();
@@ -921,25 +688,16 @@
     };
 
     /* ============ BOOT ============ */
-    document.addEventListener('DOMContentLoaded', async () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const opts = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-GB', opts);
         document.getElementById('checkInDate').value = today();
 
-        document.querySelectorAll('.auth-tab').forEach(tab => {
-            tab.addEventListener('click', () => switchAuthMode(tab.dataset.mode));
-        });
-        document.getElementById('authForm').addEventListener('submit', handleAuthSubmit);
         document.getElementById('addGuestBtn').addEventListener('click', addGuest);
 
-        if (!initSupabase()) return;
-
-        supabase.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' && session?.user) showDashboard(session.user);
-            else if (event === 'SIGNED_OUT') showAuthScreen();
-        });
-
-        await checkAuth();
+        if (initSupabase()) {
+            loadAll();
+        }
     });
 })();
 </script>
