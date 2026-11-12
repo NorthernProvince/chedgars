@@ -1,583 +1,1534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChiEdgars Lodge · Kasama</title>
-<link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f4f5fa;--card:#fff;--text:#1a1f36;--soft:#697386;--mute:#8792a2;--bd:#eceff5;--bd2:#e0e4ee;--p:#4f46e5;--p2:#7c3aed;--ok:#059669;--warn:#ea580c;--bad:#dc2626;--sh:0 4px 14px -4px rgba(15,23,42,.07),0 2px 6px -2px rgba(15,23,42,.04)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);padding:22px 18px 60px;min-height:100vh;-webkit-font-smoothing:antialiased}
-.hidden{display:none!important}
-.wrap{max-width:1400px;margin:0 auto}
-h1,h2,.num{font-family:'Space Grotesk',sans-serif}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChiEdgars Lodge · Kasama</title>
+    <link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f6fa;
+            --card: #ffffff;
+            --text: #1a1f36;
+            --text-soft: #697386;
+            --text-muted: #8792a2;
+            --border: #eef0f5;
+            --border-strong: #e3e6ee;
 
-/* login */
-#login{position:fixed;inset:0;z-index:900;overflow-y:auto;background:radial-gradient(900px 500px at 50% 0%,#e9ecf5,#f1f3f8 60%);display:flex;flex-direction:column;font-family:'Inter',sans-serif}
-.lg-head{background:#232d8c;border-bottom:4px solid #b8892e;text-align:center;padding:26px 20px 22px;color:#fff}
-.lg-logo{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;background:#0f172a;border:3px solid #fff;box-shadow:0 14px 24px -10px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;color:#d9a441;font-size:32px;overflow:hidden}
-.lg-logo img{width:100%;height:100%;object-fit:cover}
-.lg-kick{color:#c8962f;font-size:12.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase}
-.lg-name{font-family:'Playfair Display',Georgia,serif;font-size:27px;font-weight:700;letter-spacing:.03em;margin:8px 0 4px}
-.lg-tag{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:#c8962f;font-size:15px}
-.lg-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:30px 18px 24px}
-.lg-card{background:#fff;border-radius:26px;border-top:8px solid #b8892e;width:100%;max-width:440px;padding:26px 26px 30px;box-shadow:0 30px 60px -30px rgba(15,23,42,.35)}
-.lg-ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:3px solid #f6ecd6;margin-bottom:24px}
-.lg-ch h2{font-family:'Playfair Display',Georgia,serif;color:#232d8c;font-size:21px;display:flex;gap:12px;align-items:center;line-height:1.25}
-.lg-ch h2 i{color:#b8892e;font-size:22px}
-.lg-ch span{color:#8b93a3;font-size:13.5px;text-align:right}
-.lg-card label{color:#232d8c}
-.lg-f{position:relative;margin-bottom:16px}
-.lg-f>i{position:absolute;left:15px;bottom:15px;color:#b8892e;font-size:14px}
-.lg-f input{padding-left:42px;border-radius:14px;background:#f8f9fd}
-.lg-f input:focus{border-color:#232d8c;box-shadow:0 0 0 4px rgba(35,45,140,.12)}
-.lg-f .eye{position:absolute;right:6px;bottom:6px;width:38px;height:38px;border:none;background:none;color:#8b93a3;cursor:pointer;font-size:15px}
-.lg-btn{width:100%;margin-top:8px;border:none;border-radius:40px;background:#232d8c;color:#fff;padding:16px;font:700 16px 'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:0 14px 26px -12px rgba(35,45,140,.85);transition:.15s}
-.lg-btn:hover{transform:translateY(-1px);background:#1b2475}.lg-btn:disabled{opacity:.6;cursor:not-allowed}
-.lg-note{text-align:center;color:#8b93a3;font-size:12.5px;margin-top:18px}
-.lg-foot{width:100%;max-width:440px;margin-top:26px;padding-top:16px;border-top:1px solid #dde1ea;text-align:center;color:#8b93a3;font-size:13px;line-height:1.7}
-.err{background:#fef2f2;color:var(--bad);border:1px solid #fecaca;border-radius:12px;padding:10px 12px;font-size:13px;font-weight:600;margin-bottom:16px}
+            --blue-1: #4f46e5; --blue-2: #6366f1;
+            --green-1: #059669; --green-2: #10b981;
+            --orange-1: #ea580c; --orange-2: #f59e0b;
+            --purple-1: #7c3aed; --purple-2: #a78bfa;
 
-/* topbar */
-.topbar{border-radius:24px;padding:24px 26px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:#fff;box-shadow:0 24px 48px -26px rgba(15,23,42,.6);background:linear-gradient(120deg,rgba(10,15,35,.93),rgba(30,27,75,.78) 60%,rgba(49,46,129,.7)),url('imgs/lodges.jpg') center/cover}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{width:56px;height:56px;border-radius:16px;background:#fff;color:var(--p);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden}
-.logo img{width:100%;height:100%;object-fit:cover}
-.brand h1{font-size:22px;letter-spacing:-.3px}
-.brand p{color:#c7d2fe;font-size:12.5px;margin-top:3px;font-weight:500}
-.user{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.who{font-size:12.5px;text-align:right;line-height:1.3}
-.who b{display:block;font-size:13.5px}
-.role{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:1px 9px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 4px 14px -4px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.03);
+            --shadow-lg: 0 20px 40px -20px rgba(15, 23, 42, 0.12), 0 8px 20px -12px rgba(15, 23, 42, 0.06);
+        }
 
-/* buttons */
-.btn{border:1px solid var(--bd2);background:#fff;color:var(--text);padding:10px 16px;border-radius:11px;font:600 13.5px 'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.15s}
-.btn:hover{transform:translateY(-1px);box-shadow:var(--sh)}
-.btn.pri{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;border:none;box-shadow:0 10px 22px -10px rgba(79,70,229,.9)}
-.btn.ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25)}
-.btn.sm{padding:7px 11px;font-size:12.5px;border-radius:9px}
-.btn.full{width:100%;padding:14px}
-.btn:disabled{opacity:.6;cursor:not-allowed}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
 
-/* tabs */
-.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--bd);padding:5px;border-radius:14px;width:fit-content;margin-bottom:18px;box-shadow:var(--sh)}
-.tab{border:none;background:none;padding:10px 18px;border-radius:10px;font:600 13.5px 'Inter';color:var(--soft);cursor:pointer;display:flex;gap:8px;align-items:center}
-.tab.on{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(1200px 600px at 10% -10%, rgba(99, 102, 241, 0.06), transparent 60%),
+                radial-gradient(900px 500px at 100% 0%, rgba(16, 185, 129, 0.05), transparent 55%);
+            color: var(--text);
+            padding: 24px 20px 60px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:18px}
-.stat{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:18px;box-shadow:var(--sh);display:flex;gap:14px;align-items:center}
-.si{width:46px;height:46px;border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
-.c1{background:linear-gradient(135deg,#4f46e5,#6366f1)}.c2{background:linear-gradient(135deg,#059669,#10b981)}.c3{background:linear-gradient(135deg,#ea580c,#f59e0b)}.c4{background:linear-gradient(135deg,#7c3aed,#a78bfa)}.c5{background:linear-gradient(135deg,#dc2626,#f87171)}
-.stat h3{font-size:11.5px;color:var(--soft);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.stat .v{font-family:'Space Grotesk';font-size:25px;font-weight:700;letter-spacing:-.5px;margin-top:2px}
-.stat .v small{font-size:13px;color:var(--mute)}
+        .dashboard { max-width: 1440px; margin: 0 auto; }
+        .hidden { display: none !important; }
 
-/* layout */
-.main{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
-.left{flex:2.2;min-width:320px}.right{flex:1.1;min-width:300px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px;box-shadow:var(--sh);margin-bottom:18px}
-.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
-.ct{display:flex;align-items:center;gap:12px}
-.ci{width:38px;height:38px;border-radius:12px;background:#eef2ff;color:var(--p);display:flex;align-items:center;justify-content:center}
-.ct h2{font-size:16px}.ct p{font-size:12px;color:var(--mute);font-weight:500}
-.chip{background:#f1f5f9;color:#475569;font-size:12px;font-weight:700;padding:5px 12px;border-radius:30px}
+        /* ============================================================ */
+        /* AUTH SCREEN                                                   */
+        /* ============================================================ */
+        .auth-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 100;
+            background:
+                linear-gradient(120deg,
+                    rgba(10, 15, 35, 0.92) 0%,
+                    rgba(15, 23, 42, 0.85) 40%,
+                    rgba(30, 27, 75, 0.78) 75%,
+                    rgba(49, 46, 129, 0.72) 100%),
+                url('imgs/lodges.jpg') center/cover no-repeat;
+        }
 
-/* table */
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{text-align:left;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--mute);background:#fafbfd;border-bottom:1px solid var(--bd);white-space:nowrap}
-td{padding:13px 12px;border-bottom:1px solid var(--bd);font-weight:500;vertical-align:middle}
-tbody tr:hover{background:#fafbff}
-td.r,th.r{text-align:right}
-.gc{display:flex;align-items:center;gap:11px}
-.av{width:38px;height:38px;border-radius:12px;color:#fff;font-weight:700;font-size:13.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.a0{background:linear-gradient(135deg,#6366f1,#8b5cf6)}.a1{background:linear-gradient(135deg,#10b981,#059669)}.a2{background:linear-gradient(135deg,#f59e0b,#ea580c)}.a3{background:linear-gradient(135deg,#ec4899,#db2777)}.a4{background:linear-gradient(135deg,#06b6d4,#0891b2)}.a5{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
-.gn{font-weight:700}.gs{font-size:11.5px;color:var(--mute)}
-.badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:30px;white-space:nowrap;background:#dcfce7;color:#15803d}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
-.badge.out{background:#f1f5f9;color:#64748b}.badge.due{background:#ffedd5;color:#b45309}
-.money{font-family:'Space Grotesk';font-weight:700;white-space:nowrap}
-.acts{display:flex;gap:6px;justify-content:flex-end}
-.ib{width:34px;height:34px;border:none;border-radius:10px;background:#f4f6fb;color:#64748b;cursor:pointer;transition:.15s}
-.ib:hover{background:#eef2ff;color:var(--p)}.ib.red:hover{background:#fee2e2;color:var(--bad)}
+        .auth-screen::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(120% 100% at 50% 100%, rgba(99, 102, 241, 0.25), transparent 60%);
+            pointer-events: none;
+        }
 
-/* form */
-.form{display:flex;flex-direction:column;gap:14px}
-.row{display:flex;gap:12px;flex-wrap:wrap}.fg{flex:1;min-width:140px}
-label{font-size:11.5px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:6px}
-input,select{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--bd2);background:#fafbff;font:600 13.5px 'Inter';color:var(--text);outline:none;transition:.15s}
-input:focus,select:focus{border-color:var(--p);background:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.12)}
-.calc{background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1px solid #ddd6fe;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.calc small{color:var(--soft);font-weight:600;font-size:12.5px}
-.calc b{font-family:'Space Grotesk';font-size:22px;color:var(--p)}
+        .auth-card {
+            position: relative;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 36px 34px 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6),
+                        0 0 0 1px rgba(255, 255, 255, 0.08);
+            z-index: 1;
+        }
 
-/* rooms */
-.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;max-height:430px;overflow-y:auto}
-.room{border-radius:14px;padding:11px;border:1px solid var(--bd);display:flex;flex-direction:column;gap:6px}
-.room.v{background:linear-gradient(180deg,#f0fdf4,#fff);border-color:#d1fae5}.room.o{background:linear-gradient(180deg,#fff7ed,#fff);border-color:#fed7aa}
-.room .n{font:700 15px 'Space Grotesk';display:flex;justify-content:space-between;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%}.v .dot{background:#22c55e}.o .dot{background:#f97316}
-.room .g{font-size:11px;font-weight:600;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.room .p{font-size:10.5px;color:var(--mute);font-weight:600}
-.legend{display:flex;gap:16px;margin-top:14px;padding-top:12px;border-top:1px solid var(--bd);font-size:12px;color:var(--soft)}
+        .auth-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 26px;
+        }
 
-/* modal */
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);z-index:800;display:flex;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
-.mbox{background:#fff;border-radius:22px;width:100%;max-width:560px;padding:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}
-.mbox.wide{max-width:760px}
-.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.mh h2{font-size:18px}
-.line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--bd2);font-size:13.5px;gap:10px}
-.line.t{border-bottom:none;font-weight:800;font-size:15px}
-.sec{font-size:11.5px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 8px}
+        .auth-logo {
+            width: 76px; height: 76px;
+            border-radius: 22px;
+            background: #ffffff;
+            box-shadow: 0 16px 32px -12px rgba(99, 102, 241, 0.55),
+                        inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* receipt / print doc */
-.doc{font-family:'Inter',sans-serif;color:#111;font-size:13px}
-.doc .dh{text-align:center;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:12px}
-.doc .dh img{width:54px;height:54px;border-radius:12px;object-fit:cover;margin-bottom:6px}
-.doc .dh h2{font-size:20px}.doc .dh p{font-size:12px;color:#555}
-.doc table{font-size:12.5px}.doc th{background:#f3f4f6;color:#333}.doc td,.doc th{padding:7px 8px}
-.doc .meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px;font-size:12.5px}
-.doc .sum{margin-top:12px;margin-left:auto;width:min(280px,100%)}
-.doc .foot{text-align:center;margin-top:20px;font-size:12px;color:#555;border-top:1px dashed #999;padding-top:10px}
-.doc .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.doc .kpi{border:1px solid #ddd;border-radius:8px;padding:8px 10px}.doc .kpi small{color:#666;font-size:10.5px;text-transform:uppercase}.doc .kpi b{display:block;font-size:15px}
-#printArea{display:none}
+        .auth-logo img {
+            position: absolute; inset: 4px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            object-fit: cover;
+            border-radius: 18px;
+        }
 
-#toast{position:fixed;bottom:26px;right:26px;background:#059669;color:#fff;padding:14px 20px;border-radius:13px;font-weight:600;font-size:14px;z-index:999;transform:translateY(220%);transition:.35s;max-width:340px;box-shadow:0 20px 40px -12px rgba(0,0,0,.4)}
-#toast.show{transform:none}#toast.error{background:var(--bad)}
-.load{position:fixed;inset:0;background:rgba(244,245,250,.8);z-index:950;display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--p)}
-pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:12px;font-size:11.5px;overflow:auto;max-height:340px}
-.empty{padding:18px;text-align:center;color:var(--mute);font-weight:600;font-size:13.5px}
+        .auth-logo i {
+            color: #6366f1; font-size: 28px;
+            position: relative; z-index: 0;
+        }
 
-@media(max-width:760px){.btn span.lbl{display:none}.doc .kpis{grid-template-columns:1fr 1fr}}
-@media print{body{background:#fff;padding:0}body>*{display:none!important}#printArea{display:block!important;padding:10mm}@page{margin:8mm}}
+        .auth-brand h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px; font-weight: 700;
+            color: var(--text); letter-spacing: -0.4px;
+        }
 
-/* ---- navy & gold theme for app pages ---- */
-:root{--navy:#232d8c;--navy2:#1b2475;--gold:#b8892e;--gold2:#c8962f;--cream:#f6ecd6;--p:#232d8c;--p2:#1b2475}
-body{background:radial-gradient(900px 500px at 50% 0,#e9ecf5,#f1f3f8 60%) fixed}
-.topbar{border-radius:0 0 26px 26px;border-bottom:4px solid var(--gold);margin:-22px -18px 22px;padding:26px 28px;background:linear-gradient(120deg,rgba(35,45,140,.97),rgba(27,36,117,.93)),url('imgs/lodges.jpg') center/cover}
-.logo{border:3px solid #fff;border-radius:50%;width:60px;height:60px;background:#0f172a;color:var(--gold2)}
-.brand h1,.ct h2,.mh h2,.doc h2{font-family:'Playfair Display',Georgia,serif;letter-spacing:.02em}
-.brand h1{font-size:24px}.brand p{color:var(--gold2);font-style:italic;font-family:'Playfair Display',Georgia,serif}
-.role{background:var(--gold);border-color:var(--gold);color:#fff}
-.btn.pri,.tab.on{background:var(--navy);box-shadow:0 12px 22px -12px rgba(35,45,140,.9)}
-.btn.pri:hover{background:var(--navy2)}
-.tabs{border-radius:40px;border-color:var(--cream)}.tab{border-radius:40px}
-.card{border-top:5px solid var(--gold);border-radius:24px}
-.ch{padding-bottom:14px;border-bottom:3px solid var(--cream)}
-.ct h2{color:var(--navy);font-size:18px}
-.ci{background:var(--cream)!important;color:var(--gold)!important}
-.stat{border-bottom:4px solid var(--gold)}
-.stat .v{color:var(--navy)}
-.c1,.c4{background:linear-gradient(135deg,#232d8c,#3a46b8)}.c2,.c3{background:linear-gradient(135deg,#b8892e,#d9a441)}.c5{background:linear-gradient(135deg,#dc2626,#f87171)}
-th{background:#f8f4ea;color:#7a5d1c}
-.chip{background:var(--cream);color:#7a5d1c}
-label{color:var(--navy)}
-input:focus,select:focus{border-color:var(--navy);box-shadow:0 0 0 4px rgba(35,45,140,.12)}
-.calc{background:var(--cream);border-color:#e8d49c}.calc b{color:var(--navy)}
-.ib:hover{background:var(--cream);color:var(--gold)}
-.sec{color:var(--gold)}
-.mbox{border-top:6px solid var(--gold)}
-.doc .dh{border-bottom-color:var(--gold)}
-.doc .dh h2{color:var(--navy)}
-#toast{background:var(--navy)}
-@media(max-width:760px){.topbar{margin:-16px -14px 18px;padding:20px 18px}body{padding:16px 14px 50px}.brand h1{font-size:20px}}
-</style>
+        .auth-brand p {
+            font-size: 13px; color: var(--text-muted);
+            margin-top: 6px; font-weight: 500;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: #f4f6fb;
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 22px;
+            gap: 4px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 11px 12px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-soft);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .auth-tab.active {
+            background: white;
+            color: var(--text);
+            box-shadow: var(--shadow-sm), 0 2px 8px -4px rgba(15, 23, 42, 0.1);
+        }
+
+        .auth-form { display: flex; flex-direction: column; gap: 14px; }
+
+        .auth-field {
+            position: relative;
+        }
+
+        .auth-field i {
+            position: absolute;
+            left: 15px; top: 50%;
+            transform: translateY(-50%);
+            color: #a5b4fc;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .auth-field input {
+            width: 100%;
+            padding: 14px 16px 14px 42px;
+            border-radius: 13px;
+            border: 1.5px solid var(--border-strong);
+            background: #fafbff;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--text);
+            outline: none;
+            transition: 0.15s;
+        }
+
+        .auth-field input::placeholder { color: #a8b1c1; font-weight: 500; }
+
+        .auth-field input:focus {
+            border-color: #6366f1;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+
+        .auth-submit {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 13px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 14.5px;
+            cursor: pointer;
+            margin-top: 4px;
+            box-shadow: 0 14px 28px -12px rgba(79, 70, 229, 0.75);
+            transition: 0.18s;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.2px;
+        }
+
+        .auth-submit:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 34px -14px rgba(79, 70, 229, 0.9);
+        }
+
+        .auth-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+        .auth-error {
+            display: none;
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            border-radius: 11px;
+            padding: 11px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .auth-error.show { display: flex; gap: 8px; align-items: flex-start; }
+        .auth-error.success {
+            background: #ecfdf5;
+            color: #047857;
+            border-color: #d1fae5;
+        }
+        .auth-error.success i { color: #059669; }
+
+        .auth-footer {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 20px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        .auth-footer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        /* ============================================================ */
+        /* DASHBOARD (unchanged styles)                                  */
+        /* ============================================================ */
+        .topbar {
+            position: relative;
+            border-radius: 26px;
+            padding: 28px 28px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.5);
+            background:
+                linear-gradient(120deg,
+                    rgba(10, 15, 35, 0.92) 0%,
+                    rgba(15, 23, 42, 0.80) 40%,
+                    rgba(30, 27, 75, 0.72) 75%,
+                    rgba(49, 46, 129, 0.68) 100%),
+                url('imgs/lodges.jpg') center/cover no-repeat;
+            min-height: 130px;
+        }
+
+        .topbar::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(120% 100% at 0% 0%, rgba(0,0,0,0.35) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .brand { display: flex; align-items: center; gap: 16px; position: relative; z-index: 1; }
+
+        .brand-logo {
+            width: 62px; height: 62px;
+            border-radius: 18px;
+            background: #ffffff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: #6366f1;
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.55),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .brand-logo img {
+            position: absolute;
+            inset: 4px;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .brand-logo i { position: relative; z-index: 0; }
+
+        .brand-text h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px; font-weight: 700;
+            color: white; letter-spacing: -0.4px;
+            display: flex; align-items: center; gap: 10px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-text h1 .pin {
+            font-size: 11px; font-weight: 600;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #e0e7ff;
+            padding: 4px 11px; border-radius: 20px;
+            letter-spacing: 0.2px;
+            display: inline-flex; align-items: center; gap: 5px;
+            backdrop-filter: blur(6px);
+        }
+
+        .brand-text .tagline {
+            color: #c7d2fe;
+            font-size: 13px;
+            margin-top: 5px;
+            display: flex; align-items: center; gap: 8px;
+            font-weight: 500;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+            flex-wrap: wrap;
+        }
+
+        .top-actions { display: flex; gap: 10px; position: relative; z-index: 1; flex-wrap: wrap; }
+
+        .user-chip {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 14px 8px 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 30px;
+            color: #e0e7ff;
+            font-size: 12.5px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            max-width: 220px;
+        }
+        .user-chip i { font-size: 14px; color: #a5b4fc; flex-shrink: 0; }
+        .user-chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        .btn {
+            border: none; background: white; padding: 10px 16px;
+            border-radius: 12px; font-weight: 600; font-size: 13.5px;
+            font-family: inherit;
+            display: inline-flex; align-items: center; gap: 8px;
+            cursor: pointer; transition: 0.18s ease;
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+        }
+        .btn-ghost:hover { background: rgba(255, 255, 255, 0.22); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white; border: none;
+            box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.9);
+        }
+        .btn-primary:hover { box-shadow: 0 16px 30px -12px rgba(99, 102, 241, 1); }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 22px;
+            padding: 20px 20px 18px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: 0.2s ease;
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        .stat-top {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .stat-icon {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: white;
+            position: relative;
+        }
+        .stat-icon::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: 14px;
+            background: inherit;
+            filter: blur(16px);
+            opacity: 0.35;
+            z-index: -1;
+            transform: scale(1.05);
+        }
+        .ic-blue { background: linear-gradient(135deg, var(--blue-1), var(--blue-2)); }
+        .ic-green { background: linear-gradient(135deg, var(--green-1), var(--green-2)); }
+        .ic-orange { background: linear-gradient(135deg, var(--orange-1), var(--orange-2)); }
+        .ic-purple { background: linear-gradient(135deg, var(--purple-1), var(--purple-2)); }
+
+        .stat-trend {
+            font-size: 11px; font-weight: 700;
+            padding: 4px 9px; border-radius: 20px;
+            background: #ecfdf5; color: #047857;
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .stat-trend.neutral { background: #eef2ff; color: #4338ca; }
+
+        .stat-info h3 {
+            font-size: 12.5px; font-weight: 600;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 30px; font-weight: 700;
+            color: var(--text);
+            line-height: 1.05;
+            letter-spacing: -0.7px;
+        }
+        .stat-value small {
+            font-size: 15px; font-weight: 600;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+
+        /* Layout */
+        .main-panel { display: flex; gap: 20px; flex-wrap: wrap; }
+        .left-section { flex: 2.2; min-width: 320px; }
+        .right-section { flex: 1.15; min-width: 300px; }
+
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 22px 22px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 18px;
+            gap: 12px;
+        }
+        .card-title { display: flex; align-items: center; gap: 12px; }
+        .card-title-icon {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            background: #eef2ff; color: #4f46e5;
+        }
+        .card-title-text h2 {
+            font-size: 16px; font-weight: 700;
+            color: var(--text); letter-spacing: -0.2px;
+        }
+        .card-title-text p {
+            font-size: 12px; color: var(--text-muted);
+            font-weight: 500; margin-top: 1px;
+        }
+        .chip {
+            background: #f1f5f9; color: #475569;
+            font-size: 12px; font-weight: 700;
+            padding: 5px 12px; border-radius: 30px;
+            letter-spacing: 0.2px;
+        }
+        .chip.live {
+            background: #dcfce7; color: #15803d;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .chip.live::before {
+            content: ''; width: 6px; height: 6px;
+            background: #22c55e; border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Table */
+        .table-wrap { overflow-x: auto; margin: 0 -6px; padding: 0 6px; }
+        .guest-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+        .guest-table th {
+            text-align: left; padding: 10px 12px;
+            font-weight: 600; color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase; letter-spacing: 0.6px;
+            border-bottom: 1px solid var(--border);
+            background: #fafbfd;
+            white-space: nowrap;
+        }
+        .guest-table th:first-child { border-top-left-radius: 12px; }
+        .guest-table th:last-child { border-top-right-radius: 12px; }
+        .guest-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 500;
+            vertical-align: middle;
+        }
+        .guest-table tbody tr { transition: 0.15s; }
+        .guest-table tbody tr:hover { background: #fafbff; }
+        .guest-table tbody tr:last-child td { border-bottom: none; }
+
+        .guest-cell { display: flex; align-items: center; gap: 12px; }
+        .avatar {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 14px; color: white;
+            flex-shrink: 0;
+        }
+        .avatar.a0 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .avatar.a1 { background: linear-gradient(135deg, #10b981, #059669); }
+        .avatar.a2 { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .avatar.a3 { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .avatar.a4 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .avatar.a5 { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .guest-name { font-weight: 700; color: var(--text); font-size: 13.5px; }
+        .guest-room { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #dcfce7; color: #15803d;
+            font-size: 11.5px; font-weight: 700;
+            padding: 5px 11px; border-radius: 30px;
+            white-space: nowrap;
+        }
+        .status-badge::before {
+            content: ''; width: 6px; height: 6px;
+            background: currentColor; border-radius: 50%;
+        }
+        .status-badge.checked-out { background: #f1f5f9; color: #64748b; }
+
+        .amount {
+            font-weight: 700; color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+        }
+
+        .btn-icon {
+            width: 32px; height: 32px;
+            background: #f4f6fb; border: none;
+            color: #64748b; font-size: 13px;
+            cursor: pointer; border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: 0.15s;
+        }
+        .btn-icon:hover { background: #fee2e2; color: #dc2626; transform: scale(1.05); }
+
+        /* Rooms */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+            gap: 10px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 6px;
+            margin-right: -6px;
+        }
+        .rooms-grid::-webkit-scrollbar { width: 6px; }
+        .rooms-grid::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+
+        .room-item {
+            border-radius: 14px;
+            padding: 12px 11px;
+            display: flex; flex-direction: column;
+            gap: 8px;
+            border: 1px solid var(--border);
+            transition: 0.18s ease;
+        }
+        .room-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .room-item.vacant { background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%); border-color: #d1fae5; }
+        .room-item.occupied { background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%); border-color: #fed7aa; }
+        .room-top { display: flex; align-items: center; justify-content: space-between; }
+        .room-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700; font-size: 15px;
+            color: var(--text);
+        }
+        .room-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .vacant .room-dot { background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
+        .occupied .room-dot { background: #f97316; box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.18); }
+        .room-guest {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600;
+            color: var(--text-soft);
+            min-height: 16px;
+            white-space: nowrap; overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .room-mini-avatar {
+            width: 18px; height: 18px;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; color: white;
+            flex-shrink: 0;
+        }
+        .room-status-label {
+            font-size: 10.5px; font-weight: 700;
+            padding: 3px 8px; border-radius: 20px;
+            text-align: center;
+        }
+        .vacant .room-status-label { color: #15803d; background: #dcfce7; }
+        .occupied .room-status-label { color: #b45309; background: #ffedd5; }
+        .room-legend {
+            display: flex; gap: 16px; margin-top: 16px;
+            font-size: 12px; color: var(--text-soft);
+            align-items: center; font-weight: 500;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+        .legend-item { display: flex; align-items: center; gap: 7px; }
+        .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+        .legend-dot.green { background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
+        .legend-dot.orange { background: #f97316; box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.18); }
+
+        /* Form */
+        .add-guest-form { display: flex; flex-direction: column; gap: 14px; }
+        .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+        .form-group { flex: 1; min-width: 130px; }
+        .form-group label {
+            font-size: 11.5px; font-weight: 700;
+            color: var(--text-soft);
+            margin-bottom: 6px; display: flex;
+            align-items: center; gap: 5px;
+            text-transform: uppercase; letter-spacing: 0.4px;
+        }
+        .form-group label i { color: #a5b4fc; font-size: 11px; }
+        .input-wrap { position: relative; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 13px 14px 13px 40px;
+            border-radius: 13px;
+            border: 1.5px solid var(--border-strong);
+            background: #fafbff;
+            font-size: 13.5px;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--text);
+            outline: none;
+            transition: 0.15s;
+        }
+        .form-group input::placeholder { color: #a8b1c1; font-weight: 500; }
+        .input-wrap > i {
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: #a5b4fc;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #6366f1;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a5b4fc' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+        .btn-add {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white; border: none;
+            padding: 15px 20px; border-radius: 14px;
+            font-weight: 700; font-size: 14px;
+            font-family: inherit;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; cursor: pointer;
+            margin-top: 4px; width: 100%;
+            box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.7);
+            transition: 0.18s;
+        }
+        .btn-add:hover { transform: translateY(-1px); box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.85); }
+        .btn-add:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* Quick actions */
+        .quick-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+        .action-btn {
+            display: flex; align-items: center; gap: 12px;
+            background: #fafbff;
+            border: 1px solid var(--border);
+            padding: 13px 14px;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 13.5px; font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.15s;
+            text-align: left;
+            width: 100%;
+        }
+        .action-btn:hover {
+            background: white;
+            border-color: #c7d2fe;
+            transform: translateX(3px);
+            box-shadow: var(--shadow-sm);
+        }
+        .action-icon {
+            width: 36px; height: 36px;
+            border-radius: 11px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: white;
+            flex-shrink: 0;
+        }
+        .ai-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .ai-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .ai-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .action-text small {
+            display: block; font-size: 11px;
+            color: var(--text-muted); font-weight: 500;
+            margin-top: 1px;
+        }
+        .db-note {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11.5px; font-weight: 600;
+            color: #047857;
+            background: #ecfdf5;
+            padding: 9px 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+            border: 1px solid #d1fae5;
+        }
+
+        /* Toast & loading */
+        #toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #0f172a; color: white;
+            padding: 15px 22px; border-radius: 14px;
+            font-size: 14px; font-weight: 600;
+            font-family: inherit;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
+            transform: translateY(200%); transition: transform 0.35s cubic-bezier(.2,.9,.3,1.3);
+            z-index: 999; max-width: 340px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        #toast.show { transform: translateY(0); }
+        #toast.error { background: #dc2626; }
+        #toast.success { background: #059669; }
+
+        .loading-overlay {
+            position: fixed; inset: 0;
+            background: rgba(245, 246, 250, 0.85);
+            backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 998; font-size: 32px; color: #6366f1;
+        }
+
+        .text-muted { color: var(--text-muted); font-size: 13px; }
+
+        .empty-msg {
+            display: flex; align-items: center; gap: 10px;
+            padding: 16px 18px;
+            background: #f0fdf4; color: #15803d;
+            border-radius: 14px; font-size: 13.5px;
+            font-weight: 600;
+            margin-top: 12px;
+            border: 1px solid #d1fae5;
+        }
+
+        /* Responsive */
+        @media (max-width: 760px) {
+            body { padding: 16px 14px 50px; }
+            .topbar { padding: 22px 20px; border-radius: 22px; min-height: 120px; }
+            .brand-text h1 { font-size: 19px; }
+            .brand-logo { width: 54px; height: 54px; }
+            .stat-value { font-size: 26px; }
+            .rooms-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+            .top-actions .btn span { display: none; }
+            .top-actions .btn { padding: 10px 12px; }
+            .user-chip { padding: 8px 10px; max-width: 120px; }
+            .auth-card { padding: 30px 24px 26px; }
+            .auth-logo { width: 66px; height: 66px; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-  <div class="lg-head">
-    <div class="lg-logo"><img src="imgs/logo.jpg" alt="" onerror="this.outerHTML='<i class=&quot;fas fa-hotel&quot;></i>'"></div>
-    <div class="lg-kick">Welcome to</div>
-    <div class="lg-name">ChiEdgars Lodge</div>
-    <div class="lg-tag">Comfort, rest and warm hospitality</div>
-  </div>
-  <div class="lg-body">
-    <form class="lg-card" id="loginForm">
-      <div class="lg-ch"><h2><i class="fas fa-lock"></i> Staff Access Required</h2><span>Sign in</span></div>
-      <div class="err hidden" id="loginErr"></div>
-      <div class="lg-f"><label>Email</label><i class="fas fa-envelope"></i><input type="email" id="email" required autocomplete="username" placeholder="you@chiedgars.com"></div>
-      <div class="lg-f"><label>Password</label><i class="fas fa-key"></i><input type="password" id="password" required autocomplete="current-password" placeholder="••••••••"><button type="button" class="eye" id="eye" aria-label="Show password"><i class="fas fa-eye"></i></button></div>
-      <button class="lg-btn" id="loginBtn" type="submit"><i class="fas fa-right-to-bracket"></i> Login</button>
-      <p class="lg-note">Authorised staff only. Accounts are created by the administrator.</p>
-    </form>
-    <div class="lg-foot">ChiEdgars Lodge · Kasama<br>© 2026</div>
-  </div>
+<!-- ============================================================ -->
+<!-- AUTH SCREEN (login / sign up)                                 -->
+<!-- ============================================================ -->
+<div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="auth-logo">
+                <i class="fas fa-hotel"></i>
+                <img src="imgs/logo.jpg" alt="ChiEdgars logo" onerror="this.remove()">
+            </div>
+            <h2>ChiEdgars Lodge</h2>
+            <p>Staff portal · Kasama</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" data-mode="signin">Sign In</button>
+            <button type="button" class="auth-tab" data-mode="signup">Sign Up</button>
+        </div>
+
+        <form id="authForm" class="auth-form">
+            <div class="auth-field">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="authEmail" placeholder="Staff email" required autocomplete="email">
+            </div>
+            <div class="auth-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="authPassword" placeholder="Password (min 6 characters)" required autocomplete="current-password" minlength="6">
+            </div>
+
+            <div class="auth-error" id="authError"></div>
+
+            <button type="submit" class="auth-submit" id="authSubmitBtn">
+                <i class="fas fa-right-to-bracket"></i>
+                <span id="authSubmitText">Sign In</span>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Access is restricted to authorized staff only.<br>
+            First time? Tap <a href="#" onclick="switchAuthMode('signup');return false;">Sign Up</a> to create an account.
+        </div>
+    </div>
 </div>
 
-<!-- APP -->
-<div class="wrap hidden" id="app">
-  <div class="topbar">
-    <div class="brand">
-      <div class="logo"><i class="fas fa-hotel"></i></div>
-      <div><h1>ChiEdgars Lodge</h1><p><i class="far fa-calendar-alt"></i> <span id="today"></span></p></div>
-    </div>
-    <div class="user">
-      <div class="who"><b id="uName"></b><span class="role" id="uRole"></span></div>
-      <button class="btn ghost" onclick="loadAll()"><i class="fas fa-rotate"></i><span class="lbl">Refresh</span></button>
-      <button class="btn ghost" id="setupBtn" onclick="showSetup()"><i class="fas fa-gear"></i><span class="lbl">Setup</span></button>
-      <button class="btn ghost" onclick="logout()"><i class="fas fa-right-from-bracket"></i><span class="lbl">Sign out</span></button>
-    </div>
-  </div>
+<!-- ============================================================ -->
+<!-- DASHBOARD (only visible when signed in)                       -->
+<!-- ============================================================ -->
+<div id="appScreen" class="hidden">
+    <div class="dashboard">
 
-  <div class="tabs">
-    <button class="tab on" data-v="desk"><i class="fas fa-bell-concierge"></i> Front Desk</button>
-    <button class="tab hidden" data-v="reports" id="repTab"><i class="fas fa-chart-column"></i> Reports</button>
-  </div>
+        <div class="topbar">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fas fa-hotel"></i>
+                    <img src="imgs/logo.jpg" alt="ChiEdgars logo" onerror="this.remove()">
+                </div>
+                <div class="brand-text">
+                    <h1>
+                        ChiEdgars Lodge
+                        <span class="pin"><i class="fas fa-map-pin"></i> Kasama</span>
+                    </h1>
+                    <div class="tagline">
+                        <i class="far fa-calendar-alt"></i>
+                        <span id="currentDate"></span>
+                        <span style="opacity:.5">·</span>
+                        <span><i class="fas fa-circle" style="font-size:7px;color:#4ade80;"></i> System online</span>
+                    </div>
+                </div>
+            </div>
+            <div class="top-actions">
+                <div class="user-chip" title="Signed in as">
+                    <i class="fas fa-user-shield"></i>
+                    <span id="userEmail">...</span>
+                </div>
+                <button class="btn btn-ghost" onclick="loadAll()" title="Refresh">
+                    <i class="fas fa-rotate"></i> <span>Refresh</span>
+                </button>
+                <button class="btn btn-ghost" onclick="signOut()" title="Sign out">
+                    <i class="fas fa-right-from-bracket"></i> <span>Sign out</span>
+                </button>
+            </div>
+        </div>
 
-  <!-- FRONT DESK -->
-  <div id="v-desk">
-    <div class="stats" id="stats"></div>
-    <div class="main">
-      <div class="left">
-        <div class="card">
-          <div class="ch"><div class="ct"><div class="ci"><i class="fas fa-users"></i></div><div><h2>Guests & Stays</h2><p>Live guest register</p></div></div><span class="chip" id="activeChip"></span></div>
-          <div class="tw"><table><thead><tr><th>Guest</th><th>Stay</th><th>Status</th><th class="r">Billed</th><th class="r">Balance</th><th></th></tr></thead><tbody id="gBody"></tbody></table></div>
-          <div class="empty hidden" id="gEmpty">No guests yet — check one in below.</div>
-        </div>
-        <div class="card">
-          <div class="ch"><div class="ct"><div class="ci" style="background:#fef3c7;color:#d97706"><i class="fas fa-user-plus"></i></div><div><h2>New Check‑in</h2><p>Total = nights × room price</p></div></div></div>
-          <div class="form">
-            <div class="row">
-              <div class="fg"><label>Guest name</label><input id="fName" placeholder="e.g. Chanda Mulenga"></div>
-              <div class="fg"><label>Phone / NRC (optional)</label><input id="fPhone" placeholder="09XX XXX XXX"></div>
-            </div>
-            <div class="row">
-              <div class="fg"><label>Room</label><select id="fRoom"></select></div>
-              <div class="fg"><label>Check‑in date</label><input type="date" id="fIn"></div>
-              <div class="fg"><label>Number of nights</label><input type="number" id="fNights" min="1" value="1"></div>
-            </div>
-            <div class="calc"><div><small id="calcTxt">Select a room</small></div><b id="calcTotal">ZMW 0</b></div>
-            <div class="row">
-              <div class="fg"><label>Amount paid now (ZMW)</label><input type="number" id="fPaid" min="0" step="10" value="0"></div>
-              <div class="fg"><label>Payment method</label><select id="fMethod"><option>Cash</option><option>Mobile Money</option><option>Card</option><option>Bank</option></select></div>
-            </div>
-            <button class="btn pri full" id="addBtn"><i class="fas fa-circle-check"></i> Check‑in Guest</button>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="card">
-          <div class="ch"><div class="ct"><div class="ci" style="background:#ecfdf5;color:#059669"><i class="fas fa-door-open"></i></div><div><h2>Rooms</h2><p>Occupancy overview</p></div></div><span class="chip" id="roomChip"></span></div>
-          <div class="rooms" id="rooms"></div>
-          <div class="legend"><span><span class="dot" style="display:inline-block;background:#22c55e"></span> Vacant</span><span><span class="dot" style="display:inline-block;background:#f97316"></span> Occupied</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="stats-grid" id="statsGrid"></div>
 
-  <!-- REPORTS (admin) -->
-  <div id="v-reports" class="hidden">
-    <div class="card">
-      <div class="ch"><div class="ct"><div class="ci"><i class="fas fa-chart-column"></i></div><div><h2>Admin Reports</h2><p>Filter by check‑in date, then print or export</p></div></div></div>
-      <div class="row" style="align-items:flex-end">
-        <div class="fg"><label>From</label><input type="date" id="rFrom"></div>
-        <div class="fg"><label>To</label><input type="date" id="rTo"></div>
-        <div class="fg"><label>Show</label><select id="rStat"><option value="all">All stays</option><option value="in">Currently lodging</option><option value="out">Checked out</option><option value="due">Outstanding balance</option></select></div>
-        <button class="btn pri" onclick="renderReport()"><i class="fas fa-filter"></i> Generate</button>
-        <button class="btn" onclick="printReport()"><i class="fas fa-print"></i> Print</button>
-        <button class="btn" onclick="exportCSV()"><i class="fas fa-file-csv"></i> CSV</button>
-      </div>
+        <div class="main-panel">
+            <div class="left-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon"><i class="fas fa-users"></i></div>
+                            <div class="card-title-text">
+                                <h2>Guests & Stays</h2>
+                                <p>Live guest register</p>
+                            </div>
+                        </div>
+                        <span class="chip live" id="guestCountBadge">0 active</span>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="guest-table">
+                            <thead>
+                                <tr>
+                                    <th>Guest</th>
+                                    <th>Lodge In</th>
+                                    <th>Lodge Out</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="guestTableBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="empty-msg" id="emptyGuestMsg" style="display:none;">
+                        <i class="fas fa-circle-check"></i> No guests yet — add one below.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon" style="background:#fef3c7;color:#d97706;">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="card-title-text">
+                                <h2>New Guest</h2>
+                                <p>Quick check‑in</p>
+                            </div>
+                        </div>
+                        <span class="chip">Fast entry</span>
+                    </div>
+                    <div class="add-guest-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Guest name</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="guestNameInput" placeholder="e.g. Chanda M.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-door-closed"></i> Room number</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-door-closed"></i>
+                                    <select id="roomSelect"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar"></i> Check‑in date</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-calendar"></i>
+                                    <input type="date" id="checkInDate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-coins"></i> Amount paid (ZMW)</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-coins"></i>
+                                    <input type="number" id="amountPaidInput" placeholder="0" min="0" step="10" value="500">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-add" id="addGuestBtn">
+                            <i class="fas fa-circle-check"></i> Check‑in Guest
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon" style="background:#ecfdf5;color:#059669;">
+                                <i class="fas fa-door-open"></i>
+                            </div>
+                            <div class="card-title-text">
+                                <h2>Rooms 1–30</h2>
+                                <p>Occupancy overview</p>
+                            </div>
+                        </div>
+                        <span class="chip" id="roomSummaryBadge">0 vacant</span>
+                    </div>
+                    <div class="rooms-grid" id="roomsGrid"></div>
+                    <div class="room-legend">
+                        <span class="legend-item"><span class="legend-dot green"></span> Vacant</span>
+                        <span class="legend-item"><span class="legend-dot orange"></span> Occupied</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="card-title-icon" style="background:#fce7f3;color:#db2777;">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="card-title-text">
+                                <h2>Quick Actions</h2>
+                                <p>One‑tap operations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="markAllCheckedOut()">
+                            <span class="action-icon ai-red"><i class="fas fa-right-from-bracket"></i></span>
+                            <span>
+                                Check‑out all guests
+                                <small>Free every occupied room</small>
+                            </span>
+                        </button>
+                        <button class="action-btn" onclick="loadAll()">
+                            <span class="action-icon ai-blue"><i class="fas fa-rotate"></i></span>
+                            <span>
+                                Reload from database
+                                <small>Sync latest records</small>
+                            </span>
+                        </button>
+                        <button class="action-btn" onclick="showConfigHelp()">
+                            <span class="action-icon ai-indigo"><i class="fas fa-gear"></i></span>
+                            <span>
+                                Setup / SQL schema
+                                <small>Database reference</small>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="db-note">
+                        <i class="fas fa-database"></i>
+                        Data stored securely in Supabase
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card"><div class="doc" id="reportBox"></div></div>
-  </div>
 </div>
 
-<div id="modal" class="modal hidden"><div class="mbox" id="mbox"></div></div>
-<div id="printArea"></div>
 <div id="toast"></div>
-<div id="load" class="load hidden"><i class="fas fa-spinner fa-spin"></i></div>
+<div id="loading" class="loading-overlay hidden"><i class="fas fa-spinner fa-spin"></i></div>
+
+<!-- ============================================================ -->
+<!-- STEP 1: YOUR SUPABASE CREDENTIALS                             -->
+<!-- ============================================================ -->
+<script>
+    const SUPABASE_URL = 'https://vokfonpslvruqrrrzjzh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-const SUPABASE_URL='https://vokfonpslvruqrrrzjzh.supabase.co';
-const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZva2ZvbnBzbHZydXFycnJ6anpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNTI3MTEsImV4cCI6MjEwNTkyODcxMX0.aoXjKuUYPzduqxoj54fvUANF7yZ1zqS9wq1eKtXnRVw';
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-let rooms=[],guests=[],charges=[],me=null,role='staff',openId=null,repRows=[];
-const $=id=>document.getElementById(id);
-const esc=t=>{const d=document.createElement('div');d.textContent=t==null?'':t;return d.innerHTML};
-const zmw=n=>'ZMW '+Number(n||0).toLocaleString(undefined,{maximumFractionDigits:2});
-const iso=d=>{d=new Date(d);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-const today=()=>iso(new Date());
-const addDays=(s,n)=>{const d=new Date(s);d.setDate(d.getDate()+n);return iso(d)};
-const ini=n=>{const p=(n||'?').trim().split(/\s+/);return((p[0]||'?')[0]+(p[1]?p[1][0]:'')).toUpperCase()};
-const col=s=>{let h=0;for(const c of s||'x')h=(h*31+c.charCodeAt(0))%6;return 'a'+h};
-const rno=g=>'CEL-'+String(g.id).padStart(5,'0');
-function toast(m,t='ok',ms=3200){const e=$('toast');e.textContent=m;e.className='show '+(t==='error'?'error':'');setTimeout(()=>e.className='',ms)}
-const busy=on=>$('load').classList.toggle('hidden',!on);
+(function() {
+    'use strict';
 
-/* ---------- AUTH ---------- */
-$('eye').addEventListener('click',()=>{const p=$('password'),h=p.type==='password';p.type=h?'text':'password';$('eye').innerHTML='<i class="fas fa-eye'+(h?'-slash':'')+'"></i>'});
-$('loginForm').addEventListener('submit',async e=>{
-  e.preventDefault();$('loginErr').classList.add('hidden');$('loginBtn').disabled=true;
-  const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
-  $('loginBtn').disabled=false;
-  if(error){$('loginErr').textContent='Sign in failed: '+error.message;$('loginErr').classList.remove('hidden');return}
-  $('password').value='';enter();
-});
-async function enter(){
-  const {data:{session}}=await db.auth.getSession();
-  if(!session){$('login').classList.remove('hidden');$('app').classList.add('hidden');return}
-  me=session.user;role='staff';let name=me.email;
-  const {data:p}=await db.from('profiles').select('role,full_name').eq('id',me.id).maybeSingle();
-  if(p){role=p.role||'staff';name=p.full_name||me.email}
-  $('uName').textContent=name;$('uRole').textContent=role;
-  const adm=role==='admin';
-  $('repTab').classList.toggle('hidden',!adm);$('setupBtn').classList.toggle('hidden',!adm);
-  $('login').classList.add('hidden');$('app').classList.remove('hidden');
-  loadAll();
-}
-async function logout(){await db.auth.signOut();rooms=guests=charges=[];enter()}
-window.logout=logout;
+    let supabase = null;
+    let rooms = [];
+    let guests = [];
+    let authMode = 'signin';
+    let currentUser = null;
 
-/* ---------- DATA ---------- */
-async function loadAll(){
-  busy(true);
-  try{
-    const [r,g,c]=await Promise.all([
-      db.from('rooms').select('*').order('id'),
-      db.from('guests').select('*').order('created_at',{ascending:false}),
-      db.from('guest_charges').select('*').order('created_at')]);
-    for(const x of [r,g,c])if(x.error)throw x.error;
-    rooms=r.data||[];guests=g.data||[];charges=c.data||[];
-    renderAll();if(openId)openGuest(openId,true);
-  }catch(e){console.error(e);toast('Failed to load: '+e.message,'error',6000)}
-  finally{busy(false)}
-}
-window.loadAll=loadAll;
-const chg=g=>charges.filter(c=>c.guest_id===g.id);
-const chgSum=g=>chg(g).reduce((s,c)=>s+Number(c.amount||0),0);
-const billed=g=>Number(g.total_amount||0)+chgSum(g);
-const bal=g=>billed(g)-Number(g.amount_paid||0);
+    /* ============ INIT ============ */
+    function initSupabase() {
+        if (SUPABASE_URL.includes('YOUR-PROJECT') || SUPABASE_ANON_KEY.includes('YOUR-ANON')) {
+            showToast('⚠️ Add your Supabase URL and key first', 'error', 8000);
+            return false;
+        }
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        return true;
+    }
 
-/* ---------- RENDER ---------- */
-function renderAll(){renderStats();renderGuests();renderRooms();renderSelect();calc();if(role==='admin'&&!$('v-reports').classList.contains('hidden'))renderReport()}
-function renderStats(){
-  const act=guests.filter(g=>g.still_lodging);
-  const occ=rooms.filter(r=>r.is_occupied).length;
-  const rev=guests.reduce((s,g)=>s+billed(g),0);
-  const owed=guests.reduce((s,g)=>s+Math.max(bal(g),0),0);
-  $('stats').innerHTML=`
-  <div class="stat"><div class="si c1"><i class="fas fa-user-check"></i></div><div><h3>Guests in house</h3><div class="v">${act.length}</div></div></div>
-  <div class="stat"><div class="si c2"><i class="fas fa-coins"></i></div><div><h3>Total billed</h3><div class="v">${zmw(rev)}</div></div></div>
-  <div class="stat"><div class="si c5"><i class="fas fa-hourglass-half"></i></div><div><h3>Outstanding</h3><div class="v">${zmw(owed)}</div></div></div>
-  <div class="stat"><div class="si c4"><i class="fas fa-door-open"></i></div><div><h3>Occupied</h3><div class="v">${occ}<small> / ${rooms.length}</small></div></div></div>`;
-  $('activeChip').textContent=act.length+' active';
-  $('roomChip').textContent=(rooms.length-occ)+' vacant / '+rooms.length;
-}
-function renderGuests(){
-  $('gEmpty').classList.toggle('hidden',guests.length>0);
-  const s=[...guests].sort((a,b)=>(b.still_lodging?1:0)-(a.still_lodging?1:0));
-  $('gBody').innerHTML=s.map(g=>{
-    const rm=rooms.find(r=>r.id===g.room_id),b=bal(g);
-    return `<tr><td><div class="gc"><div class="av ${col(g.name)}">${ini(g.name)}</div><div><div class="gn">${esc(g.name)}</div><div class="gs">${rm?esc(rm.name):'—'}${g.phone?' · '+esc(g.phone):''}</div></div></div></td>
-    <td>${g.check_in||'—'}<div class="gs">${g.nights||1} night${(g.nights||1)>1?'s':''} · out ${g.check_out||g.expected_out||'—'}</div></td>
-    <td><span class="badge ${g.still_lodging?'':'out'}">${g.still_lodging?'Lodging':'Checked out'}</span></td>
-    <td class="r money">${zmw(billed(g))}</td>
-    <td class="r"><span class="badge ${b>0?'due':''}" style="${b>0?'':'background:#dcfce7'}">${b>0?zmw(b):'Paid'}</span></td>
-    <td><div class="acts"><button class="ib" title="Charges & receipt" onclick="openGuest(${g.id})"><i class="fas fa-receipt"></i></button>${g.still_lodging?`<button class="ib red" title="Check out" onclick="checkout(${g.id})"><i class="fas fa-sign-out-alt"></i></button>`:''}</div></td></tr>`}).join('');
-}
-function renderRooms(){
-  $('rooms').innerHTML=rooms.map(r=>{
-    const o=guests.find(g=>g.room_id===r.id&&g.still_lodging);
-    return `<div class="room ${r.is_occupied?'o':'v'}"><div class="n"><span>${esc(r.name.replace('Room ',''))}</span><span class="dot"></span></div><div class="g">${o?esc(o.name.split(' ')[0]):'Available'}</div><div class="p">${zmw(r.price_per_night)}/night</div></div>`}).join('')||'<div class="empty">No rooms in database.</div>';
-}
-function renderSelect(){
-  const v=rooms.filter(r=>!r.is_occupied),cur=$('fRoom').value;
-  $('fRoom').innerHTML=v.length?v.map(r=>`<option value="${r.id}">${esc(r.name)} — ${zmw(r.price_per_night)}</option>`).join(''):'<option value="">No vacant rooms</option>';
-  if(cur&&v.some(r=>r.id==cur))$('fRoom').value=cur;
-}
-function calc(){
-  const r=rooms.find(x=>x.id==$('fRoom').value),n=Math.max(parseInt($('fNights').value)||1,1);
-  if(!r){$('calcTxt').textContent='Select a room';$('calcTotal').textContent='ZMW 0';return}
-  $('calcTxt').textContent=`${n} night${n>1?'s':''} × ${zmw(r.price_per_night)} · check‑out ${addDays($('fIn').value||today(),n)}`;
-  $('calcTotal').textContent=zmw(n*Number(r.price_per_night||0));
-}
-['fRoom','fNights','fIn'].forEach(i=>$(i).addEventListener('input',calc));
+    /* ============ UI HELPERS ============ */
+    function showToast(msg, type = 'success', duration = 3000) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = 'show ' + (type === 'error' ? 'error' : 'success');
+        setTimeout(() => { el.className = ''; }, duration);
+    }
 
-/* ---------- ACTIONS ---------- */
-$('addBtn').addEventListener('click',async()=>{
-  const name=$('fName').value.trim(),rid=Number($('fRoom').value),inD=$('fIn').value,n=Math.max(parseInt($('fNights').value)||1,1);
-  const paid=parseFloat($('fPaid').value)||0,room=rooms.find(r=>r.id===rid);
-  if(!name)return toast('Enter guest name','error');
-  if(!room||room.is_occupied)return toast('Choose a vacant room','error');
-  if(!inD)return toast('Pick check‑in date','error');
-  const rate=Number(room.price_per_night||0),total=rate*n;
-  if(paid<0)return toast('Invalid amount','error');
-  busy(true);
-  try{
-    const {data,error}=await db.from('guests').insert({name,phone:$('fPhone').value.trim()||null,room_id:rid,check_in:inD,nights:n,rate,total_amount:total,expected_out:addDays(inD,n),amount_paid:paid,pay_method:$('fMethod').value,still_lodging:true,created_by:me.id}).select().single();
-    if(error)throw error;
-    const {error:e2}=await db.from('rooms').update({is_occupied:true}).eq('id',rid);
-    if(e2)throw e2;
-    $('fName').value='';$('fPhone').value='';$('fPaid').value='0';$('fNights').value='1';
-    toast('Guest checked in');await loadAll();openGuest(data.id);
-  }catch(e){console.error(e);toast(e.message,'error',6000)}finally{busy(false)}
-});
-async function checkout(id){
-  const g=guests.find(x=>x.id===id);if(!g)return;
-  if(bal(g)>0&&!confirm(`${g.name} still owes ${zmw(bal(g))}. Check out anyway?`))return;
-  if(bal(g)<=0&&!confirm('Check out this guest?'))return;
-  busy(true);
-  try{
-    const {error}=await db.from('guests').update({still_lodging:false,check_out:today()}).eq('id',id);if(error)throw error;
-    if(g.room_id){const {error:e2}=await db.from('rooms').update({is_occupied:false}).eq('id',g.room_id);if(e2)throw e2}
-    toast('Guest checked out');await loadAll();
-  }catch(e){toast(e.message,'error',6000)}finally{busy(false)}
-}
-window.checkout=checkout;
+    function setLoading(on) {
+        document.getElementById('loading').classList.toggle('hidden', !on);
+    }
 
-/* ---------- GUEST BILL MODAL ---------- */
-function showModal(html,wide){$('mbox').className='mbox'+(wide?' wide':'');$('mbox').innerHTML=html;$('modal').classList.remove('hidden')}
-function closeModal(){openId=null;$('modal').classList.add('hidden')}
-window.closeModal=closeModal;
-$('modal').addEventListener('mousedown',e=>{if(e.target.id==='modal')closeModal()});
-function openGuest(id,keep){
-  const g=guests.find(x=>x.id===id);if(!g)return;openId=id;
-  const rm=rooms.find(r=>r.id===g.room_id),cs=chg(g),b=bal(g);
-  showModal(`<div class="mh"><h2>${esc(g.name)} <span class="gs">· ${rm?esc(rm.name):''}</span></h2><button class="ib" onclick="closeModal()"><i class="fas fa-xmark"></i></button></div>
-  <div class="line"><span>Room: ${g.nights||1} night(s) × ${zmw(g.rate)}</span><b class="money">${zmw(g.total_amount)}</b></div>
-  ${cs.map(c=>`<div class="line"><span>${esc(c.description)} <span class="gs">${new Date(c.created_at).toLocaleDateString('en-GB')}</span></span><span class="money">${zmw(c.amount)} ${g.still_lodging&&role==='admin'?`<button class="ib red" style="width:26px;height:26px" onclick="delCharge(${c.id})"><i class="fas fa-trash" style="font-size:11px"></i></button>`:''}</span></div>`).join('')}
-  <div class="line"><span>Total billed</span><b class="money">${zmw(billed(g))}</b></div>
-  <div class="line"><span>Paid</span><span class="money">${zmw(g.amount_paid)}</span></div>
-  <div class="line t"><span>Balance due</span><span class="money" style="color:${b>0?'var(--bad)':'var(--ok)'}">${zmw(Math.max(b,0))}</span></div>
-  ${g.still_lodging?`<div class="sec">Add service / business during stay</div>
-  <div class="row"><div class="fg" style="flex:2"><input id="cDesc" list="svc" placeholder="e.g. Meals, Laundry, Drinks"><datalist id="svc"><option>Meals</option><option>Drinks</option><option>Laundry</option><option>Extra bed</option><option>Transport</option><option>Conference hall</option><option>Phone / Wi‑Fi</option></datalist></div>
-  <div class="fg"><input type="number" id="cAmt" min="0" placeholder="Amount"></div><button class="btn pri" onclick="addCharge(${g.id})"><i class="fas fa-plus"></i> Add</button></div>
-  <div class="sec">Record payment</div>
-  <div class="row"><div class="fg"><input type="number" id="pAmt" min="0" placeholder="Amount received" value="${b>0?b:''}"></div><button class="btn" onclick="addPayment(${g.id})"><i class="fas fa-money-bill-wave"></i> Record</button></div>`:''}
-  <div class="row" style="margin-top:20px"><button class="btn pri" style="flex:1" onclick="showReceipt(${g.id})"><i class="fas fa-receipt"></i> Receipt</button>${g.still_lodging?`<button class="btn" onclick="closeModal();checkout(${g.id})"><i class="fas fa-sign-out-alt"></i> Check out</button>`:''}</div>`);
-}
-window.openGuest=openGuest;
-async function addCharge(id){
-  const d=$('cDesc').value.trim(),a=parseFloat($('cAmt').value);
-  if(!d||!(a>0))return toast('Enter service and amount','error');
-  const {error}=await db.from('guest_charges').insert({guest_id:id,description:d,amount:a,created_by:me.id});
-  if(error)return toast(error.message,'error');toast('Charge added');loadAll();
-}
-async function delCharge(id){if(!confirm('Remove this charge?'))return;const {error}=await db.from('guest_charges').delete().eq('id',id);if(error)return toast(error.message,'error');loadAll()}
-async function addPayment(id){
-  const a=parseFloat($('pAmt').value),g=guests.find(x=>x.id===id);
-  if(!(a>0))return toast('Enter amount','error');
-  const {error}=await db.from('guests').update({amount_paid:Number(g.amount_paid||0)+a}).eq('id',id);
-  if(error)return toast(error.message,'error');toast('Payment recorded');loadAll();
-}
-Object.assign(window,{addCharge,delCharge,addPayment});
+    function formatDate(date) {
+        if (!date) return '';
+        const d = new Date(date);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    }
+    function today() { return formatDate(new Date()); }
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    function initials(name) {
+        if (!name) return '?';
+        const parts = name.trim().split(/\s+/);
+        return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+    }
+    function colorFor(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 6;
+        return 'a' + h;
+    }
 
-/* ---------- RECEIPT ---------- */
-function receiptHTML(g){
-  const rm=rooms.find(r=>r.id===g.room_id),cs=chg(g),b=bal(g);
-  return `<div class="doc"><div class="dh"><img src="imgs/logo.jpg" onerror="this.remove()"><h2>ChiEdgars Lodge</h2><p>Kasama, Zambia</p><p><b>OFFICIAL RECEIPT</b></p></div>
-  <div class="meta"><div>Receipt No: <b>${rno(g)}</b><br>Date: ${new Date().toLocaleDateString('en-GB')}<br>Served by: ${esc($('uName').textContent)}</div>
-  <div style="text-align:right">Guest: <b>${esc(g.name)}</b>${g.phone?'<br>'+esc(g.phone):''}<br>${rm?esc(rm.name):''}<br>${g.check_in} → ${g.check_out||g.expected_out||''}</div></div>
-  <table><thead><tr><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead><tbody>
-  <tr><td>Accommodation${rm?' – '+esc(rm.name):''}</td><td class="r">${g.nights||1} night(s)</td><td class="r">${zmw(g.rate)}</td><td class="r">${zmw(g.total_amount)}</td></tr>
-  ${cs.map(c=>`<tr><td>${esc(c.description)}</td><td class="r">1</td><td class="r">${zmw(c.amount)}</td><td class="r">${zmw(c.amount)}</td></tr>`).join('')}</tbody></table>
-  <div class="sum"><div class="line"><span>Total</span><b>${zmw(billed(g))}</b></div><div class="line"><span>Paid${g.pay_method?' ('+esc(g.pay_method)+')':''}</span><span>${zmw(g.amount_paid)}</span></div><div class="line t"><span>Balance</span><span>${zmw(Math.max(b,0))}</span></div></div>
-  <div class="foot">Thank you for staying with us. We hope to see you again!</div></div>`;
-}
-function showReceipt(id){
-  const g=guests.find(x=>x.id===id);openId=null;
-  showModal(`<div class="mh"><h2>Receipt</h2><button class="ib" onclick="closeModal()"><i class="fas fa-xmark"></i></button></div>${receiptHTML(g)}
-  <div class="row" style="margin-top:18px"><button class="btn pri" style="flex:1" onclick="printHTML(receiptHTML(guests.find(x=>x.id===${id})))"><i class="fas fa-print"></i> Print receipt</button><button class="btn" onclick="openGuest(${id})">Back</button></div>`);
-}
-function printHTML(h){$('printArea').innerHTML=h;window.print()}
-Object.assign(window,{showReceipt,printHTML,receiptHTML});
+    /* ============ AUTH ============ */
+    function switchAuthMode(mode) {
+        authMode = mode;
+        document.querySelectorAll('.auth-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.mode === mode);
+        });
+        document.getElementById('authSubmitText').textContent =
+            mode === 'signin' ? 'Sign In' : 'Create Account';
+        document.getElementById('authError').className = 'auth-error';
+        document.getElementById('authError').textContent = '';
+        document.getElementById('authPassword').autocomplete =
+            mode === 'signin' ? 'current-password' : 'new-password';
+    }
 
-/* ---------- REPORTS ---------- */
-function reportRows(){
-  const f=$('rFrom').value,t=$('rTo').value,s=$('rStat').value;
-  return guests.filter(g=>(!f||g.check_in>=f)&&(!t||g.check_in<=t)&&(s==='all'||(s==='in'&&g.still_lodging)||(s==='out'&&!g.still_lodging)||(s==='due'&&bal(g)>0)));
-}
-function renderReport(){
-  repRows=reportRows();
-  const room=repRows.reduce((s,g)=>s+Number(g.total_amount||0),0),svc=repRows.reduce((s,g)=>s+chgSum(g),0),paid=repRows.reduce((s,g)=>s+Number(g.amount_paid||0),0),nights=repRows.reduce((s,g)=>s+(g.nights||1),0);
-  const k=(l,v)=>`<div class="kpi"><small>${l}</small><b>${v}</b></div>`;
-  $('reportBox').innerHTML=`<div class="dh"><img src="imgs/logo.jpg" onerror="this.remove()"><h2>ChiEdgars Lodge — Stay & Revenue Report</h2><p>${$('rFrom').value||'start'} to ${$('rTo').value||'today'} · Generated ${new Date().toLocaleString('en-GB')} by ${esc($('uName').textContent)}</p></div>
-  <div class="kpis">${k('Guests',repRows.length)}${k('Room nights sold',nights)}${k('Room revenue',zmw(room))}${k('Services revenue',zmw(svc))}${k('Total billed',zmw(room+svc))}${k('Collected / Outstanding',zmw(paid)+' / '+zmw(room+svc-paid))}</div>
-  <div class="tw"><table><thead><tr><th>Receipt</th><th>Guest</th><th>Room</th><th>In</th><th>Out</th><th class="r">Nights</th><th class="r">Room</th><th class="r">Services</th><th class="r">Paid</th><th class="r">Balance</th></tr></thead><tbody>
-  ${repRows.map(g=>{const rm=rooms.find(r=>r.id===g.room_id);return `<tr><td>${rno(g)}</td><td>${esc(g.name)}</td><td>${rm?esc(rm.name):'—'}</td><td>${g.check_in}</td><td>${g.check_out||(g.still_lodging?'In house':'—')}</td><td class="r">${g.nights||1}</td><td class="r">${zmw(g.total_amount)}</td><td class="r">${zmw(chgSum(g))}</td><td class="r">${zmw(g.amount_paid)}</td><td class="r">${zmw(Math.max(bal(g),0))}</td></tr>`}).join('')||'<tr><td colspan="10" class="empty">No records for this filter.</td></tr>'}</tbody></table></div>`;
-}
-function printReport(){renderReport();printHTML($('reportBox').outerHTML)}
-function exportCSV(){
-  renderReport();
-  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
-  const lines=[['Receipt','Guest','Phone','Room','Check-in','Check-out','Nights','Rate','Room total','Services','Paid','Balance'].map(q).join(',')];
-  repRows.forEach(g=>{const rm=rooms.find(r=>r.id===g.room_id);lines.push([rno(g),g.name,g.phone,rm?rm.name:'',g.check_in,g.check_out||'',g.nights||1,g.rate,g.total_amount,chgSum(g),g.amount_paid,Math.max(bal(g),0)].map(q).join(','))});
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/csv'}));a.download=`chiedgars-report-${today()}.csv`;a.click();
-}
-Object.assign(window,{renderReport,printReport,exportCSV});
+    function showAuthError(msg, isSuccess = false) {
+        const el = document.getElementById('authError');
+        el.innerHTML = (isSuccess ? '<i class="fas fa-check-circle"></i> ' : '<i class="fas fa-circle-exclamation"></i> ') + escapeHtml(msg);
+        el.className = 'auth-error show' + (isSuccess ? ' success' : '');
+    }
 
-/* ---------- TABS ---------- */
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
-  $('v-desk').classList.toggle('hidden',t.dataset.v!=='desk');$('v-reports').classList.toggle('hidden',t.dataset.v!=='reports');
-  if(t.dataset.v==='reports')renderReport();
-}));
+    async function handleAuthSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('authEmail').value.trim();
+        const password = document.getElementById('authPassword').value;
+        const btn = document.getElementById('authSubmitBtn');
 
-/* ---------- SETUP (admin) ---------- */
-function showSetup(){
-  showModal(`<div class="mh"><h2>Database setup</h2><button class="ib" onclick="closeModal()"><i class="fas fa-xmark"></i></button></div>
-  <p class="gs" style="margin-bottom:10px">Run once in Supabase → SQL Editor. Then create users under Authentication → Users and set <b>role</b> in the <b>profiles</b> table ('admin' or 'staff').</p><pre>${esc(SQL)}</pre>`,true);
-}
-window.showSetup=showSetup;
-const SQL=`-- new columns
-alter table rooms  add column if not exists price_per_night numeric default 500;
-alter table guests add column if not exists phone text;
-alter table guests add column if not exists nights int default 1;
-alter table guests add column if not exists rate numeric default 0;
-alter table guests add column if not exists total_amount numeric default 0;
-alter table guests add column if not exists expected_out date;
-alter table guests add column if not exists pay_method text;
-alter table guests add column if not exists created_by uuid;
+        if (!email || !password) return showAuthError('Please enter email and password.');
 
-create table if not exists guest_charges(
-  id bigint generated always as identity primary key,
-  guest_id bigint references guests(id) on delete cascade,
-  description text not null, amount numeric not null,
-  created_by uuid, created_at timestamptz default now());
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' +
+            (authMode === 'signin' ? 'Signing in…' : 'Creating account…');
 
-create table if not exists profiles(
-  id uuid primary key references auth.users(id) on delete cascade,
-  full_name text, role text default 'staff');
+        try {
+            if (authMode === 'signin') {
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                // onAuthStateChange handles the rest
+            } else {
+                const { data, error } = await supabase.auth.signUp({ email, password });
+                if (error) throw error;
+                if (data.user && !data.session) {
+                    showAuthError('Account created! Check your email to confirm, then sign in.', true);
+                    switchAuthMode('signin');
+                } else if (data.session) {
+                    // auto-confirmed, listener will sign in
+                    showAuthError('Account created — signing you in…', true);
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            let msg = err.message || 'Something went wrong.';
+            if (msg.toLowerCase().includes('invalid login')) msg = 'Incorrect email or password.';
+            if (msg.toLowerCase().includes('already registered')) msg = 'This email is already registered. Try signing in.';
+            showAuthError(msg);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-right-to-bracket"></i> <span id="authSubmitText">' +
+                (authMode === 'signin' ? 'Sign In' : 'Create Account') + '</span>';
+        }
+    }
 
--- auto-create a staff profile for each new user
-create or replace function handle_new_user() returns trigger as $$
-begin insert into profiles(id,full_name) values(new.id,new.email) on conflict do nothing; return new; end;
-$$ language plpgsql security definer;
-drop trigger if exists on_auth_user on auth.users;
-create trigger on_auth_user after insert on auth.users for each row execute function handle_new_user();
+    async function signOut() {
+        if (!confirm('Sign out of ChiEdgars Lodge?')) return;
+        await supabase.auth.signOut();
+    }
 
--- security: remove public policies, require login
-alter table rooms enable row level security;
-alter table guests enable row level security;
-alter table guest_charges enable row level security;
-alter table profiles enable row level security;
-drop policy if exists "public read rooms" on rooms;
-drop policy if exists "public update rooms" on rooms;
-drop policy if exists "public read guests" on guests;
-drop policy if exists "public insert guests" on guests;
-drop policy if exists "public update guests" on guests;
-create policy "staff rooms" on rooms for all to authenticated using(true) with check(true);
-create policy "staff guests" on guests for all to authenticated using(true) with check(true);
-create policy "staff charges" on guest_charges for all to authenticated using(true) with check(true);
-create policy "own profile" on profiles for select to authenticated using(id=auth.uid());
+    function showDashboard(user) {
+        currentUser = user;
+        document.getElementById('authScreen').classList.add('hidden');
+        document.getElementById('appScreen').classList.remove('hidden');
+        document.getElementById('userEmail').textContent = user.email || 'Staff';
+        document.getElementById('userEmail').title = user.email || '';
+        loadAll();
+    }
 
--- make yourself admin (change the email)
--- update profiles set role='admin' where full_name='you@example.com';`;
+    function showAuthScreen() {
+        currentUser = null;
+        document.getElementById('appScreen').classList.add('hidden');
+        document.getElementById('authScreen').classList.remove('hidden');
+        document.getElementById('authPassword').value = '';
+    }
 
-/* ---------- INIT ---------- */
-$('today').textContent=new Date().toLocaleDateString('en-GB',{weekday:'short',year:'numeric',month:'short',day:'numeric'});
-$('fIn').value=today();$('rTo').value=today();$('rFrom').value=today().slice(0,8)+'01';
-db.auth.onAuthStateChange(ev=>{if(ev==='SIGNED_OUT')enter()});
-enter();
+    async function checkAuth() {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session && session.user) showDashboard(session.user);
+        else showAuthScreen();
+    }
+
+    /* ============ DATA ============ */
+    async function loadAll() {
+        if (!supabase || !currentUser) return;
+        setLoading(true);
+        try {
+            const [roomsRes, guestsRes] = await Promise.all([
+                supabase.from('rooms').select('*').order('id'),
+                supabase.from('guests').select('*').order('created_at', { ascending: false })
+            ]);
+            if (roomsRes.error) throw roomsRes.error;
+            if (guestsRes.error) throw guestsRes.error;
+            rooms = roomsRes.data || [];
+            guests = guestsRes.data || [];
+            renderAll();
+        } catch (err) {
+            console.error(err);
+            showToast('❌ Failed to load: ' + err.message, 'error', 5000);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function renderAll() {
+        renderStats();
+        renderGuestTable();
+        renderRooms();
+        renderRoomSelect();
+        updateBadges();
+    }
+
+    function renderStats() {
+        const active = guests.filter(g => g.still_lodging).length;
+        const totalPaid = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        const occupied = rooms.length - vacant;
+        const rate = rooms.length ? Math.round((occupied / rooms.length) * 100) : 0;
+
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-blue"><i class="fas fa-user-check"></i></div>
+                    <span class="stat-trend"><i class="fas fa-arrow-up"></i> Live</span>
+                </div>
+                <div class="stat-info">
+                    <h3>Guests in house</h3>
+                    <div class="stat-value">${active}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-green"><i class="fas fa-coins"></i></div>
+                    <span class="stat-trend"><i class="fas fa-check"></i> All time</span>
+                </div>
+                <div class="stat-info">
+                    <h3>Total revenue</h3>
+                    <div class="stat-value">ZMW ${totalPaid.toLocaleString()}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-orange"><i class="fas fa-door-closed"></i></div>
+                    <span class="stat-trend neutral">${rooms.length} total</span>
+                </div>
+                <div class="stat-info">
+                    <h3>Vacant rooms</h3>
+                    <div class="stat-value">${vacant}<small> / ${rooms.length}</small></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon ic-purple"><i class="fas fa-door-open"></i></div>
+                    <span class="stat-trend neutral">${rate}% full</span>
+                </div>
+                <div class="stat-info">
+                    <h3>Occupied</h3>
+                    <div class="stat-value">${occupied}<small> / ${rooms.length}</small></div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderGuestTable() {
+        const tbody = document.getElementById('guestTableBody');
+        const emptyMsg = document.getElementById('emptyGuestMsg');
+        if (!guests.length) {
+            tbody.innerHTML = '';
+            emptyMsg.style.display = 'flex';
+            return;
+        }
+        emptyMsg.style.display = 'none';
+
+        const sorted = [...guests].sort((a, b) => {
+            if (a.still_lodging === b.still_lodging) return 0;
+            return a.still_lodging ? -1 : 1;
+        });
+
+        tbody.innerHTML = sorted.map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const statusClass = g.still_lodging ? 'status-badge' : 'status-badge checked-out';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked out';
+            const av = colorFor(g.name || 'x');
+            return `<tr>
+                <td>
+                    <div class="guest-cell">
+                        <div class="avatar ${av}">${initials(g.name)}</div>
+                        <div>
+                            <div class="guest-name">${escapeHtml(g.name)}</div>
+                            <div class="guest-room"><i class="fas fa-door-closed" style="opacity:.5;margin-right:3px;"></i>${roomName}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>${g.check_in || '—'}</td>
+                <td>${g.check_out || '—'}</td>
+                <td><span class="${statusClass}">${statusText}</span></td>
+                <td class="amount">${Number(g.amount_paid).toLocaleString()}</td>
+                <td>
+                    ${g.still_lodging ? `<button class="btn-icon" onclick="checkoutGuest(${g.id})" title="Check out"><i class="fas fa-sign-out-alt"></i></button>` : ''}
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    function renderRooms() {
+        const grid = document.getElementById('roomsGrid');
+        if (!rooms.length) {
+            grid.innerHTML = '<div class="text-muted" style="grid-column:1/-1;text-align:center;padding:20px;">No rooms in database.</div>';
+            return;
+        }
+        grid.innerHTML = rooms.map(room => {
+            const occ = room.is_occupied;
+            const occupant = occ ? guests.find(g => g.room_id === room.id && g.still_lodging) : null;
+            const av = occupant ? colorFor(occupant.name || 'x') : null;
+            const guestLine = occupant
+                ? `<div class="room-mini-avatar ${av}">${initials(occupant.name)}</div><span>${escapeHtml(occupant.name.split(' ')[0])}</span>`
+                : `<span style="opacity:.5;">Available</span>`;
+            return `<div class="room-item ${occ ? 'occupied' : 'vacant'}">
+                <div class="room-top">
+                    <span class="room-num">${escapeHtml(room.name.replace('Room ',''))}</span>
+                    <span class="room-dot"></span>
+                </div>
+                <div class="room-guest">${guestLine}</div>
+                <div class="room-status-label">${occ ? 'Occupied' : 'Vacant'}</div>
+            </div>`;
+        }).join('');
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        document.getElementById('roomSummaryBadge').textContent = `${vacant} vacant / ${rooms.length}`;
+    }
+
+    function renderRoomSelect() {
+        const select = document.getElementById('roomSelect');
+        const vacant = rooms.filter(r => !r.is_occupied);
+        if (!vacant.length) {
+            select.innerHTML = '<option value="">-- No vacant rooms --</option>';
+            select.disabled = true;
+            return;
+        }
+        select.disabled = false;
+        select.innerHTML = vacant.sort((a, b) => a.id - b.id)
+            .map(r => `<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+    }
+
+    function updateBadges() {
+        const active = guests.filter(g => g.still_lodging).length;
+        document.getElementById('guestCountBadge').textContent = `${active} active`;
+    }
+
+    /* ============ ACTIONS ============ */
+    window.addGuest = async function() {
+        if (!supabase) return;
+        const name = document.getElementById('guestNameInput').value.trim();
+        const roomId = document.getElementById('roomSelect').value;
+        const checkIn = document.getElementById('checkInDate').value;
+        const amount = parseFloat(document.getElementById('amountPaidInput').value) || 0;
+
+        if (!name) return showToast('Please enter guest name', 'error');
+        if (!roomId) return showToast('No vacant room selected', 'error');
+        if (!checkIn) return showToast('Please pick check‑in date', 'error');
+
+        const room = rooms.find(r => r.id == roomId);
+        if (!room || room.is_occupied) return showToast('Room is no longer vacant', 'error');
+
+        setLoading(true);
+        try {
+            const { error: e1 } = await supabase.from('guests').insert({
+                name, room_id: Number(roomId), check_in: checkIn,
+                amount_paid: amount, still_lodging: true
+            });
+            if (e1) throw e1;
+
+            const { error: e2 } = await supabase
+                .from('rooms').update({ is_occupied: true }).eq('id', Number(roomId));
+            if (e2) throw e2;
+
+            document.getElementById('guestNameInput').value = '';
+            document.getElementById('amountPaidInput').value = '500';
+            showToast('✅ Guest checked in!');
+            await loadAll();
+        } catch (err) {
+            console.error(err);
+            showToast('❌ ' + err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.checkoutGuest = async function(guestId) {
+        if (!supabase) return;
+        if (!confirm('Check out this guest?')) return;
+        const guest = guests.find(g => g.id === guestId);
+        if (!guest) return;
+
+        setLoading(true);
+        try {
+            const { error: e1 } = await supabase.from('guests')
+                .update({ still_lodging: false, check_out: today() }).eq('id', guestId);
+            if (e1) throw e1;
+
+            if (guest.room_id) {
+                const { error: e2 } = await supabase.from('rooms')
+                    .update({ is_occupied: false }).eq('id', guest.room_id);
+                if (e2) throw e2;
+            }
+            showToast('✅ Guest checked out');
+            await loadAll();
+        } catch (err) {
+            console.error(err);
+            showToast('❌ ' + err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.markAllCheckedOut = async function() {
+        if (!supabase) return;
+        const active = guests.filter(g => g.still_lodging);
+        if (!active.length) return showToast('No active guests', 'error');
+        if (!confirm(`Check out all ${active.length} guest(s)?`)) return;
+
+        setLoading(true);
+        try {
+            const { error: e1 } = await supabase.from('guests')
+                .update({ still_lodging: false, check_out: today() }).eq('still_lodging', true);
+            if (e1) throw e1;
+
+            const { error: e2 } = await supabase.from('rooms')
+                .update({ is_occupied: false }).eq('is_occupied', true);
+            if (e2) throw e2;
+
+            showToast('✅ All guests checked out');
+            await loadAll();
+        } catch (err) {
+            console.error(err);
+            showToast('❌ ' + err.message, 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    window.showConfigHelp = function() {
+        alert(
+            'ChiEdgars Lodge · Setup\n\n' +
+            '── AUTHENTICATION ──\n' +
+            '1. Supabase → Authentication → Providers → Email\n' +
+            '   Make sure "Enable signup" is ON (until you create your account).\n' +
+            '2. Go to Authentication → Users → Add user\n' +
+            '   (or use the Sign Up tab in this app).\n' +
+            '3. After creating staff accounts, you can turn signup OFF.\n\n' +
+            '── DATABASE POLICIES ──\n' +
+            'Replace the old public policies with these:\n\n' +
+            'drop policy if exists "public read rooms" on rooms;\n' +
+            'drop policy if exists "public read guests" on guests;\n' +
+            'drop policy if exists "public insert guests" on guests;\n' +
+            'drop policy if exists "public update guests" on guests;\n' +
+            'drop policy if exists "public update rooms" on rooms;\n\n' +
+            'create policy "auth read rooms" on rooms\n' +
+            '  for select using (auth.role() = \'authenticated\');\n' +
+            'create policy "auth read guests" on guests\n' +
+            '  for select using (auth.role() = \'authenticated\');\n' +
+            'create policy "auth insert guests" on guests\n' +
+            '  for insert with check (auth.role() = \'authenticated\');\n' +
+            'create policy "auth update guests" on guests\n' +
+            '  for update using (auth.role() = \'authenticated\');\n' +
+            'create policy "auth update rooms" on rooms\n' +
+            '  for update using (auth.role() = \'authenticated\');\n\n' +
+            'That\'s it — only signed-in staff can read/write data.'
+        );
+    };
+
+    /* ============ BOOT ============ */
+    document.addEventListener('DOMContentLoaded', async () => {
+        const opts = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        document.getElementById('currentDate').textContent =
+            new Date().toLocaleDateString('en-GB', opts);
+        document.getElementById('checkInDate').value = today();
+
+        // Auth UI events
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => switchAuthMode(tab.dataset.mode));
+        });
+        document.getElementById('authForm').addEventListener('submit', handleAuthSubmit);
+        document.getElementById('addGuestBtn').addEventListener('click', addGuest);
+
+        if (!initSupabase()) return;
+
+        // React to sign-in / sign-out
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session?.user) showDashboard(session.user);
+            else if (event === 'SIGNED_OUT') showAuthScreen();
+        });
+
+        // Initial check
+        await checkAuth();
+    });
+})();
 </script>
 </body>
 </html>
