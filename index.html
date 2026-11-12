@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChiEdgars Lodge · Kasama</title>
     <link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
-    <!-- Premium Fonts: Inter for clean readability, Plus Jakarta Sans for premium headings -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* Cool, high-standard color palette */
-            --bg-body: #F4F7FB;
+            /* Sky Blue Theme Colors */
+            --bg-body: #E0F2FE; /* Sky Blue Background */
             --sidebar-bg: #111827;
             --sidebar-hover: #1F2937;
             --sidebar-text: #9CA3AF;
@@ -23,9 +19,9 @@
             --sidebar-active-bg: #4F46E5;
             
             --surface: #FFFFFF;
-            --text-main: #0F172A; /* Very dark slate for high contrast */
-            --text-muted: #475569; /* Darker muted text for readability */
-            --border: #E2E8F0;
+            --text-main: #0F172A; 
+            --text-muted: #475569;
+            --border: #BAE6FD; /* Sky blue border */
             
             --primary: #4F46E5;
             --success: #10B981;
@@ -43,7 +39,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', sans-serif;
+            /* Applied Arial Narrow everywhere */
+            font-family: 'Arial Narrow', Arial, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             display: flex;
@@ -52,7 +49,8 @@
         }
 
         h1, h2, h3, h4, .stat-value, .card-title, .nav-item {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            font-weight: 800;
         }
 
         /* ============================================================ */
@@ -80,15 +78,15 @@
             overflow: hidden;
         }
         .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
-        .brand-text h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-        .brand-text p { font-size: 12px; color: var(--sidebar-text); font-weight: 500; margin-top: 2px;}
+        .brand-text h1 { font-size: 22px; letter-spacing: -0.5px; }
+        .brand-text p { font-size: 14px; color: var(--sidebar-text); font-weight: 500; margin-top: 2px;}
 
         .nav-menu { display: flex; flex-direction: column; gap: 8px; }
         .nav-item {
             display: flex; align-items: center; gap: 14px;
             padding: 14px 16px; border-radius: 12px;
             color: var(--sidebar-text); text-decoration: none;
-            font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+            font-size: 16px; transition: all 0.2s ease;
             cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;
         }
         .nav-item i { font-size: 18px; width: 20px; text-align: center; }
@@ -108,7 +106,7 @@
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
         }
-        .topbar h2 { font-size: 22px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .topbar h2 { font-size: 24px; color: var(--text-main); letter-spacing: -0.5px; }
         
         .topbar-actions { display: flex; align-items: center; gap: 24px; }
         
@@ -121,7 +119,7 @@
         .search-bar i { color: var(--text-muted); font-size: 14px; }
         .search-bar input {
             border: none; background: transparent; outline: none;
-            font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-main); width: 100%;
+            font-family: inherit; font-size: 15px; font-weight: 600; color: var(--text-main); width: 100%;
         }
 
         .icon-btn {
@@ -133,9 +131,9 @@
         .icon-btn:hover { background: var(--bg-body); }
 
         .user-profile { display: flex; align-items: center; gap: 12px; }
-        .user-info h4 { font-size: 14px; font-weight: 700; color: var(--text-main); }
-        .user-info p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-        .avatar-profile { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+        .user-info h4 { font-size: 16px; color: var(--text-main); }
+        .user-info p { font-size: 14px; color: var(--text-muted); font-weight: 600; }
+        .avatar-profile { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
 
         /* DASHBOARD CONTENT */
         .dashboard-content { padding: 32px 40px; }
@@ -155,11 +153,11 @@
             padding: 24px; border: 1px solid var(--border);
             box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
         }
-        .stat-value { font-size: 32px; font-weight: 800; color: var(--text-main); letter-spacing: -1px; margin-bottom: 12px; }
+        .stat-value { font-size: 34px; color: var(--text-main); letter-spacing: -1px; margin-bottom: 12px; }
         .stat-meta { display: flex; align-items: center; gap: 12px; }
-        .stat-label { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .stat-label { font-size: 16px; font-weight: 600; color: var(--text-muted); }
         .stat-trend {
-            font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+            font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
             display: flex; align-items: center; gap: 4px;
         }
         .trend-up { background: var(--success-light); color: var(--success); }
@@ -174,11 +172,11 @@
             box-shadow: var(--shadow-sm); margin-bottom: 24px;
         }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .card-title { font-size: 18px; font-weight: 800; color: var(--text-main); }
+        .card-title { font-size: 20px; color: var(--text-main); }
         
         .chip {
             background: var(--bg-body); border: 1px solid var(--border);
-            padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--text-main);
+            padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--text-main);
             display: flex; align-items: center; gap: 6px;
         }
 
@@ -186,13 +184,13 @@
         .table-wrap { overflow-x: auto; }
         .guest-table { width: 100%; border-collapse: collapse; }
         .guest-table th {
-            text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700;
+            text-align: left; padding: 12px 16px; font-size: 14px; font-weight: 700;
             color: var(--text-muted); border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px;
         }
         .guest-table th:first-child { padding-left: 0; }
         .guest-table td {
             padding: 16px; border-bottom: 1px solid var(--border);
-            font-size: 14px; font-weight: 600; color: var(--text-main);
+            font-size: 16px; font-weight: 600; color: var(--text-main);
         }
         .guest-table td:first-child { padding-left: 0; }
         .guest-table tr:last-child td { border-bottom: none; }
@@ -201,14 +199,14 @@
         .avatar {
             width: 36px; height: 36px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: 700; color: white;
+            font-size: 14px; font-weight: 800; color: white;
         }
         .avatar.a0 { background: #6366F1; } .avatar.a1 { background: #10B981; }
         .avatar.a2 { background: #F59E0B; } .avatar.a3 { background: #EC4899; }
         .avatar.a4 { background: #06B6D4; } .avatar.a5 { background: #8B5CF6; }
 
         .status-badge {
-            font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 20px;
             display: inline-flex; align-items: center; gap: 6px;
         }
         .status-active { background: var(--success-light); color: var(--success); }
@@ -239,13 +237,13 @@
         .room-item.occupied { border-left: 4px solid var(--warning); }
         
         .room-top { display: flex; justify-content: space-between; align-items: center; }
-        .room-num { font-size: 15px; font-weight: 800; color: var(--text-main); }
+        .room-num { font-size: 16px; font-weight: 800; color: var(--text-main); }
         .room-dot { width: 8px; height: 8px; border-radius: 50%; }
         .vacant .room-dot { background: var(--success); }
         .occupied .room-dot { background: var(--warning); }
         
-        .room-guest { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .room-status { font-size: 11px; font-weight: 700; text-align: center; padding: 6px; border-radius: 6px; }
+        .room-guest { font-size: 14px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .room-status { font-size: 13px; font-weight: 700; text-align: center; padding: 6px; border-radius: 6px; }
         .vacant .room-status { background: var(--success-light); color: var(--success); }
         .occupied .room-status { background: var(--warning-light); color: var(--warning); }
 
@@ -253,13 +251,13 @@
         .add-guest-form { display: flex; flex-direction: column; gap: 16px; }
         .form-row { display: flex; gap: 16px; }
         .form-group { flex: 1; }
-        .form-group label { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: block; }
+        .form-group label { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: block; }
         .input-wrap { position: relative; }
         .input-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 15px; }
         .form-group input, .form-group select {
             width: 100%; padding: 14px 16px 14px 44px; border-radius: 10px;
             border: 1px solid var(--border); background: var(--bg-body);
-            font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text-main);
+            font-family: inherit; font-size: 16px; font-weight: 600; color: var(--text-main);
             outline: none; transition: 0.2s;
         }
         .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px var(--primary-light); }
@@ -267,7 +265,7 @@
         .btn-add {
             background: var(--primary); color: white; border: none;
             padding: 16px; border-radius: 10px; font-family: inherit;
-            font-size: 15px; font-weight: 700; cursor: pointer;
+            font-size: 18px; font-weight: 800; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
         }
         .btn-add:hover { background: #4338CA; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
@@ -287,13 +285,13 @@
         }
         .bg-red { background: var(--danger); }
         .bg-blue { background: var(--primary); }
-        .action-text { font-size: 14px; font-weight: 700; color: var(--text-main); }
-        .action-text small { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+        .action-text { font-size: 16px; font-weight: 800; color: var(--text-main); }
+        .action-text small { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
 
         /* TOAST & UTILS */
         #toast {
             position: fixed; bottom: 30px; right: 30px; background: var(--text-main); color: white;
-            padding: 16px 24px; border-radius: 12px; font-size: 14px; font-weight: 600;
+            padding: 16px 24px; border-radius: 12px; font-size: 16px; font-weight: 700;
             box-shadow: var(--shadow-lg); transform: translateY(200%); transition: 0.3s;
             z-index: 999; display: flex; align-items: center; gap: 10px;
         }
@@ -302,7 +300,7 @@
         #toast.success { background: var(--success); }
 
         .loading-overlay {
-            position: fixed; inset: 0; background: rgba(248, 249, 250, 0.8);
+            position: fixed; inset: 0; background: rgba(224, 242, 254, 0.8);
             backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
             z-index: 998; font-size: 32px; color: var(--primary);
         }
@@ -339,7 +337,6 @@
     </div>
     
     <div class="nav-menu">
-        <!-- Sidebar Links updated to call switchView() -->
         <button class="nav-item active" onclick="switchView('dashboard', this)">
             <i class="fas fa-border-all"></i> Dashboard
         </button>
@@ -493,7 +490,7 @@
         <div id="view-rooms" class="view">
             <div class="card" style="padding: 32px;">
                 <div class="card-header">
-                    <div class="card-title" style="font-size: 24px;">All Lodge Rooms</div>
+                    <div class="card-title" style="font-size: 26px;">All Lodge Rooms</div>
                     <div class="chip" id="allRoomsSummaryBadge">0 Vacant / 0 Total</div>
                 </div>
                 <!-- Larger grid for the dedicated rooms view -->
@@ -507,7 +504,7 @@
         <div id="view-guests" class="view">
             <div class="card" style="padding: 32px;">
                 <div class="card-header">
-                    <div class="card-title" style="font-size: 24px;">Guest History</div>
+                    <div class="card-title" style="font-size: 26px;">Guest History</div>
                     <div class="chip">All Records</div>
                 </div>
                 <div class="table-wrap">
@@ -534,13 +531,13 @@
         <div id="view-billing" class="view">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" style="color: var(--primary);">ZMW 24,500</div>
+                    <div class="stat-value" id="billTotalRevenue" style="color: var(--primary);">ZMW 0</div>
                     <div class="stat-meta">
-                        <span class="stat-label">Revenue This Month</span>
+                        <span class="stat-label">Total Revenue (All Time)</span>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" style="color: var(--success);">ZMW 12,300</div>
+                    <div class="stat-value" id="billTodayRevenue" style="color: var(--success);">ZMW 0</div>
                     <div class="stat-meta">
                         <span class="stat-label">Collected Today</span>
                     </div>
@@ -549,8 +546,22 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Recent Transactions</div>
+                    <div class="chip">Latest 20 Records</div>
                 </div>
-                <p style="color: var(--text-muted); font-size: 14px;">Billing history and invoices will appear here. (Coming soon)</p>
+                <div class="table-wrap">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Guest</th>
+                                <th>Room</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billingTableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -628,15 +639,12 @@
     // VIEW ROUTING LOGIC
     // ==========================================
     window.switchView = function(viewName, btnElement) {
-        // 1. Update Sidebar active state
         document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
 
-        // 2. Hide all views, show selected
         document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
         document.getElementById('view-' + viewName).classList.add('active');
 
-        // 3. Update Topbar Title
         const titles = {
             'dashboard': 'Dashboard Overview',
             'rooms': 'All Rooms',
@@ -676,6 +684,7 @@
         renderDashboardRooms();
         renderAllRooms();
         renderRoomSelect();
+        renderBilling();
         updateBadges();
     }
 
@@ -735,7 +744,7 @@
                         <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
                     </div>
                 </td>
-                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 12px;">${roomName}</span></td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
                 <td>${g.check_in || '—'}</td>
                 <td><span class="status-badge status-active">Lodging</span></td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
@@ -768,7 +777,7 @@
                         <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
                     </div>
                 </td>
-                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 12px;">${roomName}</span></td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
                 <td>${g.check_in || '—'}</td>
                 <td>${g.check_out || '—'}</td>
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
@@ -781,7 +790,7 @@
     function renderDashboardRooms() {
         const grid = document.getElementById('roomsGrid');
         if (!rooms.length) {
-            grid.innerHTML = '<div style="text-align:center; padding: 20px; font-size: 13px; color: var(--text-muted);">No rooms configured.</div>';
+            grid.innerHTML = '<div style="text-align:center; padding: 20px; font-size: 14px; color: var(--text-muted);">No rooms configured.</div>';
             return;
         }
         
@@ -839,6 +848,44 @@
         select.disabled = false;
         select.innerHTML = vacant.sort((a, b) => a.id - b.id)
             .map(r => `<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+    }
+
+    // NEW: Billing & Transactions View Logic
+    function renderBilling() {
+        // 1. Calculate Total Revenue
+        const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+        
+        // 2. Calculate Today's Revenue
+        const todayStr = today();
+        const todayRevenue = guests
+            .filter(g => g.check_in === todayStr)
+            .reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
+
+        document.getElementById('billTotalRevenue').textContent = `ZMW ${totalRevenue.toLocaleString()}`;
+        document.getElementById('billTodayRevenue').textContent = `ZMW ${todayRevenue.toLocaleString()}`;
+
+        // 3. Render Recent Transactions Table
+        const tbody = document.getElementById('billingTableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
+            return;
+        }
+
+        // Display latest 20 transactions
+        tbody.innerHTML = guests.slice(0, 20).map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+
+            return `<tr>
+                <td>${g.check_in || '—'}</td>
+                <td style="font-weight: 700;">${escapeHtml(g.name)}</td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td style="font-weight: 800; color: var(--primary);">ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+            </tr>`;
+        }).join('');
     }
 
     function updateBadges() {
