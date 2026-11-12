@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChiEdgars Lodge · Kasama</title>
     <link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
-    <!-- Premium Fonts -->
+    <!-- Premium Fonts: Inter for clean readability, Plus Jakarta Sans for premium headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* Colors from the reference image */
-            --bg-body: #F8F9FA;
-            --sidebar-bg: #1E2538;
-            --sidebar-hover: #2A3349;
+            /* Cool, high-standard color palette */
+            --bg-body: #F4F7FB;
+            --sidebar-bg: #111827;
+            --sidebar-hover: #1F2937;
             --sidebar-text: #9CA3AF;
             --sidebar-active: #4F46E5;
             --sidebar-active-bg: #4F46E5;
             
             --surface: #FFFFFF;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --border: #F3F4F6;
+            --text-main: #0F172A; /* Very dark slate for high contrast */
+            --text-muted: #475569; /* Darker muted text for readability */
+            --border: #E2E8F0;
             
             --primary: #4F46E5;
             --success: #10B981;
@@ -36,14 +36,14 @@
             --danger-light: #FEF2F2;
             
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
-            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             display: flex;
@@ -51,8 +51,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        h1, h2, h3, h4, .stat-value, .card-title, .nav-item {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         /* ============================================================ */
-        /* SIDEBAR (DARK)                                               */
+        /* SIDEBAR                                                      */
         /* ============================================================ */
         .sidebar {
             width: 260px;
@@ -71,54 +75,49 @@
             margin-bottom: 40px; color: white;
         }
         .brand-logo {
-            width: 40px; height: 40px; border-radius: 10px;
+            width: 42px; height: 42px; border-radius: 12px;
             background: white; display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
         .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
         .brand-text h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-        .brand-text p { font-size: 11px; color: var(--sidebar-text); font-weight: 500; margin-top: 2px;}
+        .brand-text p { font-size: 12px; color: var(--sidebar-text); font-weight: 500; margin-top: 2px;}
 
         .nav-menu { display: flex; flex-direction: column; gap: 8px; }
         .nav-item {
             display: flex; align-items: center; gap: 14px;
             padding: 14px 16px; border-radius: 12px;
             color: var(--sidebar-text); text-decoration: none;
-            font-size: 14px; font-weight: 600; transition: 0.2s;
-            cursor: pointer;
+            font-size: 14px; font-weight: 600; transition: all 0.2s ease;
+            cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;
         }
         .nav-item i { font-size: 18px; width: 20px; text-align: center; }
         .nav-item:hover { background: var(--sidebar-hover); color: white; }
-        .nav-item.active { background: var(--sidebar-active); color: white; }
+        .nav-item.active { background: var(--sidebar-active); color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
         /* ============================================================ */
         /* MAIN CONTENT AREA                                            */
         /* ============================================================ */
         .main-content {
-            flex: 1;
-            margin-left: 260px;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
+            flex: 1; margin-left: 260px; display: flex; flex-direction: column;
         }
 
         /* TOP BAR */
         .topbar {
-            background: var(--surface);
-            padding: 20px 40px;
+            background: var(--surface); padding: 20px 40px;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; z-index: 50;
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
         }
-        .topbar h2 { font-size: 20px; font-weight: 700; color: var(--text-main); }
+        .topbar h2 { font-size: 22px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
         
         .topbar-actions { display: flex; align-items: center; gap: 24px; }
         
         .search-bar {
             display: flex; align-items: center; gap: 10px;
             background: var(--bg-body); padding: 10px 16px;
-            border-radius: 30px; width: 260px;
+            border-radius: 30px; width: 260px; border: 1px solid transparent;
         }
+        .search-bar:focus-within { border-color: var(--primary); background: white; }
         .search-bar i { color: var(--text-muted); font-size: 14px; }
         .search-bar input {
             border: none; background: transparent; outline: none;
@@ -127,19 +126,24 @@
 
         .icon-btn {
             background: transparent; border: 1px solid var(--border);
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 42px; height: 42px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: var(--text-muted); cursor: pointer; transition: 0.2s;
+            color: var(--text-main); cursor: pointer; transition: 0.2s;
         }
-        .icon-btn:hover { background: var(--bg-body); color: var(--text-main); }
+        .icon-btn:hover { background: var(--bg-body); }
 
         .user-profile { display: flex; align-items: center; gap: 12px; }
-        .user-profile img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
         .user-info h4 { font-size: 14px; font-weight: 700; color: var(--text-main); }
         .user-info p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+        .avatar-profile { width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
 
         /* DASHBOARD CONTENT */
         .dashboard-content { padding: 32px 40px; }
+
+        /* VIEW SWITCHING LOGIC */
+        .view { display: none; animation: fadeIn 0.3s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* STATS GRID */
         .stats-grid {
@@ -149,36 +153,32 @@
         .stat-card {
             background: var(--surface); border-radius: 16px;
             padding: 24px; border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: center;
+            box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
         }
-        .stat-value { font-size: 28px; font-weight: 800; color: var(--text-main); letter-spacing: -1px; margin-bottom: 12px; }
+        .stat-value { font-size: 32px; font-weight: 800; color: var(--text-main); letter-spacing: -1px; margin-bottom: 12px; }
         .stat-meta { display: flex; align-items: center; gap: 12px; }
-        .stat-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+        .stat-label { font-size: 14px; font-weight: 600; color: var(--text-muted); }
         .stat-trend {
-            font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
             display: flex; align-items: center; gap: 4px;
         }
         .trend-up { background: var(--success-light); color: var(--success); }
         .trend-down { background: var(--danger-light); color: var(--danger); }
 
         /* MAIN LAYOUT GRID */
-        .layout-grid {
-            display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
-        }
+        .layout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
 
         .card {
             background: var(--surface); border-radius: 16px;
             padding: 24px; border: 1px solid var(--border);
             box-shadow: var(--shadow-sm); margin-bottom: 24px;
         }
-        .card-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px;
-        }
-        .card-title { font-size: 16px; font-weight: 700; color: var(--text-main); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .card-title { font-size: 18px; font-weight: 800; color: var(--text-main); }
+        
         .chip {
             background: var(--bg-body); border: 1px solid var(--border);
-            padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--text-muted);
+            padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--text-main);
             display: flex; align-items: center; gap: 6px;
         }
 
@@ -186,8 +186,8 @@
         .table-wrap { overflow-x: auto; }
         .guest-table { width: 100%; border-collapse: collapse; }
         .guest-table th {
-            text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 600;
-            color: var(--text-muted); border-bottom: 1px solid var(--border);
+            text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 700;
+            color: var(--text-muted); border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px;
         }
         .guest-table th:first-child { padding-left: 0; }
         .guest-table td {
@@ -223,15 +223,15 @@
 
         /* ROOMS GRID */
         .rooms-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 12px; max-height: 380px; overflow-y: auto; padding-right: 4px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px; max-height: 480px; overflow-y: auto; padding-right: 4px;
         }
         .rooms-grid::-webkit-scrollbar { width: 4px; }
         .rooms-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         
         .room-item {
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px;
+            border-radius: 12px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px;
             transition: 0.2s;
         }
         .room-item:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
@@ -239,13 +239,13 @@
         .room-item.occupied { border-left: 4px solid var(--warning); }
         
         .room-top { display: flex; justify-content: space-between; align-items: center; }
-        .room-num { font-size: 14px; font-weight: 800; color: var(--text-main); }
-        .room-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .room-num { font-size: 15px; font-weight: 800; color: var(--text-main); }
+        .room-dot { width: 8px; height: 8px; border-radius: 50%; }
         .vacant .room-dot { background: var(--success); }
         .occupied .room-dot { background: var(--warning); }
         
-        .room-guest { font-size: 11px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .room-status { font-size: 10px; font-weight: 700; text-align: center; padding: 4px; border-radius: 6px; }
+        .room-guest { font-size: 12px; font-weight: 600; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .room-status { font-size: 11px; font-weight: 700; text-align: center; padding: 6px; border-radius: 6px; }
         .vacant .room-status { background: var(--success-light); color: var(--success); }
         .occupied .room-status { background: var(--warning-light); color: var(--warning); }
 
@@ -253,42 +253,42 @@
         .add-guest-form { display: flex; flex-direction: column; gap: 16px; }
         .form-row { display: flex; gap: 16px; }
         .form-group { flex: 1; }
-        .form-group label { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; display: block; }
+        .form-group label { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; display: block; }
         .input-wrap { position: relative; }
-        .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; }
+        .input-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 15px; }
         .form-group input, .form-group select {
-            width: 100%; padding: 12px 14px 12px 40px; border-radius: 10px;
+            width: 100%; padding: 14px 16px 14px 44px; border-radius: 10px;
             border: 1px solid var(--border); background: var(--bg-body);
-            font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text-main);
+            font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text-main);
             outline: none; transition: 0.2s;
         }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px var(--primary-light); }
         
         .btn-add {
             background: var(--primary); color: white; border: none;
-            padding: 14px; border-radius: 10px; font-family: inherit;
-            font-size: 14px; font-weight: 700; cursor: pointer;
+            padding: 16px; border-radius: 10px; font-family: inherit;
+            font-size: 15px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
         }
-        .btn-add:hover { background: #4338CA; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+        .btn-add:hover { background: #4338CA; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
         /* ACTION BUTTONS */
         .action-btn {
-            display: flex; align-items: center; gap: 12px; width: 100%;
+            display: flex; align-items: center; gap: 14px; width: 100%;
             background: var(--bg-body); border: 1px solid var(--border);
-            padding: 14px; border-radius: 12px; cursor: pointer; transition: 0.2s;
+            padding: 16px; border-radius: 12px; cursor: pointer; transition: 0.2s;
             text-align: left; font-family: inherit; margin-bottom: 12px;
         }
         .action-btn:hover { border-color: var(--primary); background: white; }
         .action-icon {
-            width: 36px; height: 36px; border-radius: 10px;
+            width: 40px; height: 40px; border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 14px;
+            color: white; font-size: 16px;
         }
         .bg-red { background: var(--danger); }
         .bg-blue { background: var(--primary); }
-        .action-text { font-size: 13px; font-weight: 700; color: var(--text-main); }
-        .action-text small { display: block; font-size: 11px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
+        .action-text { font-size: 14px; font-weight: 700; color: var(--text-main); }
+        .action-text small { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 2px; }
 
         /* TOAST & UTILS */
         #toast {
@@ -314,7 +314,7 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
-            .sidebar { display: none; } /* Hide sidebar on mobile */
+            .sidebar { display: none; }
             .main-content { margin-left: 0; }
             .topbar { padding: 16px 20px; }
             .search-bar { display: none; }
@@ -339,18 +339,19 @@
     </div>
     
     <div class="nav-menu">
-        <a href="#" class="nav-item active" onclick="return false;">
+        <!-- Sidebar Links updated to call switchView() -->
+        <button class="nav-item active" onclick="switchView('dashboard', this)">
             <i class="fas fa-border-all"></i> Dashboard
-        </a>
-        <a href="#" class="nav-item" onclick="return false;">
-            <i class="fas fa-bed"></i> Rooms
-        </a>
-        <a href="#" class="nav-item" onclick="return false;">
-            <i class="fas fa-users"></i> Guests
-        </a>
-        <a href="#" class="nav-item" onclick="return false;">
+        </button>
+        <button class="nav-item" onclick="switchView('rooms', this)">
+            <i class="fas fa-bed"></i> All Rooms
+        </button>
+        <button class="nav-item" onclick="switchView('guests', this)">
+            <i class="fas fa-users"></i> Guests History
+        </button>
+        <button class="nav-item" onclick="switchView('billing', this)">
             <i class="fas fa-file-invoice-dollar"></i> Billing
-        </a>
+        </button>
     </div>
 </div>
 
@@ -358,7 +359,7 @@
 <div class="main-content">
     <!-- TOP BAR -->
     <div class="topbar">
-        <h2>Dashboard Overview</h2>
+        <h2 id="pageTitle">Dashboard Overview</h2>
         <div class="topbar-actions">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
@@ -370,7 +371,7 @@
                     <h4>ChiEdgars Admin</h4>
                     <p>Reception</p>
                 </div>
-                <div class="avatar a0" style="width: 40px; height: 40px; border-radius: 50%;">A</div>
+                <div class="avatar-profile">A</div>
             </div>
         </div>
     </div>
@@ -378,124 +379,181 @@
     <!-- DASHBOARD CONTENT -->
     <div class="dashboard-content">
         
-        <!-- STATS -->
-        <div class="stats-grid" id="statsGrid"></div>
+        <!-- ========================================== -->
+        <!-- VIEW 1: DASHBOARD                          -->
+        <!-- ========================================== -->
+        <div id="view-dashboard" class="view active">
+            <div class="stats-grid" id="statsGrid"></div>
 
-        <!-- GRID LAYOUT -->
-        <div class="layout-grid">
-            
-            <!-- LEFT COLUMN (Table & Form) -->
-            <div class="left-col">
-                <!-- GUEST TABLE -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Active Guests</div>
-                        <div class="chip" id="guestCountBadge">0 Active</div>
+            <div class="layout-grid">
+                <!-- LEFT COLUMN -->
+                <div class="left-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Active Guests</div>
+                            <div class="chip" id="guestCountBadge">0 Active</div>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="guest-table">
+                                <thead>
+                                    <tr>
+                                        <th>Guest</th>
+                                        <th>Room</th>
+                                        <th>Lodge In</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="guestTableBody"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="table-wrap">
-                        <table class="guest-table">
-                            <thead>
-                                <tr>
-                                    <th>Guest</th>
-                                    <th>Room</th>
-                                    <th>Lodge In</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="guestTableBody"></tbody>
-                        </table>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">New Check-In</div>
+                        </div>
+                        <div class="add-guest-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Guest Name</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" id="guestNameInput" placeholder="e.g. Chanda Mwila">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Assign Room</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-door-closed"></i>
+                                        <select id="roomSelect"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Check-In Date</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-calendar"></i>
+                                        <input type="date" id="checkInDate">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount Paid (ZMW)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        <input type="number" id="amountPaidInput" placeholder="0.00" min="0" step="10" value="500">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-add" id="addGuestBtn">
+                                <i class="fas fa-check-circle"></i> Confirm Check-In
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- NEW GUEST FORM -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">New Check-In</div>
+                <!-- RIGHT COLUMN -->
+                <div class="right-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Room Status</div>
+                            <div class="chip" id="roomSummaryBadge">0 Vacant</div>
+                        </div>
+                        <div class="rooms-grid" id="roomsGrid"></div>
                     </div>
-                    <div class="add-guest-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Guest Name</label>
-                                <div class="input-wrap">
-                                    <i class="fas fa-user"></i>
-                                    <input type="text" id="guestNameInput" placeholder="e.g. Chanda Mwila">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Assign Room</label>
-                                <div class="input-wrap">
-                                    <i class="fas fa-door-closed"></i>
-                                    <select id="roomSelect"></select>
-                                </div>
-                            </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Quick Actions</div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Check-In Date</label>
-                                <div class="input-wrap">
-                                    <i class="fas fa-calendar"></i>
-                                    <input type="date" id="checkInDate">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Amount Paid (ZMW)</label>
-                                <div class="input-wrap">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <input type="number" id="amountPaidInput" placeholder="0.00" min="0" step="10" value="500">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn-add" id="addGuestBtn">
-                            <i class="fas fa-check-circle"></i> Confirm Check-In
+                        <button class="action-btn" onclick="markAllCheckedOut()">
+                            <span class="action-icon bg-red"><i class="fas fa-right-from-bracket"></i></span>
+                            <span class="action-text">
+                                Check-out all guests
+                                <small>Instantly free all occupied rooms</small>
+                            </span>
+                        </button>
+                        <button class="action-btn" onclick="loadAll()">
+                            <span class="action-icon bg-blue"><i class="fas fa-arrows-rotate"></i></span>
+                            <span class="action-text">
+                                Sync Database
+                                <small>Fetch latest records</small>
+                            </span>
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- RIGHT COLUMN (Rooms & Actions) -->
-            <div class="right-col">
-                <!-- ROOM GRID -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Room Status</div>
-                        <div class="chip" id="roomSummaryBadge">0 Vacant</div>
-                    </div>
-                    <div class="rooms-grid" id="roomsGrid"></div>
-                    <div style="display: flex; gap: 16px; margin-top: 16px; font-size: 12px; font-weight: 600; color: var(--text-muted);">
-                        <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span> Vacant
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 8px; height: 8px; background: var(--warning); border-radius: 50%;"></span> Occupied
-                        </div>
-                    </div>
+        <!-- ========================================== -->
+        <!-- VIEW 2: ROOMS                              -->
+        <!-- ========================================== -->
+        <div id="view-rooms" class="view">
+            <div class="card" style="padding: 32px;">
+                <div class="card-header">
+                    <div class="card-title" style="font-size: 24px;">All Lodge Rooms</div>
+                    <div class="chip" id="allRoomsSummaryBadge">0 Vacant / 0 Total</div>
                 </div>
+                <!-- Larger grid for the dedicated rooms view -->
+                <div class="rooms-grid" id="allRoomsGrid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); max-height: none;"></div>
+            </div>
+        </div>
 
-                <!-- QUICK ACTIONS -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Quick Actions</div>
-                    </div>
-                    <button class="action-btn" onclick="markAllCheckedOut()">
-                        <span class="action-icon bg-red"><i class="fas fa-right-from-bracket"></i></span>
-                        <span class="action-text">
-                            Check-out all guests
-                            <small>Instantly free all occupied rooms</small>
-                        </span>
-                    </button>
-                    <button class="action-btn" onclick="loadAll()">
-                        <span class="action-icon bg-blue"><i class="fas fa-arrows-rotate"></i></span>
-                        <span class="action-text">
-                            Sync Database
-                            <small>Fetch latest records</small>
-                        </span>
-                    </button>
+        <!-- ========================================== -->
+        <!-- VIEW 3: GUESTS HISTORY                     -->
+        <!-- ========================================== -->
+        <div id="view-guests" class="view">
+            <div class="card" style="padding: 32px;">
+                <div class="card-header">
+                    <div class="card-title" style="font-size: 24px;">Guest History</div>
+                    <div class="chip">All Records</div>
+                </div>
+                <div class="table-wrap">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>Guest</th>
+                                <th>Room</th>
+                                <th>Lodge In</th>
+                                <th>Lodge Out</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allGuestsTableBody"></tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 4: BILLING                            -->
+        <!-- ========================================== -->
+        <div id="view-billing" class="view">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--primary);">ZMW 24,500</div>
+                    <div class="stat-meta">
+                        <span class="stat-label">Revenue This Month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--success);">ZMW 12,300</div>
+                    <div class="stat-meta">
+                        <span class="stat-label">Collected Today</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Recent Transactions</div>
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">Billing history and invoices will appear here. (Coming soon)</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -566,6 +624,28 @@
         return 'a' + h;
     }
 
+    // ==========================================
+    // VIEW ROUTING LOGIC
+    // ==========================================
+    window.switchView = function(viewName, btnElement) {
+        // 1. Update Sidebar active state
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        // 2. Hide all views, show selected
+        document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+        document.getElementById('view-' + viewName).classList.add('active');
+
+        // 3. Update Topbar Title
+        const titles = {
+            'dashboard': 'Dashboard Overview',
+            'rooms': 'All Rooms',
+            'guests': 'Guest History',
+            'billing': 'Billing & Finance'
+        };
+        document.getElementById('pageTitle').textContent = titles[viewName];
+    };
+
     async function loadAll() {
         if (!supabase && !initSupabase()) return;
         setLoading(true);
@@ -591,8 +671,10 @@
 
     function renderAll() {
         renderStats();
-        renderGuestTable();
-        renderRooms();
+        renderDashboardTable();
+        renderAllGuestsTable();
+        renderDashboardRooms();
+        renderAllRooms();
         renderRoomSelect();
         updateBadges();
     }
@@ -631,46 +713,72 @@
         `;
     }
 
-    function renderGuestTable() {
+    // Dashboard Table (Only active guests)
+    function renderDashboardTable() {
         const tbody = document.getElementById('guestTableBody');
-        if (!guests.length) {
+        const activeGuests = guests.filter(g => g.still_lodging);
+
+        if (!activeGuests.length) {
             tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">No active guests found.</td></tr>';
             return;
         }
 
-        const sorted = [...guests].sort((a, b) => {
-            if (a.still_lodging === b.still_lodging) return 0;
-            return a.still_lodging ? -1 : 1;
-        });
-
-        tbody.innerHTML = sorted.map(g => {
+        tbody.innerHTML = activeGuests.map(g => {
             const room = rooms.find(r => r.id === g.room_id);
             const roomName = room ? room.name : '—';
-            const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
-            const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
             const av = colorFor(g.name || 'x');
             
             return `<tr>
                 <td>
                     <div class="guest-cell">
                         <div class="avatar ${av}">${initials(g.name)}</div>
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
-                        </div>
+                        <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
                     </div>
                 </td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 12px;">${roomName}</span></td>
                 <td>${g.check_in || '—'}</td>
-                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td><span class="status-badge status-active">Lodging</span></td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
                 <td>
-                    ${g.still_lodging ? `<button class="btn-icon" onclick="checkoutGuest(${g.id})" title="Check out"><i class="fas fa-arrow-right-from-bracket"></i></button>` : ''}
+                    <button class="btn-icon" onclick="checkoutGuest(${g.id})" title="Check out"><i class="fas fa-arrow-right-from-bracket"></i></button>
                 </td>
             </tr>`;
         }).join('');
     }
 
-    function renderRooms() {
+    // Full Guests History Table
+    function renderAllGuestsTable() {
+        const tbody = document.getElementById('allGuestsTableBody');
+        if (!guests.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = guests.map(g => {
+            const room = rooms.find(r => r.id === g.room_id);
+            const roomName = room ? room.name : '—';
+            const av = colorFor(g.name || 'x');
+            const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
+            const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+            
+            return `<tr>
+                <td>
+                    <div class="guest-cell">
+                        <div class="avatar ${av}">${initials(g.name)}</div>
+                        <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
+                    </div>
+                </td>
+                <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 12px;">${roomName}</span></td>
+                <td>${g.check_in || '—'}</td>
+                <td>${g.check_out || '—'}</td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Dashboard Room Widget
+    function renderDashboardRooms() {
         const grid = document.getElementById('roomsGrid');
         if (!rooms.length) {
             grid.innerHTML = '<div style="text-align:center; padding: 20px; font-size: 13px; color: var(--text-muted);">No rooms configured.</div>';
@@ -694,6 +802,30 @@
         
         const vacant = rooms.filter(r => !r.is_occupied).length;
         document.getElementById('roomSummaryBadge').textContent = `${vacant} Vacant`;
+    }
+
+    // Full Rooms View Grid
+    function renderAllRooms() {
+        const grid = document.getElementById('allRoomsGrid');
+        if (!rooms.length) return;
+        
+        grid.innerHTML = rooms.map(room => {
+            const occ = room.is_occupied;
+            const occupant = occ ? guests.find(g => g.room_id === room.id && g.still_lodging) : null;
+            const guestName = occupant ? escapeHtml(occupant.name) : 'Available';
+            
+            return `<div class="room-item ${occ ? 'occupied' : 'vacant'}">
+                <div class="room-top">
+                    <span class="room-num">${escapeHtml(room.name)}</span>
+                    <span class="room-dot"></span>
+                </div>
+                <div class="room-guest">${guestName}</div>
+                <div class="room-status">${occ ? 'Occupied' : 'Vacant'}</div>
+            </div>`;
+        }).join('');
+        
+        const vacant = rooms.filter(r => !r.is_occupied).length;
+        document.getElementById('allRoomsSummaryBadge').textContent = `${vacant} Vacant / ${rooms.length} Total`;
     }
 
     function renderRoomSelect() {
