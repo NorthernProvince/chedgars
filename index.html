@@ -285,7 +285,6 @@
         }
         .bg-red { background: var(--danger); }
         .bg-blue { background: var(--primary); }
-        .bg-green { background: #25D366; } /* WhatsApp Green */
         .action-text { font-size: 16px; font-weight: 800; color: var(--text-main); }
         .action-text small { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
 
@@ -546,8 +545,8 @@
         <!-- ========================================== -->
         <div id="view-billing" class="view">
             <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-                <button class="btn-print" onclick="printReport()"><i class="fas fa-print"></i> Print Report (Boss)</button>
-                <button class="btn-print-wa" onclick="shareToWhatsApp()"><i class="fab fa-whatsapp"></i> Send Report to WhatsApp</button>
+                <button type="button" class="btn-print" onclick="printReport()"><i class="fas fa-print"></i> Print Report (Boss)</button>
+                <button type="button" class="btn-print-wa" onclick="shareToWhatsApp()"><i class="fab fa-whatsapp"></i> Send Report to WhatsApp</button>
             </div>
 
             <div class="stats-grid">
@@ -768,7 +767,7 @@
                 <td><span class="status-badge status-active">Lodging</span></td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
                 <td>
-                    <button class="btn-icon" onclick="checkoutGuest(${g.id})" title="Check out"><i class="fas fa-arrow-right-from-bracket"></i></button>
+                    <button class="btn-icon" onclick="checkoutGuest('${g.id}')" title="Check out"><i class="fas fa-arrow-right-from-bracket"></i></button>
                 </td>
             </tr>`;
         }).join('');
@@ -895,21 +894,50 @@
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                 <td style="font-weight: 800; color: var(--primary);">ZMW ${Number(g.amount_paid).toLocaleString()}</td>
                 <td>
-                    <button class="btn-print" onclick="printReceipt(${g.id})"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" class="btn-print" onclick="printReceipt('${g.id}')"><i class="fas fa-print"></i> Print</button>
                 </td>
             </tr>`;
         }).join('');
     }
 
+    // --- HIDDEN IFRAME PRINTING METHOD (No Popup Blockers) ---
+    function printHTML(htmlContent) {
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+        document.body.appendChild(iframe);
+
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(htmlContent);
+        doc.close();
+
+        iframe.contentWindow.focus();
+        // Wait briefly for content to render, then print
+        setTimeout(() => {
+            iframe.contentWindow.print();
+            // Clean up iframe after user finishes printing
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+            }, 1000);
+        }, 500);
+    }
+
     // --- PRINT RECEIPT FUNCTION ---
     window.printReceipt = function(guestId) {
-        const g = guests.find(x => x.id === guestId);
-        if (!g) return;
+        const g = guests.find(x => String(x.id) === String(guestId));
+        if (!g) {
+            showToast('Guest not found', 'error');
+            return;
+        }
         const room = rooms.find(r => r.id === g.room_id);
         const roomName = room ? room.name : '—';
         
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
+        const html = `
             <html>
             <head>
                 <title>Receipt - ${g.name}</title>
@@ -926,7 +954,7 @@
                     .footer { text-align: center; margin-top: 50px; font-size: 14px; color: #555; }
                 </style>
             </head>
-            <body onload="window.print(); window.close();">
+            <body>
                 <div class="header">
                     <h1>ChiEdgars Lodge</h1>
                     <p>Kasama, Zambia</p>
@@ -950,8 +978,8 @@
                 </div>
             </body>
             </html>
-        `);
-        printWindow.document.close();
+        `;
+        printHTML(html);
     };
 
     // --- PRINT REPORT FUNCTION ---
@@ -969,8 +997,7 @@
             </tr>
         `).join('');
 
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
+        const html = `
             <html>
             <head>
                 <title>Management Report - ChiEdgars Lodge</title>
@@ -983,7 +1010,7 @@
                     th { background-color: #eee; }
                 </style>
             </head>
-            <body onload="window.print(); window.close();">
+            <body>
                 <h1>ChiEdgars Lodge - Management Report</h1>
                 <p style="text-align: center;">Generated on ${new Date().toLocaleString()}</p>
                 
@@ -1009,8 +1036,8 @@
                 </table>
             </body>
             </html>
-        `);
-        printWindow.document.close();
+        `;
+        printHTML(html);
     };
 
     // --- SHARE TO WHATSAPP FUNCTION ---
@@ -1019,14 +1046,22 @@
         const activeGuests = guests.filter(g => g.still_lodging).length;
         const vacantRooms = rooms.filter(r => !r.is_occupied).length;
         
-        const text = `*ChiEdgars Lodge - Management Report*%0A` +
-                     `📅 Date: ${new Date().toLocaleDateString()}%0A%0A` +
-                     `💰 *Total Revenue:* ZMW ${totalRevenue.toLocaleString()}%0A` +
-                     `🛏️ *Active Guests:* ${activeGuests}%0A` +
-                     `🚪 *Vacant Rooms:* ${vacantRooms} / ${rooms.length}%0A%0A` +
+        const text = `*ChiEdgars Lodge - Management Report*\n` +
+                     `📅 Date: ${new Date().toLocaleDateString()}\n\n` +
+                     `💰 *Total Revenue:* ZMW ${totalRevenue.toLocaleString()}\n` +
+                     `🛏️ *Active Guests:* ${activeGuests}\n` +
+                     `🚪 *Vacant Rooms:* ${vacantRooms} / ${rooms.length}\n\n` +
                      `_Generated automatically from the Lodge System._`;
 
-        window.open(`https://wa.me/?text=${text}`, '_blank');
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        
+        // Create temporary link to avoid popup blockers
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     };
 
     function updateBadges() {
@@ -1072,13 +1107,13 @@
     window.checkoutGuest = async function(guestId) {
         if (!supabase) return;
         if (!confirm('Check out this guest?')) return;
-        const guest = guests.find(g => g.id === guestId);
+        const guest = guests.find(g => String(g.id) === String(guestId));
         if (!guest) return;
 
         setLoading(true);
         try {
             const { error: e1 } = await supabase.from('guests')
-                .update({ still_lodging: false, check_out: today() }).eq('id', guestId);
+                .update({ still_lodging: false, check_out: today() }).eq('id', guest.id);
             if (e1) throw e1;
 
             if (guest.room_id) {
