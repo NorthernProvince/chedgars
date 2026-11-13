@@ -30,6 +30,7 @@
             --warning-light: #FFFBEB;
             --danger: #EF4444;
             --danger-light: #FEF2F2;
+            --whatsapp: #25D366;
             
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
@@ -39,7 +40,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            /* Applied Arial Narrow everywhere */
             font-family: 'Arial Narrow', Arial, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
@@ -288,7 +288,7 @@
         .action-text { font-size: 16px; font-weight: 800; color: var(--text-main); }
         .action-text small { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
 
-        /* PRINT BUTTONS */
+        /* BUTTONS */
         .btn-print {
             background: var(--bg-body); border: 1px solid var(--border);
             color: var(--text-main); padding: 10px 16px; border-radius: 8px;
@@ -297,12 +297,23 @@
         }
         .btn-print:hover { background: white; border-color: var(--primary); color: var(--primary); }
         .btn-print-wa {
-            background: #25D366; border: 1px solid #25D366;
+            background: var(--whatsapp); border: 1px solid var(--whatsapp);
             color: white; padding: 10px 16px; border-radius: 8px;
             font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
             display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;
         }
         .btn-print-wa:hover { background: #128C7E; border-color: #128C7E; }
+        
+        /* Digital Receipt Buttons */
+        .btn-receipt {
+            border: none; padding: 6px 10px; border-radius: 6px;
+            font-family: inherit; font-size: 13px; font-weight: 700;
+            cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .btn-receipt-wa { background: #25D366; color: white; }
+        .btn-receipt-wa:hover { background: #128C7E; }
+        .btn-receipt-email { background: var(--primary); color: white; }
+        .btn-receipt-email:hover { background: #4338CA; }
 
         /* TOAST & UTILS */
         #toast {
@@ -472,7 +483,6 @@
                                     <label>Total Amount Paid</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-money-bill-wave"></i>
-                                        <!-- Read-only total field -->
                                         <input type="number" id="totalAmountInput" readonly style="background: #E2E8F0; cursor: not-allowed;" value="500">
                                     </div>
                                 </div>
@@ -546,6 +556,7 @@
                                 <th>Guest</th>
                                 <th>Room</th>
                                 <th>Lodge In</th>
+                                <th>Days</th>
                                 <th>Lodge Out</th>
                                 <th>Status</th>
                                 <th>Amount</th>
@@ -593,9 +604,10 @@
                                 <th>Date</th>
                                 <th>Guest</th>
                                 <th>Room</th>
+                                <th>Days</th>
                                 <th>Status</th>
                                 <th>Amount</th>
-                                <th>Action</th>
+                                <th>Send Receipt</th>
                             </tr>
                         </thead>
                         <tbody id="billingTableBody"></tbody>
@@ -690,7 +702,6 @@
         document.getElementById('pageTitle').textContent = titles[viewName];
     };
 
-    // --- NEW: Calculate Total Amount ---
     window.calculateTotal = function() {
         const days = parseFloat(document.getElementById('daysInput').value) || 1;
         const rate = parseFloat(document.getElementById('rateInput').value) || 0;
@@ -801,7 +812,7 @@
     function renderAllGuestsTable() {
         const tbody = document.getElementById('allGuestsTableBody');
         if (!guests.length) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
             return;
         }
 
@@ -811,6 +822,7 @@
             const av = colorFor(g.name || 'x');
             const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
             const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+            const days = g.days || 1; // Fallback for old records
             
             return `<tr>
                 <td>
@@ -821,6 +833,7 @@
                 </td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
                 <td>${g.check_in || '—'}</td>
+                <td>${days}</td>
                 <td>${g.check_out || '—'}</td>
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
@@ -902,7 +915,7 @@
 
         const tbody = document.getElementById('billingTableBody');
         if (!guests.length) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
             return;
         }
 
@@ -911,20 +924,74 @@
             const roomName = room ? room.name : '—';
             const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
             const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
+            const days = g.days || 1;
 
             return `<tr>
                 <td>${g.check_in || '—'}</td>
                 <td style="font-weight: 700;">${escapeHtml(g.name)}</td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
+                <td>${days}</td>
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                 <td style="font-weight: 800; color: var(--primary);">ZMW ${Number(g.amount_paid).toLocaleString()}</td>
                 <td>
-                    <button type="button" class="btn-print" onclick="printReceipt('${g.id}')"><i class="fas fa-print"></i> Print</button>
+                    <div style="display: flex; gap: 6px;">
+                        <button type="button" class="btn-receipt btn-receipt-wa" onclick="sendReceiptWhatsApp('${g.id}')" title="Send via WhatsApp">
+                            <i class="fab fa-whatsapp"></i> WA
+                        </button>
+                        <button type="button" class="btn-receipt btn-receipt-email" onclick="sendReceiptEmail('${g.id}')" title="Send via Email">
+                            <i class="fas fa-envelope"></i> Email
+                        </button>
+                    </div>
                 </td>
             </tr>`;
         }).join('');
     }
 
+    // --- DIGITAL RECEIPTS ---
+
+    window.sendReceiptWhatsApp = function(guestId) {
+        const g = guests.find(x => String(x.id) === String(guestId));
+        if (!g) return;
+        
+        const room = rooms.find(r => r.id === g.room_id);
+        const roomName = room ? room.name : '—';
+        const days = g.days || 1;
+        
+        const text = `*ChiEdgars Lodge - Receipt*\n\n` +
+                     `Guest: ${g.name}\n` +
+                     `Room: ${roomName}\n` +
+                     `Check-In: ${g.check_in}\n` +
+                     `Days: ${days}\n` +
+                     `Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
+                     `Thank you for staying with us!`;
+
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    };
+
+    window.sendReceiptEmail = function(guestId) {
+        const g = guests.find(x => String(x.id) === String(guestId));
+        if (!g) return;
+        
+        const room = rooms.find(r => r.id === g.room_id);
+        const roomName = room ? room.name : '—';
+        const days = g.days || 1;
+
+        const subject = `Receipt from ChiEdgars Lodge - ${g.name}`;
+        const body = `Dear ${g.name},\n\nThank you for staying at ChiEdgars Lodge.\n\n` +
+                     `Receipt Details:\n` +
+                     `- Room: ${roomName}\n` +
+                     `- Check-In: ${g.check_in}\n` +
+                     `- Days: ${days}\n` +
+                     `- Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
+                     `We hope to see you again soon!\nChiEdgars Management`;
+
+        const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+    };
+
+    // --- PRINT REPORT (BOSS) ---
+    
     function printHTML(htmlContent) {
         const iframe = document.createElement('iframe');
         iframe.style.position = 'fixed';
@@ -949,60 +1016,6 @@
         }, 500);
     }
 
-    window.printReceipt = function(guestId) {
-        const g = guests.find(x => String(x.id) === String(guestId));
-        if (!g) {
-            showToast('Guest not found', 'error');
-            return;
-        }
-        const room = rooms.find(r => r.id === g.room_id);
-        const roomName = room ? room.name : '—';
-        
-        const html = `
-            <html>
-            <head>
-                <title>Receipt - ${g.name}</title>
-                <style>
-                    body { font-family: 'Arial Narrow', Arial, sans-serif; padding: 40px; color: #000; }
-                    .header { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed #000; padding-bottom: 20px; }
-                    .header h1 { margin: 0 0 10px 0; font-size: 28px; }
-                    .header p { margin: 0; font-size: 16px; }
-                    .details { margin-bottom: 30px; font-size: 18px; }
-                    .details table { width: 100%; border-collapse: collapse; }
-                    .details td { padding: 8px 0; border-bottom: 1px solid #ddd; }
-                    .details td:last-child { text-align: right; font-weight: bold; }
-                    .total { font-size: 24px; font-weight: bold; text-align: right; margin-top: 20px; border-top: 2px solid #000; padding-top: 10px; }
-                    .footer { text-align: center; margin-top: 50px; font-size: 14px; color: #555; }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <h1>ChiEdgars Lodge</h1>
-                    <p>Kasama, Zambia</p>
-                    <p>Official Receipt</p>
-                </div>
-                <div class="details">
-                    <table>
-                        <tr><td><strong>Date:</strong></td><td>${new Date().toLocaleDateString()}</td></tr>
-                        <tr><td><strong>Guest Name:</strong></td><td>${g.name}</td></tr>
-                        <tr><td><strong>Room:</strong></td><td>${roomName}</td></tr>
-                        <tr><td><strong>Check-In Date:</strong></td><td>${g.check_in}</td></tr>
-                        <tr><td><strong>Status:</strong></td><td>${g.still_lodging ? 'Lodging' : 'Checked Out'}</td></tr>
-                    </table>
-                </div>
-                <div class="total">
-                    Amount Paid: ZMW ${Number(g.amount_paid).toLocaleString()}
-                </div>
-                <div class="footer">
-                    <p>Thank you for staying with us!</p>
-                    <p>Signature: ________________________</p>
-                </div>
-            </body>
-            </html>
-        `;
-        printHTML(html);
-    };
-
     window.printReport = function() {
         const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
         const activeGuests = guests.filter(g => g.still_lodging).length;
@@ -1013,6 +1026,7 @@
                 <td>${g.check_in}</td>
                 <td>${g.name}</td>
                 <td>${rooms.find(r => r.id === g.room_id)?.name || '—'}</td>
+                <td>${g.days || 1}</td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
             </tr>
         `).join('');
@@ -1047,6 +1061,7 @@
                             <th>Date</th>
                             <th>Guest</th>
                             <th>Room</th>
+                            <th>Days</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
@@ -1073,13 +1088,7 @@
                      `_Generated automatically from the Lodge System._`;
 
         const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.target = '_blank';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        window.open(url, '_blank');
     };
 
     function updateBadges() {
@@ -1092,8 +1101,7 @@
         const name = document.getElementById('guestNameInput').value.trim();
         const roomId = document.getElementById('roomSelect').value;
         const checkIn = document.getElementById('checkInDate').value;
-        
-        // Read the calculated total amount
+        const days = parseInt(document.getElementById('daysInput').value) || 1;
         const amount = parseFloat(document.getElementById('totalAmountInput').value) || 0;
 
         if (!name) return showToast('Please enter guest name', 'error');
@@ -1104,7 +1112,7 @@
         try {
             const { error: e1 } = await supabase.from('guests').insert({
                 name, room_id: Number(roomId), check_in: checkIn,
-                amount_paid: amount, still_lodging: true
+                days: days, amount_paid: amount, still_lodging: true
             });
             if (e1) throw e1;
 
@@ -1112,11 +1120,10 @@
                 .from('rooms').update({ is_occupied: true }).eq('id', Number(roomId));
             if (e2) throw e2;
 
-            // Reset form fields
             document.getElementById('guestNameInput').value = '';
             document.getElementById('daysInput').value = '1';
             document.getElementById('rateInput').value = '500';
-            calculateTotal(); // Recalculate to reset total to 500
+            calculateTotal();
 
             showToast('Guest checked in!');
             await loadAll();
@@ -1185,7 +1192,6 @@
         document.getElementById('checkInDate').value = today();
         document.getElementById('addGuestBtn').addEventListener('click', addGuest);
         
-        // Initialize total calculation
         calculateTotal();
 
         if (initSupabase()) {
