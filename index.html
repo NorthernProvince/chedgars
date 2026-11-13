@@ -448,6 +448,29 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label>Phone Number (WhatsApp)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="tel" id="guestPhoneInput" placeholder="e.g. 0977123456">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="email" id="guestEmailInput" placeholder="e.g. guest@gmail.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Coming From (Origin)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <input type="text" id="guestOriginInput" placeholder="e.g. Lusaka">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label>Assign Room</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-door-closed"></i>
@@ -554,6 +577,7 @@
                         <thead>
                             <tr>
                                 <th>Guest</th>
+                                <th>Coming From</th>
                                 <th>Room</th>
                                 <th>Lodge In</th>
                                 <th>Days</th>
@@ -603,6 +627,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Guest</th>
+                                <th>Origin</th>
                                 <th>Room</th>
                                 <th>Days</th>
                                 <th>Status</th>
@@ -795,7 +820,10 @@
                 <td>
                     <div class="guest-cell">
                         <div class="avatar ${av}">${initials(g.name)}</div>
-                        <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
+                            <div style="font-size: 13px; color: var(--text-muted);">${escapeHtml(g.origin || '—')}</div>
+                        </div>
                     </div>
                 </td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
@@ -812,7 +840,7 @@
     function renderAllGuestsTable() {
         const tbody = document.getElementById('allGuestsTableBody');
         if (!guests.length) {
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No guest records found.</td></tr>';
             return;
         }
 
@@ -831,6 +859,7 @@
                         <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(g.name)}</div>
                     </div>
                 </td>
+                <td>${escapeHtml(g.origin || '—')}</td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
                 <td>${g.check_in || '—'}</td>
                 <td>${days}</td>
@@ -915,7 +944,7 @@
 
         const tbody = document.getElementById('billingTableBody');
         if (!guests.length) {
-            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No transactions found.</td></tr>';
             return;
         }
 
@@ -929,6 +958,7 @@
             return `<tr>
                 <td>${g.check_in || '—'}</td>
                 <td style="font-weight: 700;">${escapeHtml(g.name)}</td>
+                <td>${escapeHtml(g.origin || '—')}</td>
                 <td><span style="background: var(--bg-body); padding: 4px 8px; border-radius: 6px; font-size: 14px;">${roomName}</span></td>
                 <td>${days}</td>
                 <td><span class="status-badge ${statusClass}">${statusText}</span></td>
@@ -965,7 +995,23 @@
                      `Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
                      `Thank you for staying with us!`;
 
-        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        let phone = g.phone || '';
+        // Clean phone number: remove spaces, dashes, etc.
+        phone = phone.replace(/\D/g, '');
+        
+        // If it's a Zambian local number (starts with 0, 10 digits), replace 0 with 260
+        if (phone.startsWith('0') && phone.length === 10) {
+            phone = '260' + phone.substring(1);
+        }
+
+        let url;
+        if (phone) {
+            url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        } else {
+            // Fallback: if no phone number was provided, open WhatsApp to pick a contact
+            url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        }
+        
         window.open(url, '_blank');
     };
 
@@ -986,7 +1032,8 @@
                      `- Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
                      `We hope to see you again soon!\nChiEdgars Management`;
 
-        const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const email = g.email || '';
+        const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailtoUrl;
     };
 
@@ -1025,6 +1072,7 @@
             <tr>
                 <td>${g.check_in}</td>
                 <td>${g.name}</td>
+                <td>${g.origin || '—'}</td>
                 <td>${rooms.find(r => r.id === g.room_id)?.name || '—'}</td>
                 <td>${g.days || 1}</td>
                 <td>ZMW ${Number(g.amount_paid).toLocaleString()}</td>
@@ -1060,6 +1108,7 @@
                         <tr>
                             <th>Date</th>
                             <th>Guest</th>
+                            <th>Origin</th>
                             <th>Room</th>
                             <th>Days</th>
                             <th>Amount</th>
@@ -1099,6 +1148,9 @@
     window.addGuest = async function() {
         if (!supabase) return;
         const name = document.getElementById('guestNameInput').value.trim();
+        const phone = document.getElementById('guestPhoneInput').value.trim();
+        const email = document.getElementById('guestEmailInput').value.trim();
+        const origin = document.getElementById('guestOriginInput').value.trim();
         const roomId = document.getElementById('roomSelect').value;
         const checkIn = document.getElementById('checkInDate').value;
         const days = parseInt(document.getElementById('daysInput').value) || 1;
@@ -1111,7 +1163,7 @@
         setLoading(true);
         try {
             const { error: e1 } = await supabase.from('guests').insert({
-                name, room_id: Number(roomId), check_in: checkIn,
+                name, phone, email, origin, room_id: Number(roomId), check_in: checkIn,
                 days: days, amount_paid: amount, still_lodging: true
             });
             if (e1) throw e1;
@@ -1121,6 +1173,9 @@
             if (e2) throw e2;
 
             document.getElementById('guestNameInput').value = '';
+            document.getElementById('guestPhoneInput').value = '';
+            document.getElementById('guestEmailInput').value = '';
+            document.getElementById('guestOriginInput').value = '';
             document.getElementById('daysInput').value = '1';
             document.getElementById('rateInput').value = '500';
             calculateTotal();
