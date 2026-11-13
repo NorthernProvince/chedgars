@@ -822,7 +822,7 @@
             const av = colorFor(g.name || 'x');
             const statusClass = g.still_lodging ? 'status-active' : 'status-inactive';
             const statusText = g.still_lodging ? 'Lodging' : 'Checked Out';
-            const days = g.days || 1; // Fallback for old records
+            const days = g.days || 1;
             
             return `<tr>
                 <td>
