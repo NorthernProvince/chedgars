@@ -453,10 +453,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Amount Paid (ZMW)</label>
+                                    <label>Number of Days</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-clock"></i>
+                                        <input type="number" id="daysInput" min="1" value="1" oninput="calculateTotal()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Rate per Night (ZMW)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-tag"></i>
+                                        <input type="number" id="rateInput" min="0" step="10" value="500" oninput="calculateTotal()">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Total Amount Paid</label>
                                     <div class="input-wrap">
                                         <i class="fas fa-money-bill-wave"></i>
-                                        <input type="number" id="amountPaidInput" placeholder="0.00" min="0" step="10" value="500">
+                                        <!-- Read-only total field -->
+                                        <input type="number" id="totalAmountInput" readonly style="background: #E2E8F0; cursor: not-allowed;" value="500">
                                     </div>
                                 </div>
                             </div>
@@ -671,6 +688,14 @@
             'billing': 'Billing & Finance'
         };
         document.getElementById('pageTitle').textContent = titles[viewName];
+    };
+
+    // --- NEW: Calculate Total Amount ---
+    window.calculateTotal = function() {
+        const days = parseFloat(document.getElementById('daysInput').value) || 1;
+        const rate = parseFloat(document.getElementById('rateInput').value) || 0;
+        const total = days * rate;
+        document.getElementById('totalAmountInput').value = total;
     };
 
     async function loadAll() {
@@ -900,7 +925,6 @@
         }).join('');
     }
 
-    // --- HIDDEN IFRAME PRINTING METHOD (No Popup Blockers) ---
     function printHTML(htmlContent) {
         const iframe = document.createElement('iframe');
         iframe.style.position = 'fixed';
@@ -917,17 +941,14 @@
         doc.close();
 
         iframe.contentWindow.focus();
-        // Wait briefly for content to render, then print
         setTimeout(() => {
             iframe.contentWindow.print();
-            // Clean up iframe after user finishes printing
             setTimeout(() => {
                 document.body.removeChild(iframe);
             }, 1000);
         }, 500);
     }
 
-    // --- PRINT RECEIPT FUNCTION ---
     window.printReceipt = function(guestId) {
         const g = guests.find(x => String(x.id) === String(guestId));
         if (!g) {
@@ -982,7 +1003,6 @@
         printHTML(html);
     };
 
-    // --- PRINT REPORT FUNCTION ---
     window.printReport = function() {
         const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
         const activeGuests = guests.filter(g => g.still_lodging).length;
@@ -1040,7 +1060,6 @@
         printHTML(html);
     };
 
-    // --- SHARE TO WHATSAPP FUNCTION ---
     window.shareToWhatsApp = function() {
         const totalRevenue = guests.reduce((s, g) => s + (Number(g.amount_paid) || 0), 0);
         const activeGuests = guests.filter(g => g.still_lodging).length;
@@ -1055,7 +1074,6 @@
 
         const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
         
-        // Create temporary link to avoid popup blockers
         const a = document.createElement('a');
         a.href = url;
         a.target = '_blank';
@@ -1074,7 +1092,9 @@
         const name = document.getElementById('guestNameInput').value.trim();
         const roomId = document.getElementById('roomSelect').value;
         const checkIn = document.getElementById('checkInDate').value;
-        const amount = parseFloat(document.getElementById('amountPaidInput').value) || 0;
+        
+        // Read the calculated total amount
+        const amount = parseFloat(document.getElementById('totalAmountInput').value) || 0;
 
         if (!name) return showToast('Please enter guest name', 'error');
         if (!roomId) return showToast('No vacant room selected', 'error');
@@ -1092,8 +1112,12 @@
                 .from('rooms').update({ is_occupied: true }).eq('id', Number(roomId));
             if (e2) throw e2;
 
+            // Reset form fields
             document.getElementById('guestNameInput').value = '';
-            document.getElementById('amountPaidInput').value = '500';
+            document.getElementById('daysInput').value = '1';
+            document.getElementById('rateInput').value = '500';
+            calculateTotal(); // Recalculate to reset total to 500
+
             showToast('Guest checked in!');
             await loadAll();
         } catch (err) {
@@ -1160,6 +1184,9 @@
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('checkInDate').value = today();
         document.getElementById('addGuestBtn').addEventListener('click', addGuest);
+        
+        // Initialize total calculation
+        calculateTotal();
 
         if (initSupabase()) {
             loadAll();
