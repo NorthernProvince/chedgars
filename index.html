@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SinamuLodge · Kasama</title>
+    <title>Sinamu Lodge · Kasama</title>
     <link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -987,7 +987,7 @@
         const roomName = room ? room.name : '—';
         const days = g.days || 1;
         
-        const text = `*SinamuLodge - Receipt*\n\n` +
+        const text = `*Sinamu Lodge - Receipt*\n\n` +
                      `Guest: ${g.name}\n` +
                      `Room: ${roomName}\n` +
                      `Check-In: ${g.check_in}\n` +
@@ -1023,7 +1023,7 @@
         const roomName = room ? room.name : '—';
         const days = g.days || 1;
 
-        const subject = `Receipt from SinamuLodge - ${g.name}`;
+        const subject = `Receipt from Sinamu Lodge - ${g.name}`;
         const body = `Dear ${g.name},\n\nThank you for staying at SinamuLodge.\n\n` +
                      `Receipt Details:\n` +
                      `- Room: ${roomName}\n` +
@@ -1093,7 +1093,7 @@
                 </style>
             </head>
             <body>
-                <h1>SinamuLodge - Management Report</h1>
+                <h1>Sinamu Lodge - Management Report</h1>
                 <p style="text-align: center;">Generated on ${new Date().toLocaleString()}</p>
                 
                 <div class="stats">
@@ -1129,7 +1129,7 @@
         const activeGuests = guests.filter(g => g.still_lodging).length;
         const vacantRooms = rooms.filter(r => !r.is_occupied).length;
         
-        const text = `*SinamuLodge - Management Report*\n` +
+        const text = `*Sinamu Lodge - Management Report*\n` +
                      `📅 Date: ${new Date().toLocaleDateString()}\n\n` +
                      `💰 *Total Revenue:* ZMW ${totalRevenue.toLocaleString()}\n` +
                      `🛏️ *Active Guests:* ${activeGuests}\n` +
