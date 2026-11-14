@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChiEdgars Lodge · Kasama</title>
+    <title>SinamuLodge · Kasama</title>
     <link rel="icon" type="image/jpeg" href="imgs/logo.jpg">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -392,7 +392,7 @@
             <button class="icon-btn" onclick="loadAll()"><i class="fas fa-rotate-right"></i></button>
             <div class="user-profile">
                 <div class="user-info" style="text-align: right;">
-                    <h4>ChiEdgars Admin</h4>
+                    <h4>SinamuAdmin</h4>
                     <p>Reception</p>
                 </div>
                 <div class="avatar-profile">A</div>
@@ -987,7 +987,7 @@
         const roomName = room ? room.name : '—';
         const days = g.days || 1;
         
-        const text = `*ChiEdgars Lodge - Receipt*\n\n` +
+        const text = `*SinamuLodge - Receipt*\n\n` +
                      `Guest: ${g.name}\n` +
                      `Room: ${roomName}\n` +
                      `Check-In: ${g.check_in}\n` +
@@ -1023,14 +1023,14 @@
         const roomName = room ? room.name : '—';
         const days = g.days || 1;
 
-        const subject = `Receipt from ChiEdgars Lodge - ${g.name}`;
-        const body = `Dear ${g.name},\n\nThank you for staying at ChiEdgars Lodge.\n\n` +
+        const subject = `Receipt from SinamuLodge - ${g.name}`;
+        const body = `Dear ${g.name},\n\nThank you for staying at SinamuLodge.\n\n` +
                      `Receipt Details:\n` +
                      `- Room: ${roomName}\n` +
                      `- Check-In: ${g.check_in}\n` +
                      `- Days: ${days}\n` +
                      `- Total Paid: ZMW ${Number(g.amount_paid).toLocaleString()}\n\n` +
-                     `We hope to see you again soon!\nChiEdgars Management`;
+                     `We hope to see you again soon!\nSinamuManagement`;
 
         const email = g.email || '';
         const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -1082,7 +1082,7 @@
         const html = `
             <html>
             <head>
-                <title>Management Report - ChiEdgars Lodge</title>
+                <title>Management Report - SinamuLodge</title>
                 <style>
                     body { font-family: 'Arial Narrow', Arial, sans-serif; padding: 40px; color: #000; }
                     h1 { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; }
@@ -1093,7 +1093,7 @@
                 </style>
             </head>
             <body>
-                <h1>ChiEdgars Lodge - Management Report</h1>
+                <h1>SinamuLodge - Management Report</h1>
                 <p style="text-align: center;">Generated on ${new Date().toLocaleString()}</p>
                 
                 <div class="stats">
@@ -1129,7 +1129,7 @@
         const activeGuests = guests.filter(g => g.still_lodging).length;
         const vacantRooms = rooms.filter(r => !r.is_occupied).length;
         
-        const text = `*ChiEdgars Lodge - Management Report*\n` +
+        const text = `*SinamuLodge - Management Report*\n` +
                      `📅 Date: ${new Date().toLocaleDateString()}\n\n` +
                      `💰 *Total Revenue:* ZMW ${totalRevenue.toLocaleString()}\n` +
                      `🛏️ *Active Guests:* ${activeGuests}\n` +
